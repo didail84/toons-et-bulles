@@ -1,0 +1,2204 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Toons &amp; Bulles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+/* Salle de projection du samedi matin : fond bleu nuit d'écran cathodique, jaune « cellulo », corail.
+   En-tête fixe, filtres à gauche, grille d'affiches fluide. Une seule ambiance sombre, choisie exprès. */
+:root{
+  --bg:#0F1426; --surface:#161D36; --raised:#202A4A; --line:#2A3558; --line2:#3A4775;
+  --fg:#EEF1FB; --soft:#CBD3EE; --muted:#A3AEDA; --dim:#8590BE;
+  --accent:#FFC93C; --accent-soft:#FFE08A; --accent-deep:#3A3216;
+  --coral:#FF7A5C;
+  --good:#1F6B55; --good-fg:#E3FBF2; --wait:#5A3A2E; --danger:#D9534F;
+  --display:'Baloo 2', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --body:'Nunito Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45}
+a{color:var(--accent-soft)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px}
+h1,h2,h3{text-wrap:balance}
+.muted{color:var(--muted)}
+.label{margin:0;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--surface)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+.brand span{font-family:var(--display);font-weight:700;font-size:24px}
+nav.main{display:flex;flex-wrap:wrap;gap:4px}
+nav.main a{padding:10px 14px;border-radius:6px;color:var(--fg);text-decoration:none}
+nav.main a:hover{background:var(--raised)}
+nav.main a.on{background:var(--accent-deep);color:var(--accent-soft);font-weight:600}
+.search{flex:1 1 280px;display:flex;justify-content:flex-end}
+.search label{display:flex;align-items:center;gap:10px;width:100%;max-width:440px;height:44px;padding:0 14px;border:1px solid var(--line2);border-radius:8px;background:var(--bg)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent}
+.search input::placeholder,input::placeholder,textarea::placeholder{color:var(--dim)}
+
+.wrap{padding:24px;max-width:1500px;margin:0 auto}
+.layout{display:flex;flex-wrap:wrap;gap:32px}
+.filters{flex:1 1 220px;max-width:260px;display:flex;flex-direction:column;gap:24px}
+.content{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.fgroup{display:flex;flex-direction:column;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:36px;padding:0 12px;border-radius:18px;border:1px solid var(--line2);background:transparent;cursor:pointer;font-size:14px}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+.check{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--accent);flex:none}
+.check .n{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+
+.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px}
+h1.title{margin:0;font-family:var(--display);font-size:34px;font-weight:700;line-height:1.1}
+.head-row p{margin:4px 0 0}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--line2);border-radius:8px;background:transparent;cursor:pointer;text-decoration:none;color:var(--fg)}
+.btn:hover{border-color:var(--accent);background:var(--raised)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+.btn.primary:hover{background:var(--accent-soft);border-color:var(--accent-soft)}
+.btn.good{background:var(--good);border-color:var(--good);color:var(--good-fg);font-weight:600}
+.btn.wait{background:var(--coral);border-color:var(--coral);color:#1A0E0A;font-weight:700}
+.btn.danger{border-color:var(--danger);color:#F2B8A8}
+.btn.danger:hover{background:var(--danger);color:var(--fg)}
+.btn.small{min-height:36px;padding:0 12px;font-size:14px}
+.btn[disabled]{opacity:.5;cursor:default}
+select.sel,input.inp,textarea.inp{height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:8px;background:var(--surface)}
+textarea.inp{height:auto;padding:10px 12px;resize:vertical}
+input.inp{width:100%}
+label.inline{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line)}
+.tab{min-height:44px;padding:0 16px;display:inline-flex;align-items:center;border:0;background:transparent;cursor:pointer;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--soft);text-decoration:none}
+.tab.on{color:var(--accent-soft);font-weight:600;border-bottom-color:var(--accent)}
+
+/* Grille d'affiches */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;gap:6px;color:var(--fg);text-decoration:none;min-width:0}
+.poster{position:relative;display:flex;align-items:flex-end;aspect-ratio:2/3;max-width:100%;border-radius:8px;padding:12px;border:1px solid var(--line2);overflow:hidden;width:100%}
+button.poster{cursor:pointer;text-align:left;color:inherit;font:inherit}
+.card:hover .poster,button.poster:hover{border-color:var(--accent)}
+.poster-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.poster-title{position:relative;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.1;color:#FFFFFF;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.pill{position:absolute;z-index:1;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:.3px}
+.pill.note{top:8px;right:8px;background:var(--bg);color:var(--accent-soft)}
+.pill.vu{top:8px;left:8px;background:var(--good);color:var(--good-fg)}
+.pill.avoir{top:8px;left:8px;background:var(--coral);color:#1A0E0A}
+.pill.own{bottom:8px;right:8px;background:var(--bg);color:var(--soft)}
+.pill.free{bottom:8px;left:8px;background:var(--good);color:var(--good-fg)}
+.watch{display:flex;flex-direction:column;gap:12px;padding:16px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.watch h2{margin:0}
+.watch .row{gap:8px}
+.watch .free-now{margin:0;padding:10px 14px;border-radius:8px;background:var(--good);color:var(--good-fg);font-weight:600}
+.watch .hint{margin:0;font-size:13px;color:var(--dim)}
+.who{display:flex;align-items:center;gap:8px}
+.who select{height:40px;padding:0 10px;border:1px solid var(--line2);border-radius:8px;background:var(--bg)}
+.pill.fav{bottom:8px;right:8px;background:var(--coral);color:#1A0E0A}
+.kids{display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.kidrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-block:6px;border-top:1px solid var(--line)}
+.kidrow:first-of-type{border-top:0}
+.kidrow b{min-width:110px}
+.kidrow .inp.num{width:64px;height:36px}
+.saga{display:flex;flex-direction:column;gap:10px}
+.saga ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.saga li.on{font-weight:700;color:var(--accent-soft)}
+.saga .done{color:var(--good-fg);background:var(--good);border-radius:4px;padding:1px 6px;font-size:12px;margin-left:6px}
+.sagarow{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
+.sagarow .poster{padding:8px}
+.sagarow .poster-title{font-size:14px}
+.sagarow .num{position:absolute;top:6px;left:6px;z-index:1;background:var(--bg);color:var(--accent-soft);border-radius:4px;padding:1px 7px;font-weight:700;font-size:13px}
+.tonight{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start}
+.tonight .poster{max-width:150px}
+@media (max-width:640px){.tonight{grid-template-columns:1fr}.tonight .poster{max-width:200px}}
+.scanbox{display:flex;flex-direction:column;gap:14px;max-width:760px}
+.scanbox input.big{height:60px;font-size:22px;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.loanwarn{padding:12px 16px;border-radius:8px;background:var(--wait);color:var(--fg)}
+.printpage{background:#fff;color:#111;padding:28px;border-radius:10px;font-family:var(--body)}
+.printpage h1{margin:0 0 4px;font-family:var(--display);font-size:28px;color:#111}
+.printpage table{min-width:0;width:100%;border-collapse:collapse;font-size:13px}
+.printpage th{background:#eee;color:#333;padding:6px 8px;letter-spacing:.5px}
+.printpage td{border-top:1px solid #ccc;padding:5px 8px;color:#111}
+@media print{
+  header.top,.noprint,#warn,#toast{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  .wrap{padding:0!important;max-width:none}
+  .printpage{padding:0;border-radius:0}
+}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px}
+.card-t{font-weight:600;line-height:1.25}
+.card-m{color:var(--muted);font-size:13px}
+.empty{padding:40px 24px;border:1px dashed var(--line2);border-radius:10px;text-align:center;color:var(--soft)}
+.empty h2{margin:0 0 6px;font-family:var(--display);font-size:22px;color:var(--fg)}
+
+/* Fiche */
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
+.film{display:flex;flex-wrap:wrap;gap:36px}
+.film-side{flex:0 1 300px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.film-main{flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.film-main h1{margin:0;font-family:var(--display);font-size:42px;line-height:1.05}
+.film-main .orig{margin:6px 0 0;color:var(--muted);font-style:italic}
+.film-main .meta{margin:8px 0 0;color:var(--soft)}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 12px;border-radius:16px;background:var(--raised);border:1px solid var(--line2);font-size:13px}
+.panel{display:flex;flex-wrap:wrap;gap:28px;padding:16px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.bignum{font-family:var(--display);font-size:30px;font-weight:700;color:var(--accent-soft);font-variant-numeric:tabular-nums}
+.bignum small{font-size:16px;color:var(--muted)}
+.stars{display:flex;gap:2px}
+.star{width:40px;height:40px;border:0;background:transparent;padding:0;cursor:pointer}
+.cast{display:flex;flex-wrap:wrap;gap:10px}
+.person{display:flex;align-items:center;gap:10px;min-height:44px;padding:6px 14px 6px 6px;border-radius:24px;background:var(--surface);border:1px solid var(--line);color:var(--fg);text-decoration:none;cursor:pointer}
+.person:hover{border-color:var(--accent)}
+.ini{width:34px;height:34px;border-radius:50%;background:var(--line2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent-soft);flex:none}
+.person b{display:block;font-size:14px}
+.person i{display:block;font-style:normal;color:var(--muted);font-size:12px}
+.two{display:flex;flex-wrap:wrap;gap:24px}
+.two > *{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.synopsis{margin:0;line-height:1.6;color:var(--soft);max-width:70ch}
+
+/* Tableaux & stats */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;min-width:720px;border-collapse:collapse}
+th{padding:12px 16px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:left;background:var(--surface)}
+td{padding:10px 16px;border-top:1px solid var(--line);vertical-align:middle}
+tr.clk{cursor:pointer}
+tr.clk:hover td{background:var(--surface)}
+.thumb{width:36px;height:54px;border-radius:4px;flex:none;object-fit:cover;border:1px solid var(--line2)}
+.cellfilm{display:flex;align-items:center;gap:12px}
+.badge{display:inline-block;padding:4px 10px;border-radius:4px;font-size:13px;font-weight:600}
+.badge.vu{background:var(--good);color:var(--good-fg)}
+.badge.avoir{background:var(--coral);color:#1A0E0A}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.tile{padding:16px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.tile .bignum{font-size:32px}
+.tile small{color:var(--muted);font-size:12px}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:12px;font-size:14px}
+.bar .track{height:14px;border-radius:7px;background:var(--raised);overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:7px}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--soft)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.box{padding:20px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;min-width:0}
+.box h2{margin:0;font-family:var(--display);font-size:22px}
+
+/* Listes */
+.listnav{flex:1 1 240px;max-width:300px;display:flex;flex-direction:column;gap:8px}
+.listlink{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;padding:0 16px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--fg);text-decoration:none}
+.listlink:hover{border-color:var(--accent)}
+.listlink.on{border-color:var(--accent);background:var(--accent-deep)}
+.listlink span:last-child{color:var(--muted);font-size:13px}
+
+/* Fenêtre d'édition */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(6,9,20,.78);display:flex;align-items:flex-start;justify-content:center;padding:32px 16px;overflow-y:auto}
+.modal{width:100%;max-width:760px;background:var(--surface);border:1px solid var(--line2);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.modal h2{margin:0;font-family:var(--display);font-size:26px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.form .full{grid-column:1 / -1}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field > span{font-size:13px;color:var(--muted);font-weight:500}
+.field .hint{font-size:12px;color:var(--dim)}
+.err{color:#F2B8A8;font-size:14px;min-height:1em}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;padding:12px 18px;border-radius:8px;background:var(--raised);border:1px solid var(--accent);color:var(--fg);box-shadow:0 8px 24px rgba(0,0,0,.4);max-width:calc(100% - 32px)}
+.warn{padding:12px 16px;border-radius:8px;background:var(--wait);color:var(--accent-soft);margin-bottom:16px}
+.note-box{padding:16px 18px;border-radius:10px;background:var(--surface);border:1px solid var(--line);line-height:1.6}
+.note-box ol{margin:8px 0 0;padding-left:20px}
+.pager{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px;padding:8px 0}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:sp 0.8s linear infinite;vertical-align:-3px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+@media (max-width:640px){
+  .wrap{padding:16px}
+  header.top{padding:12px 16px}
+  .filters,.listnav{max-width:none}
+  .form{grid-template-columns:1fr}
+  .film-main h1{font-size:32px}
+  .bar{grid-template-columns:100px 1fr 32px}
+}
+</style>
+<header class="top">
+  <a class="brand" href="#/catalogue">
+    <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c5.5 0 9.5 3.4 9.5 7.8s-4 7.8-9.5 7.8c-1 0-2-.1-2.9-.3L4 20.5l1.3-4.2C3.5 14.9 2.5 12.8 2.5 10.3 2.5 5.9 6.5 2.5 12 2.5z" fill="#FFC93C"/><g fill="#0F1426"><circle cx="12" cy="7.2" r="1.6"/><circle cx="12" cy="13.4" r="1.6"/><circle cx="8.9" cy="10.3" r="1.6"/><circle cx="15.1" cy="10.3" r="1.6"/></g></svg>
+    <span>Toons &amp; Bulles</span>
+  </a>
+  <nav class="main" aria-label="Navigation principale">
+    <a href="#/catalogue" data-nav="catalogue">Catalogue</a>
+    <a href="#/collection" data-nav="collection">Ma collection</a>
+    <a href="#/listes" data-nav="listes">Mes listes</a>
+    <a href="#/stats" data-nav="stats">Statistiques</a>
+    <a href="#/sagas" data-nav="sagas">Sagas</a>
+    <a href="#/scanner" data-nav="scanner">Scanner</a>
+    <a href="#/reglages" data-nav="reglages">Réglages</a>
+  </nav>
+  <div class="who"><label class="label" for="who">Profil</label><select id="who" data-ch="who"></select>
+    <button type="button" class="btn small primary" data-act="tonight">Ce soir, on fait quoi ?</button></div>
+  <div class="search">
+    <label for="q">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9C8E7A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" type="search" placeholder="Titre, personnage, auteur, studio…" aria-label="Rechercher dans ma base" autocomplete="off">
+    </label>
+  </div>
+</header>
+<div class="wrap">
+  <div id="warn"></div>
+  <main id="view"></main>
+</div>
+<div id="modal-root"></div>
+<div id="confirm-root"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script src="catalogue.js"></script>
+<script>
+'use strict';
+/* =========================================================
+   Classements (modifiables sur chaque fiche)
+   ========================================================= */
+const STUDIOS = ['Disney', 'Pixar', 'DreamWorks', 'Warner Bros. / Looney Tunes', 'MGM / Tom et Jerry', 'Hanna-Barbera', 'Cartoon Network', 'Nickelodeon',
+  'Illumination', 'Blue Sky', 'Sony Animation', 'Universal / Amblin', 'Paramount', '20th Century / Fox', 'Laika', 'Aardman', 'Netflix',
+  'Fleischer / Popeye', 'Animation française', 'Animation européenne', 'Animés et style japonais', 'Autres studios',
+  'BD franco-belge', 'BD jeunesse', 'Comics et strips', 'Albums et premières lectures', 'Romans jeunesse', 'Documentaires jeunesse', 'Grands classiques', 'Premières lectures', 'Magazines jeunesse', 'Non classé'];
+const SUB_LIST = STUDIOS;
+const BOOK_TYPES = ['Série de BD', 'Série de livres', 'Album', 'Roman', 'Magazine'];
+const TYPES = ['Film', 'Série', 'Mini-série', 'Téléfilm / spécial', 'Court métrage'].concat(BOOK_TYPES);
+const TYPE_PLURAL = {'Série de BD':'Séries de BD', 'Série de livres':'Séries de livres', 'Album':'Albums', 'Roman':'Romans', 'Magazine':'Magazines', 'Film':'Films', 'Série':'Séries', 'Mini-série':'Mini-séries', 'Téléfilm / spécial':'Téléfilms et spéciaux', 'Court métrage':'Courts métrages'};
+const TECHS = ['Bande dessinée', 'Livre illustré', 'Roman', 'Magazine', 'Dessin animé (2D)', 'Images de synthèse (3D)', 'Stop-motion / pâte à modeler', 'Animation + prises de vue réelles', 'Papier découpé / ombres / autres', 'Non précisé'];
+const PUBLICS = ['Famille', 'Grands enfants et ados', 'Adultes'];
+const TONES = {'Disney':'#2C4C9C','Pixar':'#2F6E8E','DreamWorks':'#3B5F3A','Warner Bros. / Looney Tunes':'#8E3B2E','MGM / Tom et Jerry':'#7A4A1E',
+  'Hanna-Barbera':'#5B3F8C','Cartoon Network':'#2E2E36','Nickelodeon':'#B4521F','Illumination':'#8C7A1C','Blue Sky':'#2F6A9E','Sony Animation':'#6A2F5E',
+  'Universal / Amblin':'#3C4A6E','Paramount':'#24508A','20th Century / Fox':'#6E5A2A','Laika':'#4A3A5E','Aardman':'#6E4A2E','Netflix':'#7A1F26',
+  'Fleischer / Popeye':'#4E5A2E','Animation française':'#26407A','Animation européenne':'#2E5E5A','Animés et style japonais':'#9C2F4A','BD franco-belge':'#B0602A','BD jeunesse':'#C2453A','Comics et strips':'#3E6E3A','Albums et premières lectures':'#6A4C9C','Romans jeunesse':'#2E6A7A','Documentaires jeunesse':'#5A6A2A','Grands classiques':'#6E3A2A','Premières lectures':'#7A5A1E','Magazines jeunesse':'#2E5A8A','Autres studios':'#3A4466','Non classé':'#3A4466'};
+const SUPPORTS = ['Blu-ray','DVD','4K UHD','Numérique','VHS','Livre','Album BD','Liseuse','Autre'];
+
+/* =========================================================
+   Outils
+   ========================================================= */
+const STORE_KEY = 'cinetoons-v1';
+const IMG = 'https://image.tmdb.org/t/p/';
+const $ = (s, r = document) => r.querySelector(s);
+const h = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const decadeOf = (y) => (y ? Math.floor(+y / 10) * 10 : null);
+const fmtNote = (n) => (n == null || n === '' ? '' : String(Math.round(n * 10) / 10).replace('.', ','));
+const today = () => new Date().toISOString().slice(0, 10);
+const fmtDate = (d) => (d ? d.split('-').reverse().join('/') : '');
+const initials = (n) => String(n).split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+const tone = (f) => TONES[f.subgenre] || TONES['Non classé'];
+const isWebUrl = (u) => /^https?:/i.test(u || '');
+const COUNTRY = {US:'États-Unis',IT:'Italie',ES:'Espagne',FR:'France',DE:'Allemagne',GB:'Royaume-Uni',MX:'Mexique',CA:'Canada',AU:'Australie',NZ:'Nouvelle-Zélande',JP:'Japon',BE:'Belgique',DK:'Danemark',NO:'Norvège',SE:'Suède',AR:'Argentine',BR:'Brésil',IE:'Irlande',ZA:'Afrique du Sud',KR:'Corée du Sud',CN:'Chine',HU:'Hongrie',CZ:'Tchéquie',PL:'Pologne',AT:'Autriche',CH:'Suisse',NL:'Pays-Bas'};
+
+function blankFilm() {
+  return {id: uid(), tmdbId: null, tmdbType: '', title: '', originalTitle: '', year: '', endYear: '', type: 'Film', director: '', country: '', subgenre: 'Non classé',
+    technique: 'Non précisé', public: 'Famille', pd: false, age: 6, awards: '', vf: '', seasons: null, episodes: null,
+    kids: {}, loan: null, ean: [], publisher: '', volumes: null, vols: [], readVols: [], eanT: {}, coll: '',
+    runtime: null, cast: [], synopsis: '', synLang: '', poster: '', tmdbNote: null, trailer: '', providers: '', providersLink: '', wiki: '', imdb: '',
+    status: '', owned: false, support: '', myNote: 0, watchedDate: '', notes: '', addedAt: Date.now()};
+}
+/* ---------- Catalogue (fichier catalogue.js, en lecture seule) ----------
+   Ce qui est enregistré ne contient que les fiches modifiées, ajoutées ou supprimées. */
+const CAT = (() => {
+  const rows = window.CT_CATALOG, fields = window.CT_FIELDS;
+  if (!Array.isArray(rows) || !Array.isArray(fields)) return [];
+  return rows.map(r => {
+    const o = {}; fields.forEach((k, i) => { o[k] = r[i] == null ? '' : r[i]; });
+    return Object.assign(blankFilm(), {
+      id: o.id, title: o.title, originalTitle: o.originalTitle, year: String(o.year || ''), endYear: String(o.endYear || ''),
+      type: o.type || 'Film', director: o.director, country: o.country, subgenre: o.subgenre || 'Non classé',
+      cast: o.cast ? String(o.cast).split('|').map(n => ({name: n, role: ''})) : [],
+      technique: o.technique || 'Non précisé', public: o.public || 'Famille', poster: o.poster || '', pd: !!o.pd,
+      age: +o.age || 6, awards: o.awards || '', vf: o.vf || '', publisher: o.publisher || '', volumes: +o.volumes || null, coll: o.coll || '',
+      synopsis: o.synopsis, synLang: '', wiki: o.wiki, imdb: o.imdb || '', addedAt: 0
+    });
+  });
+})();
+const CAT_BY_ID = new Map(CAT.map(f => [f.id, f]));
+const CAT_JSON = new Map(CAT.map(f => [f.id, JSON.stringify(f)]));
+const USER_KEYS = ['status', 'owned', 'support', 'myNote', 'watchedDate', 'notes', 'kids', 'loan', 'ean', 'vols', 'readVols', 'eanT'];
+const isBlank = (v) => v == null || v === '' || (Array.isArray(v) && !v.length);
+function mergeFilm(cat, ov) {
+  const r = Object.assign({}, cat, ov);
+  Object.keys(cat).forEach(k => { if (k !== 'id' && k !== 'synLang' && !USER_KEYS.includes(k) && isBlank(ov[k]) && !isBlank(cat[k])) r[k] = cat[k]; });
+  r.synLang = !isBlank(ov.synopsis) && ov.synopsis !== cat.synopsis ? (ov.synLang || '') : cat.synLang;
+  return r;
+}
+/* Reconstruit la liste complète : catalogue + fiches modifiées/ajoutées − fiches supprimées */
+function assemble(over, deleted) {
+  const del = new Set(deleted || []);
+  const films = [];
+  CAT.forEach(c => { if (del.has(c.id)) return; const o = over[c.id]; films.push(o ? mergeFilm(c, Object.assign(blankFilm(), o)) : Object.assign({}, c)); });
+  Object.keys(over).forEach(id => { if (!CAT_BY_ID.has(id) && !del.has(id)) films.push(Object.assign(blankFilm(), over[id])); });
+  return films;
+}
+function computeOver() {
+  const over = {}, present = new Set();
+  S.films.forEach(f => { present.add(f.id); if (CAT_JSON.get(f.id) !== JSON.stringify(f)) over[f.id] = f; });
+  const deleted = CAT.filter(c => !present.has(c.id)).map(c => c.id);
+  return {over, deleted};
+}
+function defaultLists() {
+  const pick = (titles) => titles.map(t => { const f = CAT.find(c => c.title === t[0] && c.year === t[1]); return f && f.id; }).filter(Boolean);
+  return [
+    {id: uid(), name: 'Les grands classiques Disney', ids: pick([['Blanche-Neige et les Sept Nains', '1937'], ['Pinocchio', '1940'], ['Dumbo', '1941'], ['Bambi', '1942'], ['Cendrillon', '1950'], ['Peter Pan', '1953'], ['La Belle et le Clochard', '1955'], ['Les 101 Dalmatiens', '1961'], ['Le Livre de la jungle', '1967'], ['Les Aristochats', '1970'], ['Robin des Bois', '1973'], ['Le Roi lion', '1994']])},
+    {id: uid(), name: 'Soirée film en famille', ids: pick([['Toy Story', '1995'], ['Le Monde de Nemo', '2003'], ['Ratatouille', '2007'], ['Dragons', '2010'], ['Moi, moche et méchant', '2010'], ['Zootopie', '2016'], ['Coco', '2017']])},
+    {id: uid(), name: 'Souvenirs de Récré A2 et du Club Dorothée', ids: pick([['Goldorak', '1975'], ['Albator, le corsaire de l\'espace', '1978'], ['Capitaine Flam', '1978'], ['Candy', '1976'], ['Tom Sawyer', '1980'], ['Ulysse 31', '1981'], ['Les Mystérieuses Cités d\'or', '1982'], ['Heidi', '1974'], ['Rémi sans famille', '1977'], ['Les Chevaliers du Zodiaque', '1986'], ['Dragon Ball', '1986'], ['Olive et Tom', '1983']])},
+    {id: uid(), name: 'Histoires du soir', ids: pick([['Le Gruffalo (album)', '1999'], ['La Chenille qui fait des trous', '1969'], ['Petit Bleu et Petit Jaune', '1959'], ['Max et les Maximonstres', '1963'], ['Ernest et Célestine (albums)', '1981'], ['Les Contes de la rue Broca', '1967'], ['Contes de Perrault', '1697']])},
+    {id: uid(), name: 'À voir avec les enfants', ids: []}
+  ];
+}
+function defaultKids() { return [{id: 'k1', name: 'Enfant 1', age: 5}, {id: 'k2', name: 'Enfant 2', age: 8}, {id: 'k3', name: 'Enfant 3', age: 10}]; }
+const kidsFrom = (arr) => Array.isArray(arr) && arr.length ? arr.map(k => ({id: String(k.id || uid()), name: String(k.name || 'Enfant'), age: +k.age || 6})) : defaultKids();
+function initialState() { return {v: 2, films: assemble({}, []), lists: defaultLists(), tmdbKey: '', kids: defaultKids()}; }
+/* Accepte le format actuel (v2 : over/deleted) et l'ancien (v1 : liste complète des films) */
+function stateFrom(data) {
+  if (!data) return null;
+  const lists = Array.isArray(data.lists) ? data.lists.map(l => ({id: l.id || uid(), name: l.name || 'Liste', ids: [...(l.ids || [])]})) : [];
+  if (data.over && typeof data.over === 'object') return {v: 2, films: assemble(data.over, data.deleted || []), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids)};
+  if (Array.isArray(data.films)) {
+    const over = {}; data.films.forEach(f => { if (f && f.id) over[f.id] = f; });
+    const deleted = [];
+    return {v: 2, films: assemble(over, deleted), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids)};
+  }
+  return null;
+}
+
+/* =========================================================
+   Sauvegarde : navigateur / application de bureau (localStorage)
+   ou page Claude (stockage en ligne « db »)
+   ========================================================= */
+const IS_WEB = !!(window.claude && typeof window.claude.use === 'function');
+const WEB_BOOKS_MSG = "Dans la version en ligne sur Claude, la page n'a pas le droit de contacter d'autres sites : la recherche de livres (Google Livres), le titre automatique au scan d'un ISBN et les couvertures automatiques ne marchent que dans l'application installée sur ton Mac ou ton PC.";
+const WEB_TMDB_MSG = "Dans la version en ligne sur Claude, la page n'a pas le droit de contacter d'autres sites : la base TMDB (tous les dessins animés, affiches, résumés en français, plateformes) et les affiches de Wikipédia n'y sont donc pas disponibles. Utilise l'application installée sur ton Mac ou ton PC pour explorer TMDB, puis transfère ta collection ici avec Réglages › Exporter / Restaurer une sauvegarde.";
+let MODE = 'local';          // 'local' ou 'db'
+let DB = null, dbTimer = null, saveTimer = null, dbBusy = false, dbAgain = false, dbErr = '';
+const written = new Map();   // film id -> JSON enregistré en ligne
+let metaWritten = '';
+let storageOk = true;
+const STORE_V2 = 'cinetoons-v2';
+function load() {
+  try {
+    const raw2 = localStorage.getItem(STORE_V2);
+    if (raw2) return stateFrom(JSON.parse(raw2));
+    const raw1 = localStorage.getItem(STORE_KEY);
+    if (raw1) return stateFrom(JSON.parse(raw1));
+    return null;
+  } catch (e) { storageOk = false; return null; }
+}
+function save() {
+  LOCAL_IDX = null;
+  if (MODE === 'db') { clearTimeout(dbTimer); dbTimer = setTimeout(flushDb, 300); return; }
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      const {over, deleted} = computeOver();
+      localStorage.setItem(STORE_V2, JSON.stringify({v: 2, over, deleted, lists: S.lists, tmdbKey: S.tmdbKey, kids: S.kids}));
+      storageOk = true;
+    } catch (e) { storageOk = false; }
+    paintWarn();
+  }, 120);
+}
+/* Envoie seulement ce qui a changé : un document par fiche modifiée + un document pour les listes */
+async function flushDb() {
+  if (dbBusy) { dbAgain = true; return; }
+  dbBusy = true;
+  const {over, deleted} = computeOver();
+  const jobs = [];
+  Object.keys(over).forEach(id => { const j = JSON.stringify(over[id]); if (written.get(id) !== j) jobs.push(() => DB.doc('films/' + id).set(JSON.parse(j)).then(() => written.set(id, j))); });
+  [...written.keys()].forEach(id => { if (!over[id]) jobs.push(() => DB.doc('films/' + id).delete().then(() => written.delete(id))); });
+  const meta = JSON.stringify({v: 2, lists: S.lists, deleted, kids: S.kids});
+  if (meta !== metaWritten) jobs.push(() => DB.doc('meta/main').set(JSON.parse(meta)).then(() => { metaWritten = meta; }));
+  let failed = null;
+  for (let i = 0; i < jobs.length; i += 8) {
+    const res = await Promise.allSettled(jobs.slice(i, i + 8).map(fn => fn()));
+    res.forEach(r => { if (r.status === 'rejected') failed = r.reason; });
+  }
+  storageOk = !failed; dbErr = failed ? (failed.code || 'unavailable') : '';
+  dbBusy = false; paintWarn();
+  if (dbAgain) { dbAgain = false; flushDb(); }
+}
+function paintWarn() {
+  let msg = '';
+  if (!storageOk && MODE === 'db') {
+    msg = dbErr === 'quota_exceeded' ? 'Le stockage en ligne est plein : supprime quelques fiches modifiées ou utilise l\'application installée.'
+      : dbErr === 'invalid_argument' || dbErr === 'revoked' ? 'Tu peux consulter la collection mais pas la modifier depuis ce compte.'
+      : 'Enregistrement impossible pour le moment. Ta dernière modification sera renvoyée à la prochaine action ; en attendant, tu peux exporter une sauvegarde (Réglages).';
+  } else if (!storageOk) {
+    msg = 'Ce navigateur refuse l\'enregistrement automatique. Tes modifications seront perdues à la fermeture : va dans Réglages et clique sur « Exporter une sauvegarde ».';
+  }
+  $('#warn').innerHTML = msg ? '<div class="warn">' + h(msg) + '</div>' : '';
+}
+let S = {v: 2, films: [], lists: [], tmdbKey: '', kids: []};
+async function boot() {
+  if (IS_WEB) {
+    $('#view').innerHTML = '<div class="empty"><h2>Ouverture de ta collection…</h2><p><span class="spin"></span></p></div>';
+    try { DB = await window.claude.use('db'); } catch (e) { DB = null; }
+    if (DB) {
+      try {
+        const [fs, meta] = await Promise.all([DB.collection('films').get(), DB.doc('meta/main').get()]);
+        const over = {};
+        fs.docs.forEach(d => { const data = JSON.parse(JSON.stringify(d.data())); over[d.id] = data; written.set(d.id, JSON.stringify(data)); });
+        const m = meta.exists ? JSON.parse(JSON.stringify(meta.data())) : null;
+        const lists = m && Array.isArray(m.lists) ? m.lists.map(l => ({id: l.id, name: l.name, ids: [...(l.ids || [])]})) : defaultLists();
+        S = {v: 2, films: assemble(over, (m && m.deleted) || []), lists, tmdbKey: '', kids: kidsFrom(m && m.kids)};
+        metaWritten = m ? JSON.stringify(m) : '';
+        MODE = 'db';
+      } catch (e) { DB = null; }
+    }
+    if (MODE !== 'db') S = load() || initialState();
+  } else {
+    S = load() || initialState();
+  }
+  /* Ajout unique de la liste « Souvenirs de Récré A2… » pour les collections déjà créées */
+  try {
+    if (!localStorage.getItem('cinetoons-recre') && !S.lists.some(l => /^Souvenirs de Récré/.test(l.name))) {
+      const l = defaultLists().find(x => /^Souvenirs de Récré/.test(x.name)); if (l) S.lists.push(l);
+    }
+    localStorage.setItem('cinetoons-recre', '1');
+    if (!localStorage.getItem('cinetoons-soir') && !S.lists.some(l => /^Histoires du soir/.test(l.name))) {
+      const l = defaultLists().find(x => /^Histoires du soir/.test(x.name)); if (l) S.lists.push(l);
+    }
+    localStorage.setItem('cinetoons-soir', '1');
+  } catch (e) { /* stockage indisponible : on continue */ }
+  save();   // range les anciennes données au nouveau format (n'écrit que ce qui a changé)
+  loadPosters();
+  loadFree();
+  IMAGES = await imgStore.load();
+  paintWarn();
+  render();
+}
+/* =========================================================
+   Affiches
+   - POSTERS : affiches trouvées automatiquement sur TMDB (chemin seulement), sur l'ordinateur
+   - IMAGES  : photos choisies par l'utilisateur (réduites), sur l'ordinateur (IndexedDB) ou en ligne (page Claude)
+   ========================================================= */
+const POSTER_KEY = 'cinetoons-posters';
+let POSTERS = {};            // id -> {p: '/chemin.jpg', t: tmdbId, k: 'movie'|'tv'} ou 0 (cherché, rien trouvé)
+let IMAGES = {};             // id -> data:image/jpeg;base64,…
+function loadPosters() {
+  if (IS_WEB) return;
+  try { POSTERS = JSON.parse(localStorage.getItem(POSTER_KEY) || '{}') || {}; } catch (e) { POSTERS = {}; }
+}
+let posterTimer;
+function savePosters() {
+  if (IS_WEB) return;
+  clearTimeout(posterTimer);
+  posterTimer = setTimeout(() => { try { localStorage.setItem(POSTER_KEY, JSON.stringify(POSTERS)); } catch (e) { storageOk = false; paintWarn(); } }, 300);
+}
+/* Adresse de l'image à afficher pour une fiche (photo perso > affiche de la fiche > affiche trouvée) */
+function posterOf(f, size) {
+  if (IMAGES[f.id]) return IMAGES[f.id];
+  if (f.poster && !(IS_WEB && isWebUrl(f.poster))) return size === 'big' ? f.poster.replace('/w342/', '/w500/') : f.poster;
+  const p = POSTERS[f.id];
+  if (p && p.u && !IS_WEB) return size === 'big' ? p.u.replace('zoom=1', 'zoom=2') : p.u;
+  if (p && p.p && !IS_WEB) return IMG + (size === 'big' ? 'w500' : 'w342') + p.p;
+  return '';
+}
+const countPosters = () => S.films.reduce((n, f) => n + (posterOf(f) ? 1 : 0), 0);
+
+/* --- Stockage des photos personnelles --- */
+const IDB = {
+  db: null,
+  open() {
+    if (this.db) return Promise.resolve(this.db);
+    return new Promise((res, rej) => {
+      const r = indexedDB.open('cinetoons', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('images');
+      r.onsuccess = () => { this.db = r.result; res(r.result); };
+      r.onerror = () => rej(r.error);
+    });
+  },
+  async run(mode, fn) {
+    const db = await this.open();
+    return new Promise((res, rej) => { const tx = db.transaction('images', mode); const out = fn(tx.objectStore('images')); tx.oncomplete = () => res(out && out.result); tx.onerror = () => rej(tx.error); });
+  },
+  async all() {
+    const db = await this.open();
+    return new Promise((res, rej) => {
+      const out = {}; const req = db.transaction('images').objectStore('images').openCursor();
+      req.onsuccess = () => { const c = req.result; if (c) { out[c.key] = c.value; c.continue(); } else res(out); };
+      req.onerror = () => rej(req.error);
+    });
+  },
+  put(k, v) { return this.run('readwrite', st => st.put(v, k)); },
+  del(k) { return this.run('readwrite', st => st.delete(k)); }
+};
+const imgStore = {
+  async load() {
+    try {
+      if (MODE === 'db') {
+        const snap = await DB.collection('images').get();
+        const out = {}; snap.docs.forEach(d => { const v = d.data(); if (v && v.data) out[d.id] = v.data; }); return out;
+      }
+      return await IDB.all();
+    } catch (e) { return {}; }
+  },
+  async put(id, data) {
+    if (MODE === 'db') return DB.doc('images/' + id).set({data, at: Date.now()});
+    if (IS_WEB) throw new Error('Les photos ne peuvent pas être enregistrées sur cette page pour le moment.');
+    return IDB.put(id, data);
+  },
+  async del(id) {
+    if (MODE === 'db') return DB.doc('images/' + id).delete();
+    if (IS_WEB) return;
+    return IDB.del(id);
+  }
+};
+/* Réduit une image choisie (≈ 400 px de large, JPEG) pour qu'elle reste légère */
+function shrinkImage(file) {
+  return new Promise((res, rej) => {
+    if (!file || !/^image\//.test(file.type)) { rej(new Error('Choisis un fichier image (JPEG, PNG, HEIC converti…).')); return; }
+    const url = URL.createObjectURL(file);
+    const im = new Image();
+    im.onload = () => {
+      const w = Math.min(400, im.naturalWidth), hgt = Math.round(im.naturalHeight * w / im.naturalWidth);
+      const c = document.createElement('canvas'); c.width = w; c.height = hgt;
+      c.getContext('2d').drawImage(im, 0, 0, w, hgt);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', 0.82));
+    };
+    im.onerror = () => { URL.revokeObjectURL(url); rej(new Error("Cette image n'a pas pu être lue. Essaie une photo au format JPEG ou PNG.")); };
+    im.src = url;
+  });
+}
+async function setOwnImage(f, file) {
+  const data = await shrinkImage(file);
+  await imgStore.put(f.id, data);
+  IMAGES[f.id] = data;
+}
+async function removeOwnImage(f) { await imgStore.del(f.id); delete IMAGES[f.id]; }
+
+/* --- Livres en ligne : Google Books (sans clé), puis Open Library ---
+   Disponible dans l'application installée ; la page Claude ne peut pas contacter d'autres sites. */
+const httpsUrl = (u) => String(u || '').replace(/^http:/, 'https:').replace('&edge=curl', '');
+async function gbooks(q, n = 20) {
+  if (IS_WEB) throw new Error(WEB_BOOKS_MSG);
+  const u = 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(q) + '&maxResults=' + n + '&printType=books';
+  let r;
+  try { r = await fetch(u); } catch (e) { throw new Error('Impossible de joindre Google Livres. Vérifie ta connexion Internet.'); }
+  if (r.status === 429) throw new Error('Google Livres demande de patienter un peu (trop de recherches). Réessaie dans une minute.');
+  if (!r.ok) throw new Error('Google Livres a répondu avec une erreur (' + r.status + ').');
+  const d = await r.json();
+  return (d.items || []).map(it => {
+    const v = it.volumeInfo || {};
+    const isbn = ((v.industryIdentifiers || []).find(x => x.type === 'ISBN_13') || (v.industryIdentifiers || []).find(x => x.type === 'ISBN_10') || {}).identifier || '';
+    return {id: it.id, title: v.title || '', subtitle: v.subtitle || '', authors: (v.authors || []).join(', '), publisher: v.publisher || '', year: (v.publishedDate || '').slice(0, 4),
+      pages: v.pageCount || 0, desc: v.description || '', cats: (v.categories || []).join(', '), lang: v.language || '', isbn,
+      cover: httpsUrl((v.imageLinks || {}).thumbnail || (v.imageLinks || {}).smallThumbnail || '')};
+  });
+}
+async function openLibraryIsbn(isbn) {
+  try {
+    const r = await fetch('https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn + '&format=json&jscmd=data');
+    const d = (await r.json())['ISBN:' + isbn]; if (!d) return null;
+    return {title: d.title || '', subtitle: d.subtitle || '', authors: (d.authors || []).map(a => a.name).join(', '), publisher: ((d.publishers || [])[0] || {}).name || '',
+      year: String(d.publish_date || '').match(/\d{4}/) ? String(d.publish_date).match(/\d{4}/)[0] : '', pages: d.number_of_pages || 0, desc: '', isbn,
+      cover: httpsUrl((d.cover || {}).medium || '')};
+  } catch (e) { return null; }
+}
+async function lookupIsbn(isbn) {
+  try { const g = await gbooks('isbn:' + isbn, 1); if (g[0]) return g[0]; } catch (e) { if (/patienter/.test(e.message)) throw e; }
+  return openLibraryIsbn(isbn);
+}
+/* Devine le nom de la série à partir du titre d'un tome : « Astérix - Tome 3 : … » → « Astérix » */
+const seriesGuess = (t) => String(t || '').replace(/\s*[-–:,.]?\s*(tome|t\.|vol\.?|volume|n°)\s*\d+.*$/i, '').replace(/\s*[:–-].*$/, '').trim();
+const tomeGuess = (t) => { const m = String(t || '').match(/(?:tome|t\.|vol\.?|volume|n°)\s*(\d+)/i); return m ? +m[1] : 0; };
+async function findCover(f) {
+  const au = ((f.director || '').split(/,| et | puis /)[0] || '').trim();
+  const q = 'intitle:' + f.title.replace(/\s*\((livres?|album|BD|roman|livre)\)$/i, '') + (au && !/collectif|presse|méthode|disney/i.test(au) ? ' inauthor:' + au.split(' ').slice(-1)[0] : '');
+  const res = await gbooks(q, 10);
+  const want = tkey(f.title.replace(/\s*\(.*\)$/, ''));
+  const hit = res.find(x => x.cover && tkey(x.title).includes(want)) || res.find(x => x.cover);
+  return hit ? {u: hit.cover, g: hit.id} : 0;
+}
+function bookFromGoogle(b) {
+  const bd = /comic|graphic|bande/i.test(b.cats);
+  const type = bd ? 'Série de BD' : b.pages && b.pages <= 48 ? 'Album' : 'Roman';
+  const tn = tomeGuess(b.title), sg = seriesGuess(b.title);
+  return Object.assign(blankFilm(), {title: sg && (bd || tn) ? sg : (b.title + (b.subtitle && b.title.length < 40 ? ' : ' + b.subtitle : '')), year: b.year, type: tn && !bd ? 'Série de livres' : type, vols: tn ? [tn] : [],
+    subgenre: bd ? 'BD jeunesse' : type === 'Album' ? 'Albums et premières lectures' : 'Romans jeunesse', technique: bd ? 'Bande dessinée' : type === 'Album' ? 'Livre illustré' : 'Roman',
+    director: b.authors, publisher: b.publisher, synopsis: b.desc.slice(0, 1200), poster: b.cover, ean: b.isbn ? [b.isbn] : [], age: type === 'Album' ? 3 : 8,
+    country: '', public: 'Famille', addedAt: Date.now()});
+}
+const BO = {q: '', loading: false, error: '', results: [], done: false};
+function viewBooksOnline() {
+  const tabs = `<div class="tabs"><a class="tab" href="#/catalogue">Ma base</a><a class="tab" href="#/explorer">Explorer TMDB (films et séries)</a><a class="tab on" href="#/livres-en-ligne">Chercher un livre</a></div>`;
+  if (IS_WEB) return `<section class="content" style="max-width:900px">${tabs}<div class="empty"><h2>Recherche de livres : dans l'application installée</h2><p>${h(WEB_BOOKS_MSG)}</p></div></section>`;
+  return `<section class="content">${tabs}
+    <div class="head-row"><div><h1 class="title">Chercher un livre ou une BD</h1><p class="muted">Recherche dans Google Livres : titre, auteur, série ou numéro ISBN. Clique sur « Ajouter à ma base » pour créer la fiche, avec la couverture.</p></div></div>
+    <form id="bo-form" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 320px"><span>Titre, auteur ou ISBN</span><input class="inp" id="bo-q" type="search" value="${h(BO.q)}" placeholder="Ex. Les P'tites Poules, Geronimo Stilton, 9782…"></label><button class="btn primary" type="submit">Chercher</button></form>
+    <p class="muted" id="bo-info"></p><div id="bo-grid"></div></section>`;
+}
+function paintBO() {
+  const g = $('#bo-grid'), info = $('#bo-info'); if (!g) return;
+  if (BO.loading) { info.innerHTML = '<span class="spin"></span> Recherche…'; g.innerHTML = ''; return; }
+  if (BO.error) { info.textContent = ''; g.innerHTML = `<div class="empty"><h2>La recherche n'a pas abouti</h2><p>${h(BO.error)}</p></div>`; return; }
+  if (!BO.done) { info.textContent = ''; g.innerHTML = ''; return; }
+  info.textContent = BO.results.length + ' résultat' + (BO.results.length > 1 ? 's' : '') + ' pour « ' + BO.q + ' »';
+  g.innerHTML = BO.results.length ? `<div class="grid">${BO.results.map((b, i) => { const have = S.films.find(f => b.isbn && (f.ean || []).includes(b.isbn));
+    return `<div class="card"><div class="poster" style="background:#4A3A2A">${b.cover ? `<img class="poster-img" src="${h(b.cover)}" alt="" loading="lazy" data-title="${h(b.title)}">` : `<span class="poster-title">${h(b.title)}</span>`}${have ? '<span class="pill vu">DANS MA BASE</span>' : ''}</div>
+      <div class="card-t">${h(b.title)}</div><div class="card-m">${h([b.authors, b.publisher, b.year].filter(Boolean).join(' · '))}</div>
+      ${have ? `<a class="btn small" href="#/film/${h(have.id)}">Ouvrir la fiche</a>` : `<button type="button" class="btn small" data-act="bo-add" data-i="${i}">${ICON.plus}Ajouter à ma base</button>`}</div>`; }).join('')}</div>`
+    : '<div class="empty"><h2>Aucun résultat</h2><p>Essaie avec moins de mots, ou seulement le nom de l\'auteur.</p></div>';
+}
+async function boSearch() {
+  BO.loading = true; BO.error = ''; paintBO();
+  try { const q = BO.q.trim().replace(/[\s-]/g, ''); BO.results = await gbooks(/^97[89]\d{10}$/.test(q) ? 'isbn:' + q : BO.q.trim(), 40); BO.done = true; }
+  catch (e) { BO.error = e.message; }
+  BO.loading = false; paintBO();
+}
+
+/* --- Recherche automatique des affiches sur TMDB --- */
+const RUN = {active: false, stop: false, done: 0, total: 0, found: 0, errors: 0, lastError: ''};
+async function findPoster(f) {
+  const kind = f.tmdbType || (isTV(f) ? 'tv' : 'movie');
+  if (f.tmdbId) {
+    const d = await tmdb('/' + kind + '/' + f.tmdbId, {language: 'fr-FR'});
+    return d.poster_path ? {p: d.poster_path, t: d.id, k: kind} : 0;
+  }
+  const titles = [...new Set([f.originalTitle, f.title].filter(Boolean))];
+  const want = +f.year || 0;
+  const yKey = kind === 'tv' ? 'first_air_date_year' : 'year';
+  let best = null, bestScore = -1;
+  for (const q of titles) {
+    for (const withYear of want ? [true, false] : [false]) {
+      const res = await tmdb('/search/' + kind, Object.assign({query: q, language: 'fr-FR', include_adult: 'false'}, withYear ? {[yKey]: want} : {}));
+      (res.results || []).forEach(r => {
+        const y = +((r.release_date || r.first_air_date || '').slice(0, 4)) || 0;
+        if (want && y && Math.abs(y - want) > 1) return;
+        const names = [r.title, r.original_title, r.name, r.original_name].filter(Boolean).map(tkey);
+        const exact = names.includes(tkey(q));
+        const anim = (r.genre_ids || []).includes(16);
+        if (!exact && !anim) return;
+        const score = (exact ? 4 : 0) + (anim ? 3 : 0) + (y === want ? 2 : 0) + (r.poster_path ? 1 : 0);
+        if (score > bestScore) { best = r; bestScore = score; }
+      });
+      if (best && best.poster_path) break;
+    }
+    if (best && best.poster_path) break;
+  }
+  return best && best.poster_path ? {p: best.poster_path, t: best.id, k: kind} : 0;
+}
+async function runPosters(list) {
+  RUN.active = true; RUN.stop = false; RUN.done = 0; RUN.found = 0; RUN.errors = 0; RUN.lastError = '';
+  RUN.total = list.length; paintRun();
+  let i = 0;
+  const worker = async () => {
+    while (!RUN.stop && i < list.length) {
+      const f = list[i++];
+      try {
+        const r = isBook(f) ? await findCover(f) : await findPoster(f);
+        POSTERS[f.id] = r; if (r) RUN.found++;
+      } catch (e) {
+        RUN.errors++; RUN.lastError = e.message;
+        if (/clé|joindre/.test(e.message)) RUN.stop = true;
+        await new Promise(r => setTimeout(r, 1500));
+      }
+      RUN.done++;
+      if (RUN.done % 10 === 0) { savePosters(); paintRun(); }
+      if (RUN.done % 60 === 0 && route().name === 'catalogue' && !$('#modal-root').innerHTML) paintCatGrid();
+    }
+  };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  savePosters(); RUN.active = false; paintRun();
+  toast(RUN.stop && RUN.done < RUN.total ? 'Recherche arrêtée : ' + RUN.found + ' affiche' + (RUN.found > 1 ? 's' : '') + ' trouvée' + (RUN.found > 1 ? 's' : '') + '.' : 'Terminé : ' + RUN.found + ' affiche' + (RUN.found > 1 ? 's' : '') + ' trouvée' + (RUN.found > 1 ? 's' : '') + ' sur ' + RUN.total + '.');
+  if (route().name === 'catalogue') paintCatGrid();
+}
+function postersTodo(scope) {
+  const base = scope === 'filtre' ? filteredFilms() : S.films;
+  return base.filter(f => !IMAGES[f.id] && POSTERS[f.id] === undefined && (scope === 'livres' ? isBook(f) && !f.poster : S.tmdbKey || isBook(f)) && !(isBook(f) && f.poster));
+}
+function openPosterPanel() {
+  if (IS_WEB) { toast(WEB_TMDB_MSG); return; }
+  const all = postersTodo('tout').length, filt = postersTodo('filtre').length, books = postersTodo('livres').length;
+  const active = filtersActive();
+  $('#modal-root').innerHTML = `<div class="overlay" data-act="close-overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="pp-title" style="max-width:620px">
+    <h2 id="pp-title">Ajouter les affiches et les couvertures</h2>
+    <p style="margin:0">Couvertures des BD et livres : cherchées dans Google Livres, sans clé.${S.tmdbKey ? ' Affiches des dessins animés : cherchées sur TMDB.' : ' Pour les affiches des dessins animés, ajoute ta clé TMDB gratuite dans Réglages.'}</p>
+    <p style="margin:0" class="muted">Les titres qui ont déjà une affiche Wikipédia la gardent ; l'appli cherche aussi chaque titre sur TMDB (titre + année) et garde l'affiche TMDB, souvent l'affiche française, quand elle est sûre de la correspondance. Compte environ 1 minute pour 300 titres. Tu peux fermer cette fenêtre : la recherche continue, et tu peux l'arrêter puis la reprendre plus tard là où elle s'est arrêtée.</p>
+    <div id="run-zone"></div>
+    <div class="row" id="run-start">
+      <button type="button" class="btn primary" data-act="posters-run" data-scope="tout" ${all ? '' : 'disabled'}>${S.tmdbKey ? 'Tous les titres sans affiche' : 'Toutes les BD et livres'} (${all.toLocaleString('fr-FR')})</button>
+      ${S.tmdbKey ? `<button type="button" class="btn" data-act="posters-run" data-scope="livres" ${books ? '' : 'disabled'}>Seulement les BD et livres (${books.toLocaleString('fr-FR')})</button>` : ''}
+      ${active ? `<button type="button" class="btn" data-act="posters-run" data-scope="filtre" ${filt ? '' : 'disabled'}>Seulement les titres filtrés (${filt.toLocaleString('fr-FR')})</button>` : ''}
+    </div>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Fermer</button></div>
+  </div></div>`;
+  paintRun();
+}
+/* --- Offres gratuites en France (TMDB / JustWatch), sur l'ordinateur --- */
+const FREE_KEY = 'cinetoons-free';
+let FREE = {};               // id -> {n: [plateformes gratuites], at: 'AAAA-MM-JJ', link}
+function loadFree() { if (IS_WEB) return; try { FREE = JSON.parse(localStorage.getItem(FREE_KEY) || '{}') || {}; } catch (e) { FREE = {}; } }
+let freeTimer;
+function saveFree() { if (IS_WEB) return; clearTimeout(freeTimer); freeTimer = setTimeout(() => { try { localStorage.setItem(FREE_KEY, JSON.stringify(FREE)); } catch (e) { storageOk = false; paintWarn(); } }, 300); }
+const isFreeNow = (f) => !!(FREE[f.id] && FREE[f.id].n && FREE[f.id].n.length);
+const FRUN = {active: false, stop: false, done: 0, total: 0, found: 0, errors: 0, lastError: ''};
+async function tmdbRef(f) {
+  if (f.tmdbId) return {t: f.tmdbId, k: f.tmdbType || (isTV(f) ? 'tv' : 'movie')};
+  const p = POSTERS[f.id];
+  if (p && p.t) return {t: p.t, k: p.k};
+  if (p === 0) return null;
+  const r = await findPoster(f); POSTERS[f.id] = r;
+  return r && r.t ? {t: r.t, k: r.k} : null;
+}
+async function checkFree(f) {
+  const ref = await tmdbRef(f);
+  if (!ref) { FREE[f.id] = {n: [], at: today(), link: ''}; return false; }
+  const raw = await tmdbDetails(ref.t, ref.k);
+  const x = fromTmdb(raw, ref.k);
+  if (!f.tmdbId) { f.tmdbId = ref.t; f.tmdbType = ref.k; }
+  ['runtime', 'seasons', 'episodes', 'tmdbNote', 'trailer', 'providers', 'providersLink'].forEach(k => { if (!isBlank(x[k])) f[k] = x[k]; });
+  const n = x.freeNow || [];
+  FREE[f.id] = {n, at: today(), link: x.providersLink || ''};
+  HAY.delete(f.id);
+  return n.length > 0;
+}
+async function runFree(list) {
+  FRUN.active = true; FRUN.stop = false; FRUN.done = 0; FRUN.found = 0; FRUN.errors = 0; FRUN.lastError = ''; FRUN.total = list.length; paintFree();
+  let i = 0;
+  const worker = async () => {
+    while (!FRUN.stop && i < list.length) {
+      const f = list[i++];
+      try { if (await checkFree(f)) FRUN.found++; }
+      catch (e) { FRUN.errors++; FRUN.lastError = e.message; if (/clé|joindre/.test(e.message)) FRUN.stop = true; await new Promise(r => setTimeout(r, 1500)); }
+      FRUN.done++;
+      if (FRUN.done % 10 === 0) { saveFree(); savePosters(); paintFree(); }
+    }
+  };
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  saveFree(); savePosters(); save(); FRUN.active = false; paintFree();
+  toast('Vérification terminée : ' + FRUN.found + ' titre' + (FRUN.found > 1 ? 's' : '') + ' gratuit' + (FRUN.found > 1 ? 's' : '') + ' en ce moment.');
+  if (route().name === 'catalogue') render();
+}
+function freeTodo(scope) {
+  const base = scope === 'filtre' ? filteredFilms() : S.films;
+  const old = (d) => !d || (Date.now() - new Date(d).getTime()) > 7 * 86400000;
+  return base.filter(f => !FREE[f.id] || old(FREE[f.id].at));
+}
+function openFreePanel() {
+  if (IS_WEB) { toast(WEB_TMDB_MSG); return; }
+  if (!S.tmdbKey) { toast('Ajoute d\'abord ta clé TMDB (gratuite) dans Réglages.'); location.hash = '#/reglages'; return; }
+  const all = freeTodo('tout').length, filt = freeTodo('filtre').length;
+  $('#modal-root').innerHTML = `<div class="overlay" data-act="close-overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="fp-title" style="max-width:620px">
+    <h2 id="fp-title">Mettre à jour depuis TMDB</h2>
+    <p style="margin:0" class="muted">Pour chaque titre, l'appli récupère sur TMDB la durée, le nombre de saisons et d'épisodes, la note, la bande-annonce et les offres en France (données JustWatch), dont les offres gratuites ou avec publicité : France.tv, Arte, TF1+, M6+, Pluto TV, Rakuten TV… Les titres déjà vérifiés il y a moins de 7 jours sont passés. Compte environ 2 minutes pour 300 titres. Tu peux fermer cette fenêtre, la recherche continue.</p>
+    <div id="frun-zone"></div>
+    <div class="row" id="frun-start">
+      <button type="button" class="btn primary" data-act="free-run" data-scope="tout" ${all ? '' : 'disabled'}>Tous les titres (${all.toLocaleString('fr-FR')})</button>
+      ${filtersActive() ? `<button type="button" class="btn" data-act="free-run" data-scope="filtre" ${filt ? '' : 'disabled'}>Seulement les titres filtrés (${filt.toLocaleString('fr-FR')})</button>` : ''}
+    </div>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Fermer</button></div>
+  </div></div>`;
+  paintFree();
+}
+function paintFree() {
+  const z = $('#frun-zone'), st = $('#frun-start'), badge = $('#frun-badge');
+  if (st) st.hidden = FRUN.active;
+  if (badge) badge.textContent = FRUN.active ? ' (' + Math.round(FRUN.done / Math.max(FRUN.total, 1) * 100) + ' %)' : '';
+  if (!z) return;
+  if (!FRUN.active && !FRUN.done) { z.innerHTML = ''; return; }
+  const pct = Math.round(FRUN.done / Math.max(FRUN.total, 1) * 100);
+  z.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">
+    <div class="bar" style="grid-template-columns:1fr 48px"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span class="v">${pct} %</span></div>
+    <p style="margin:0">${FRUN.done.toLocaleString('fr-FR')} / ${FRUN.total.toLocaleString('fr-FR')} titres vérifiés · <b>${FRUN.found.toLocaleString('fr-FR')}</b> gratuit${FRUN.found > 1 ? 's' : ''} en ce moment${FRUN.errors ? ' · ' + FRUN.errors + ' erreur' + (FRUN.errors > 1 ? 's' : '') : ''}</p>
+    ${FRUN.lastError ? `<p class="err" style="margin:0">${h(FRUN.lastError)}</p>` : ''}
+    ${FRUN.active ? '<div class="row"><button type="button" class="btn" data-act="free-stop">Arrêter</button></div>' : ''}
+  </div>`;
+}
+
+function paintRun() {
+  const z = $('#run-zone'); const st = $('#run-start');
+  if (st) st.hidden = RUN.active;
+  const badge = $('#run-badge');
+  if (badge) badge.textContent = RUN.active ? ' (' + Math.round(RUN.done / Math.max(RUN.total, 1) * 100) + ' %)' : '';
+  if (!z) return;
+  if (!RUN.active && !RUN.done) { z.innerHTML = ''; return; }
+  const pct = Math.round(RUN.done / Math.max(RUN.total, 1) * 100);
+  z.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">
+    <div class="bar" style="grid-template-columns:1fr 48px"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span class="v">${pct} %</span></div>
+    <p style="margin:0">${RUN.done.toLocaleString('fr-FR')} / ${RUN.total.toLocaleString('fr-FR')} titres vérifiés · <b>${RUN.found.toLocaleString('fr-FR')}</b> affiche${RUN.found > 1 ? 's' : ''} trouvée${RUN.found > 1 ? 's' : ''}${RUN.errors ? ' · ' + RUN.errors + ' erreur' + (RUN.errors > 1 ? 's' : '') : ''}</p>
+    ${RUN.lastError ? `<p class="err" style="margin:0">${h(RUN.lastError)}</p>` : ''}
+    ${RUN.active ? '<div class="row"><button type="button" class="btn" data-act="posters-stop">Arrêter</button></div>' : ''}
+  </div>`;
+}
+
+/* Fenêtre de confirmation (remplace confirm(), refusé dans la page Claude) */
+function ask(msg, okLabel) {
+  return new Promise(res => {
+    const r = $('#confirm-root');
+    r.innerHTML = `<div class="overlay"><div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="ask-msg" style="max-width:480px">
+      <p id="ask-msg" style="margin:0;line-height:1.55">${h(msg)}</p>
+      <div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="ask-no">Annuler</button><button type="button" class="btn danger" id="ask-yes">${h(okLabel || 'Confirmer')}</button></div></div></div>`;
+    const done = (v) => { r.innerHTML = ''; res(v); };
+    $('#ask-no').onclick = () => done(false);
+    $('#ask-yes').onclick = () => done(true);
+    $('#ask-no').focus();
+  });
+}
+
+const byId = (id) => S.films.find(f => f.id === id);
+
+/* =========================================================
+   TMDB
+   ========================================================= */
+async function tmdb(path, params = {}) {
+  if (IS_WEB) throw new Error(WEB_TMDB_MSG);
+  const key = (S.tmdbKey || '').trim();
+  if (!key) throw new Error('Aucune clé TMDB enregistrée. Ajoute-la dans Réglages.');
+  const u = new URL('https://api.themoviedb.org/3' + path);
+  Object.entries(params).forEach(([k, v]) => { if (v !== '' && v != null) u.searchParams.set(k, v); });
+  const opt = {headers: {accept: 'application/json'}};
+  if (key.length > 40) opt.headers.Authorization = 'Bearer ' + key; else u.searchParams.set('api_key', key);
+  let r;
+  try { r = await fetch(u, opt); }
+  catch (e) { throw new Error('Impossible de joindre TMDB. Vérifie ta connexion Internet.'); }
+  if (r.status === 401) throw new Error('TMDB refuse la clé. Vérifie-la dans Réglages.');
+  if (r.status === 404) throw new Error('Film introuvable sur TMDB.');
+  if (!r.ok) throw new Error('TMDB a répondu avec une erreur (' + r.status + '). Réessaie dans un moment.');
+  return r.json();
+}
+const isTV = (f) => f.type === 'Série' || f.type === 'Mini-série';
+const tmdbDetails = (id, kind) => tmdb('/' + (kind === 'tv' ? 'tv' : 'movie') + '/' + id,
+  {language: 'fr-FR', append_to_response: 'credits,videos,watch/providers', include_video_language: 'fr,en'});
+
+/* Clé de comparaison de titres (sans accents, ponctuation ni article) */
+const tkey = (t) => norm(t).replace(/[’'`]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim()
+  .replace(/^(the|a|an|le|la|les|l|el|il|lo|un|une|der|die|das)\s+/, '');
+let LOCAL_IDX = null;
+function findLocal(titles, year) {
+  if (!LOCAL_IDX) {
+    LOCAL_IDX = new Map();
+    S.films.forEach(f => [f.title, f.originalTitle].filter(Boolean).forEach(t => {
+      const k = tkey(t); if (!LOCAL_IDX.has(k)) LOCAL_IDX.set(k, []); LOCAL_IDX.get(k).push(f);
+    }));
+  }
+  for (const t of titles.filter(Boolean)) {
+    const hit = (LOCAL_IDX.get(tkey(t)) || []).find(f => f.year && year && Math.abs(+f.year - +year) <= 1);
+    if (hit) return hit;
+  }
+  return null;
+}
+const sameTmdb = (f, id, kind) => f.tmdbId === id && (f.tmdbType || 'movie') === kind;
+
+function fromTmdb(d, kind) {
+  const tv = kind === 'tv';
+  const crew = (d.credits && d.credits.crew) || [];
+  const countries = tv ? (d.origin_country || []).map(c => ({iso_3166_1: c, name: c})) : (d.production_countries || []);
+  const comp = ((d.production_companies || []).map(c => c.name).join(' ') + ' ' + ((d.networks || []).map(n => n.name).join(' ')));
+  const STUDIO_RULES = [[/Pixar/, 'Pixar'], [/DreamWorks/, 'DreamWorks'], [/Disney/, 'Disney'], [/Illumination/, 'Illumination'], [/Blue Sky/, 'Blue Sky'],
+    [/Sony Pictures Animation/, 'Sony Animation'], [/Laika/, 'Laika'], [/Aardman/, 'Aardman'], [/Hanna-Barbera/, 'Hanna-Barbera'], [/Cartoon Network/, 'Cartoon Network'],
+    [/Nickelodeon/, 'Nickelodeon'], [/Warner/, 'Warner Bros. / Looney Tunes'], [/Netflix/, 'Netflix'], [/Universal|Amblin/, 'Universal / Amblin'], [/Paramount/, 'Paramount'],
+    [/20th Century|Fox/, '20th Century / Fox'], [/MGM|Metro-Goldwyn/, 'MGM / Tom et Jerry']];
+  let sub = (d.original_language === 'ja' || countries.some(c => c.iso_3166_1 === 'JP')) ? 'Animés et style japonais' : (STUDIO_RULES.find(([re]) => re.test(comp)) || [0, ''])[1];
+  if (!sub) sub = countries.some(c => c.iso_3166_1 === 'FR') ? 'Animation française' : countries.some(c => ['GB','BE','IE','ES','DE','IT','DK','NO','SE','CH','NL','LU','FI','CZ','PL','LV'].includes(c.iso_3166_1)) ? 'Animation européenne' : 'Autres studios';
+  const vids = ((d.videos && d.videos.results) || []).filter(v => v.site === 'YouTube');
+  const trailer = vids.find(v => v.type === 'Trailer' && v.iso_639_1 === 'fr') || vids.find(v => v.type === 'Trailer') || vids[0];
+  const p = d['watch/providers'] && d['watch/providers'].results && d['watch/providers'].results.FR;
+  let providers = '';
+  if (p) {
+    const part = (label, arr) => (arr && arr.length ? label + ' : ' + arr.map(x => x.provider_name).join(', ') : '');
+    providers = [part('Gratuit', p.free), part('Avec publicité', p.ads), part('Abonnement', p.flatrate), part('Location', p.rent), part('Achat', p.buy)].filter(Boolean).join(' · ');
+  }
+  const title = (tv ? d.name : d.title) || (tv ? d.original_name : d.original_title) || '';
+  const orig = tv ? d.original_name : d.original_title;
+  const out = {
+    tmdbId: d.id, tmdbType: tv ? 'tv' : 'movie', title,
+    originalTitle: orig && orig !== title ? orig : '',
+    year: ((tv ? d.first_air_date : d.release_date) || '').slice(0, 4),
+    director: tv ? (d.created_by || []).map(c => c.name).join(', ') : crew.filter(c => c.job === 'Director').map(c => c.name).join(', '),
+    country: countries.map(c => COUNTRY[c.iso_3166_1] || c.name).join(', '), subgenre: sub,
+    runtime: (tv ? (d.episode_run_time || [])[0] : d.runtime) || null,
+    cast: ((d.credits && d.credits.cast) || []).slice(0, 8).map(c => ({name: c.name, role: c.character || ''})),
+    synopsis: d.overview || '', synLang: d.overview ? '' : 'en', poster: d.poster_path ? IMG + 'w342' + d.poster_path : '',
+    tmdbNote: d.vote_average ? Math.round(d.vote_average * 10) / 10 : null,
+    trailer: trailer ? 'https://www.youtube.com/watch?v=' + trailer.key : '',
+    providers: providers, providersLink: p && p.link ? p.link : '',
+    freeNow: p ? [...new Set([...(p.free || []), ...(p.ads || [])].map(x => x.provider_name))] : null
+  };
+  if (tv) {
+    out.type = d.type === 'Miniseries' ? 'Mini-série' : 'Série';
+    const end = (d.last_air_date || '').slice(0, 4);
+    out.endYear = !d.in_production && end && end !== out.year ? end : '';
+    out.seasons = d.number_of_seasons || null; out.episodes = d.number_of_episodes || null;
+  }
+  return out;
+}
+/* Ajoute les infos TMDB à une fiche sans effacer ce qui existe ni ce que l'utilisateur a saisi pour lui-même */
+function applyTmdb(f, d) {
+  Object.keys(d).forEach(k => {
+    if (isBlank(d[k])) return;
+    if (k === 'subgenre' && f.subgenre && f.subgenre !== 'Non classé') return;
+    if (k === 'poster' && f.poster && !/image\.tmdb\.org/.test(f.poster)) return;
+    if (k === 'synLang') return;
+    f[k] = d[k];
+  });
+  if (d.synopsis) f.synLang = '';
+  if (d.freeNow) { FREE[f.id] = {n: d.freeNow, at: today(), link: d.providersLink || ''}; saveFree(); }
+  delete f.freeNow;
+  HAY.delete(f.id); LOCAL_IDX = null;
+}
+async function importTmdb(id, kind) {
+  const existing = S.films.find(f => sameTmdb(f, id, kind));
+  if (existing) return existing;
+  const raw = await tmdbDetails(id, kind);
+  const d = fromTmdb(raw, kind);
+  const match = findLocal([d.title, d.originalTitle, kind === 'tv' ? raw.original_name : raw.original_title], d.year);
+  if (match && !match.tmdbId) { applyTmdb(match, d); save(); return match; }
+  const fr = d.freeNow; delete d.freeNow;
+  const f = Object.assign(blankFilm(), d);
+  if (fr) { FREE[f.id] = {n: fr, at: today(), link: d.providersLink || ''}; saveFree(); }
+  S.films.push(f); LOCAL_IDX = null; save();
+  return f;
+}
+async function completeFromTmdb(f) {
+  const kind = f.tmdbType || (isTV(f) ? 'tv' : 'movie');
+  let id = f.tmdbId;
+  if (!id) {
+    const tries = [f.originalTitle, f.title].filter(Boolean);
+    let hit = null;
+    for (const q of tries) {
+      const res = await tmdb('/search/' + kind, kind === 'tv'
+        ? {query: q, first_air_date_year: f.year, language: 'fr-FR', include_adult: 'false'}
+        : {query: q, year: f.year, language: 'fr-FR', include_adult: 'false'});
+      const list = res.results || [];
+      hit = list.find(r => (r.genre_ids || []).includes(16)) || list[0];
+      if (hit) break;
+    }
+    if (!hit) throw new Error('Aucun titre correspondant trouvé sur TMDB. Vérifie le titre, l\'année et le type (film ou série).');
+    id = hit.id;
+  }
+  const other = S.films.find(x => sameTmdb(x, id, kind) && x.id !== f.id);
+  if (other) throw new Error('Ce titre est déjà dans ta base sous le nom « ' + other.title + ' ».');
+  applyTmdb(f, fromTmdb(await tmdbDetails(id, kind), kind));
+  save();
+}
+
+/* =========================================================
+   Petits éléments d'interface
+   ========================================================= */
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+}
+function posterInner(f) {
+  const src = posterOf(f);
+  return src ? `<img class="poster-img" src="${h(src)}" alt="" loading="lazy" data-title="${h(f.title)}">` : `<span class="poster-title">${h(f.title)}</span>`;
+}
+/* ---------- Profils enfants ---------- */
+const KIDS = () => S.kids || [];
+const activeKid = () => KIDS().find(k => k.id === UI.kid) || null;
+const kidRec = (f, k) => ((f.kids || {})[k.id]) || {};
+const stOf = (f, k = activeKid()) => k ? (kidRec(f, k).s || '') : (f.status || '');
+const noteOf = (f, k = activeKid()) => k ? (kidRec(f, k).n || 0) : (f.myNote || 0);
+const favOf = (f, k = activeKid()) => k ? !!kidRec(f, k).fav : false;
+function setKid(f, k, patch) {
+  f.kids = Object.assign({}, f.kids || {});
+  const r = Object.assign({}, f.kids[k.id] || {}, patch);
+  Object.keys(r).forEach(x => { if (r[x] === '' || r[x] === 0 || r[x] === false || r[x] == null) delete r[x]; });
+  if (Object.keys(r).length) f.kids[k.id] = r; else delete f.kids[k.id];
+}
+const isBook = (f) => BOOK_TYPES.includes(f.type);
+const W = (f) => isBook(f) ? {vu: 'Lu', avoir: 'À lire', VU: 'LU', AVOIR: 'À LIRE', le: 'Lu le'} : {vu: 'Vu', avoir: 'À voir', VU: 'VU', AVOIR: 'À VOIR', le: 'Vu le'};
+const edOf = (f) => (f.publisher || '').split(/ puis |,| \(/)[0].trim();
+const kindOf = (f) => f.type === 'Série de BD' ? 'bd' : isBook(f) ? 'livre' : 'video';
+const durOf = (f) => f.runtime || ({'Magazine': 20, 'Album': 10, 'Série de BD': 30, 'Série de livres': 30, 'Roman': 120, 'Film': 90, 'Court métrage': 8, 'Série': 22, 'Mini-série': 25, 'Téléfilm / spécial': 50}[f.type] || 90);
+const isSeries = (f) => f.type === 'Série' || f.type === 'Mini-série';
+function paintWho() {
+  const sel = $('#who'); if (!sel) return;
+  sel.innerHTML = `<option value="">Toute la famille</option>` + KIDS().map(k => `<option value="${h(k.id)}" ${UI.kid === k.id ? 'selected' : ''}>${h(k.name)} (${k.age} ans)</option>`).join('');
+  sel.value = UI.kid || '';
+}
+
+function statusPill(f) {
+  const st = stOf(f);
+  if (st === 'vu') return `<span class="pill vu">${W(f).VU}</span>`;
+  if (st === 'avoir') return `<span class="pill avoir">${W(f).AVOIR}</span>`;
+  return '';
+}
+function card(f) {
+  const t = typeLabel(f.type);
+  return `<a class="card" href="#/film/${h(f.id)}">
+    <div class="poster" style="background:${tone(f)}">${posterInner(f)}
+      ${f.tmdbNote ? `<span class="pill note">★ ${fmtNote(f.tmdbNote)}</span>` : ''}${statusPill(f)}
+      ${favOf(f) ? '<span class="pill fav">COUP DE CŒUR</span>' : f.owned ? `<span class="pill own">${h(f.loan ? 'Prêté' : (f.support || 'Possédé'))}</span>` : ''}${isFreeNow(f) ? '<span class="pill free">GRATUIT</span>' : f.pd ? '<span class="pill free">DOMAINE PUBLIC</span>' : ''}
+    </div>
+    <div class="card-t">${h(f.title)}</div>
+    <div class="card-m">${h([t, yearsLabel(f), f.subgenre !== 'Non classé' ? f.subgenre : ''].filter(Boolean).join(' · '))}</div>
+  </a>`;
+}
+const ICON = {
+  check: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>',
+  clock: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  disc: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg>',
+  plus: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  edit: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+  trash: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+  play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+  dl: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+  up: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"/></svg>',
+  back: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+  cloud: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/><path d="M12 11v6M9.5 14.5L12 17l2.5-2.5"/></svg>'
+};
+const starSvg = (on) => `<svg width="28" height="28" viewBox="0 0 24 24" stroke="#E8A066" stroke-width="1.6" stroke-linejoin="round" fill="${on ? '#E8A066' : 'none'}" aria-hidden="true"><path d="M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8 6.2 20l1.4-6.4L2.7 9.2l6.5-.7z"/></svg>`;
+
+/* =========================================================
+   Vue : Catalogue (ma base)
+   ========================================================= */
+const UI = {eds: new Set(), colls: new Set(), kind: '', kid: (() => { try { return localStorage.getItem('cinetoons-kid') || ''; } catch (e) { return ''; } })(), kidAge: true, ageMax: 0, awardsOnly: false, q: '', decades: new Set(), subs: new Set(), types: new Set(), techs: new Set(), pubs: new Set(), hideAdult: true, hideSeen: false, ownedOnly: false, toWatch: false, sort: 'yearDesc', colTab: 'tous', limit: 120};
+const filtersActive = () => !!(UI.eds.size || UI.colls.size || UI.ageMax || UI.awardsOnly || (activeKid() && UI.kidAge) || UI.q || UI.decades.size || UI.subs.size || UI.types.size || UI.techs.size || UI.pubs.size || UI.hideSeen || UI.ownedOnly || UI.toWatch || UI.freeOnly || UI.pdOnly);
+const PAGE = 120;
+const HAY = new Map();   // texte de recherche par fiche (mis en cache)
+const hayOf = (f) => {
+  let s = HAY.get(f.id);
+  if (s === undefined) { s = norm([f.title, f.originalTitle, f.director, f.publisher, f.coll, (f.cast || []).map(c => c.name).join(' '), f.country, f.subgenre, f.synopsis].join(' ')); HAY.set(f.id, s); }
+  return s;
+};
+const yearsLabel = (f) => (f.endYear && f.endYear !== f.year ? f.year + '–' + f.endYear : (f.year || '?'));
+const typeLabel = (t) => (t === 'Film' ? '' : t);
+
+function filteredFilms() {
+  const words = norm(UI.q.trim()).split(/\s+/).filter(Boolean);
+  const list = S.films.filter(f => {
+    if (words.length) { const hay = hayOf(f); if (!words.every(w => hay.includes(w))) return false; }
+    if (UI.decades.size && !UI.decades.has(decadeOf(f.year))) return false;
+    if (UI.subs.size && !UI.subs.has(f.subgenre)) return false;
+    if (UI.kind && kindOf(f) !== UI.kind) return false;
+    if (UI.eds.size && !UI.eds.has(edOf(f))) return false;
+    if (UI.colls.size && !UI.colls.has(f.coll)) return false;
+    if (UI.types.size && !UI.types.has(f.type || 'Film')) return false;
+    if (UI.techs.size && !UI.techs.has(f.technique || 'Non précisé')) return false;
+    if (UI.pubs.size && !UI.pubs.has(f.public || 'Famille')) return false;
+    if (UI.hideAdult && !UI.pubs.has('Adultes') && f.public === 'Adultes') return false;
+    if (UI.ageMax && (f.age || 6) > UI.ageMax) return false;
+    const kid = activeKid();
+    if (kid && UI.kidAge && (f.age || 6) > kid.age) return false;
+    if (UI.awardsOnly && !f.awards) return false;
+    if (UI.hideSeen && stOf(f) === 'vu') return false;
+    if (UI.ownedOnly && !f.owned) return false;
+    if (UI.toWatch && stOf(f) !== 'avoir') return false;
+    if (UI.freeOnly && !isFreeNow(f)) return false;
+    if (UI.pdOnly && !f.pd) return false;
+    return true;
+  });
+  const cmpT = (a, b) => a.title.localeCompare(b.title, 'fr');
+  const sorts = {
+    year: (a, b) => (+a.year || 9999) - (+b.year || 9999) || cmpT(a, b),
+    yearDesc: (a, b) => (+b.year || 0) - (+a.year || 0) || cmpT(a, b),
+    title: cmpT,
+    added: (a, b) => (b.addedAt || 0) - (a.addedAt || 0) || cmpT(a, b),
+    mine: (a, b) => noteOf(b) - noteOf(a) || cmpT(a, b),
+    short: (a, b) => durOf(a) - durOf(b) || cmpT(a, b),
+    tmdb: (a, b) => (b.tmdbNote || 0) - (a.tmdbNote || 0) || cmpT(a, b)
+  };
+  return list.sort(sorts[UI.sort] || sorts.yearDesc);
+}
+function viewCatalogue() {
+  const decCount = new Map(), subCount = new Map(), typeCount = new Map(), techCount = new Map(), pubCount = new Map();
+  S.films.forEach(f => {
+    if (UI.kind && kindOf(f) !== UI.kind) return;
+    const tq = f.technique || 'Non précisé'; techCount.set(tq, (techCount.get(tq) || 0) + 1);
+    const pb = f.public || 'Famille'; pubCount.set(pb, (pubCount.get(pb) || 0) + 1);
+    const d = decadeOf(f.year); if (d) decCount.set(d, (decCount.get(d) || 0) + 1);
+    subCount.set(f.subgenre, (subCount.get(f.subgenre) || 0) + 1);
+    const t = f.type || 'Film'; typeCount.set(t, (typeCount.get(t) || 0) + 1);
+  });
+  const decs = [...decCount.keys()].sort();
+  const sortOpt = [['yearDesc', 'Année (récent → ancien)'], ['year', 'Année (ancien → récent)'], ['title', 'Titre'], ['added', 'Ajout récent'], ['mine', activeKid() ? 'Sa note' : 'Ma note'], ['tmdb', 'Note TMDB'], ['short', 'Durée (plus courts d\'abord)']];
+  return `<div class="layout">
+  <aside class="filters" aria-label="Filtres">
+    <div class="fgroup"><h2 class="label">Type</h2>
+      ${TYPES.filter(t => typeCount.get(t)).map(t => `<label class="check"><input type="checkbox" data-ch="type" value="${h(t)}" ${UI.types.has(t) ? 'checked' : ''}><span>${h(TYPE_PLURAL[t] || t)}</span><span class="n">${typeCount.get(t).toLocaleString('fr-FR')}</span></label>`).join('')}
+    </div>
+    <div class="fgroup"><h2 class="label">Décennie</h2><div class="chips">
+      ${decs.map(d => `<button type="button" class="chip ${UI.decades.has(d) ? 'on' : ''}" data-act="dec" data-v="${d}" aria-pressed="${UI.decades.has(d)}" title="${decCount.get(d)} titres">${d}s</button>`).join('')}
+    </div></div>
+    <div class="fgroup"><h2 class="label">Âge conseillé</h2><div class="chips">
+      ${[[0, 'Tous'], [3, '3 ans'], [6, '6 ans'], [8, '8 ans'], [10, '10 ans'], [12, '12 ans']].map(([v, l]) => `<button type="button" class="chip ${UI.ageMax === v ? 'on' : ''}" data-act="agemax" data-v="${v}" aria-pressed="${UI.ageMax === v}">${v ? 'Jusqu\'à ' + l : l}</button>`).join('')}
+      </div>
+      ${activeKid() ? `<label class="check"><input type="checkbox" id="f-kidage" data-ch="flag" data-k="kidAge" ${UI.kidAge ? 'checked' : ''}>Adapté à l'âge de ${h(activeKid().name)} (${activeKid().age} ans)</label>` : ''}
+      <label class="check"><input type="checkbox" id="f-awards" data-ch="flag" data-k="awardsOnly" ${UI.awardsOnly ? 'checked' : ''}><span>Primés (Oscar, César)</span><span class="n">${S.films.filter(f => f.awards).length}</span></label>
+    </div>
+    <div class="fgroup"><h2 class="label">Pour qui</h2>
+      ${PUBLICS.filter(s => pubCount.get(s)).map(s => `<label class="check"><input type="checkbox" data-ch="pub" value="${h(s)}" ${UI.pubs.has(s) ? 'checked' : ''}><span>${h(s)}</span><span class="n">${pubCount.get(s).toLocaleString('fr-FR')}</span></label>`).join('')}
+      <label class="check"><input type="checkbox" id="f-adult" data-ch="flag" data-k="hideAdult" ${UI.hideAdult ? 'checked' : ''}>Masquer les titres pour adultes</label>
+    </div>
+    ${UI.kind === 'bd' || UI.kind === 'livre' ? (() => {
+      const eds = new Map(), cols = new Map();
+      S.films.forEach(f => { if (kindOf(f) !== UI.kind) return; const e = edOf(f); if (e) eds.set(e, (eds.get(e) || 0) + 1); if (f.coll && f.coll !== 'Magazine') cols.set(f.coll, (cols.get(f.coll) || 0) + 1); });
+      const box = (title, m, ch, set) => m.size ? `<div class="fgroup"><h2 class="label">${title}</h2>${[...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr')).map(([v, n]) => `<label class="check"><input type="checkbox" data-ch="${ch}" value="${h(v)}" ${set.has(v) ? 'checked' : ''}><span>${h(v)}</span><span class="n">${n}</span></label>`).join('')}</div>` : '';
+      return box('Éditeur', eds, 'ed', UI.eds) + box('Collection', cols, 'coll', UI.colls);
+    })() : ''}
+    <div class="fgroup"><h2 class="label">${UI.kind === 'bd' || UI.kind === 'livre' ? 'Catégorie' : 'Studio / univers'}</h2>
+      ${SUB_LIST.filter(s => subCount.get(s)).map(s => `<label class="check"><input type="checkbox" data-ch="sub" value="${h(s)}" ${UI.subs.has(s) ? 'checked' : ''}><span>${h(s)}</span><span class="n">${subCount.get(s).toLocaleString('fr-FR')}</span></label>`).join('')}
+    </div>
+    <div class="fgroup"><h2 class="label">Technique</h2>
+      ${TECHS.filter(s => techCount.get(s)).map(s => `<label class="check"><input type="checkbox" data-ch="tech" value="${h(s)}" ${UI.techs.has(s) ? 'checked' : ''}><span>${h(s)}</span><span class="n">${techCount.get(s).toLocaleString('fr-FR')}</span></label>`).join('')}
+    </div>
+    <div class="fgroup"><h2 class="label">Ma collection</h2>
+      <label class="check"><input type="checkbox" id="f-hide" data-ch="flag" data-k="hideSeen" ${UI.hideSeen ? 'checked' : ''}>Masquer les titres vus</label>
+      <label class="check"><input type="checkbox" id="f-own" data-ch="flag" data-k="ownedOnly" ${UI.ownedOnly ? 'checked' : ''}>Seulement ceux que je possède</label>
+      <label class="check"><input type="checkbox" id="f-avoir" data-ch="flag" data-k="toWatch" ${UI.toWatch ? 'checked' : ''}>Seulement « à voir »</label>
+    </div>
+    <div class="fgroup"><h2 class="label">Regarder gratuitement</h2>
+      ${IS_WEB ? '' : `<label class="check"><input type="checkbox" id="f-free" data-ch="flag" data-k="freeOnly" ${UI.freeOnly ? 'checked' : ''}><span>Gratuit en ce moment</span><span class="n">${S.films.filter(isFreeNow).length.toLocaleString('fr-FR')}</span></label>`}
+      <label class="check"><input type="checkbox" id="f-pd" data-ch="flag" data-k="pdOnly" ${UI.pdOnly ? 'checked' : ''}><span>Domaine public</span><span class="n">${S.films.filter(f => f.pd).length.toLocaleString('fr-FR')}</span></label>
+    </div>
+    <button type="button" class="btn small" data-act="clear-filters">Effacer les filtres</button>
+  </aside>
+  <section class="content">
+    <div class="tabs">${[['', 'Tout'], ['video', 'Dessins animés'], ['bd', 'BD'], ['livre', 'Livres']].map(([k, l]) => `<button type="button" class="tab ${UI.kind === k ? 'on' : ''}" data-act="kind" data-v="${k}" aria-pressed="${UI.kind === k}">${l}</button>`).join('')}<a class="tab" href="#/explorer">Explorer TMDB</a><a class="tab" href="#/livres-en-ligne">Chercher un livre</a></div>
+    <div class="head-row">
+      <div><h1 class="title">${({'': 'Toute ma base', video: 'Dessins animés', bd: 'Bandes dessinées', livre: 'Livres jeunesse'})[UI.kind]}</h1><p class="muted" id="cat-count"></p></div>
+      <div class="row">
+        <label class="inline" for="cat-sort">Trier par
+          <select class="sel" id="cat-sort" data-ch="sort">${sortOpt.map(([v, l]) => `<option value="${v}" ${UI.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
+        </label>
+        ${IS_WEB ? '' : `<button type="button" class="btn" data-act="posters-open">${ICON.cloud}Ajouter les affiches<span id="run-badge"></span></button><button type="button" class="btn" data-act="free-open">${ICON.cloud}Mettre à jour depuis TMDB<span id="frun-badge"></span></button>`}
+        <button type="button" class="btn primary" data-act="add">${ICON.plus}Ajouter un titre</button>
+      </div>
+    </div>
+    <div id="cat-grid"></div>
+  </section></div>`;
+}
+function paintCatGrid() {
+  const g = $('#cat-grid'); if (!g) return;
+  const list = filteredFilms();
+  const active = filtersActive();
+  const n = list.length.toLocaleString('fr-FR');
+  const hidden = UI.hideAdult && !UI.pubs.has('Adultes') && S.films.some(f => f.public === 'Adultes');
+  $('#cat-count').textContent = (active || hidden ? n + ' titre' + (list.length > 1 ? 's' : '') + ' affiché' + (list.length > 1 ? 's' : '') + ' sur ' + S.films.length.toLocaleString('fr-FR') : n + ' titres dans ta base') + (hidden ? ' (titres pour adultes masqués)' : '');
+  if (!S.films.length) {
+    g.innerHTML = `<div class="empty"><h2>Ta base est vide</h2><p>Recharge le catalogue de départ, restaure une sauvegarde, ou ajoute tes titres un par un.</p>
+      <div class="row" style="justify-content:center"><button type="button" class="btn primary" data-act="load-base">Recharger le catalogue</button><a class="btn" href="#/reglages">Restaurer une sauvegarde</a><button type="button" class="btn" data-act="add">${ICON.plus}Ajouter un titre</button></div></div>`;
+    return;
+  }
+  if (!list.length) {
+    g.innerHTML = `<div class="empty"><h2>Aucun titre ne correspond</h2><p>Change les filtres${IS_WEB ? '' : ', cherche dans l\'onglet TMDB'} ou ajoute le titre toi-même.</p>
+     <div class="row" style="justify-content:center"><button type="button" class="btn" data-act="clear-filters">Effacer les filtres</button><button type="button" class="btn primary" data-act="add">${ICON.plus}Ajouter un titre</button></div></div>`;
+    return;
+  }
+  const shown = list.slice(0, UI.limit);
+  g.innerHTML = `<div class="grid">${shown.map(card).join('')}</div>` +
+    (list.length > shown.length ? `<div class="pager"><span class="muted">${shown.length.toLocaleString('fr-FR')} affichés sur ${n}</span>
+      <button type="button" class="btn" data-act="more">Afficher ${Math.min(PAGE, list.length - shown.length)} de plus</button></div>` : '');
+}
+
+/* =========================================================
+   Vue : Explorer TMDB
+   ========================================================= */
+const ANIME_LANG = ['ja'];   // films japonais (anime) écartés, comme demandé
+const EXJP = {v: false};
+const EX = {kind: 'movie', q: '', dec: '', sort: 'popularity.desc', vote: 0, only: true, page: 1, results: [], total: 0, pages: 0, loading: false, error: '', loaded: false};
+function viewExplorer() {
+  const tabs = `<div class="tabs"><a class="tab" href="#/catalogue">Ma base</a><a class="tab on" href="#/explorer">Explorer TMDB (films et séries)</a><a class="tab" href="#/livres-en-ligne">Chercher un livre</a></div>`;
+  if (IS_WEB) {
+    return `<section class="content" style="max-width:900px">${tabs}
+      <div class="empty"><h2>Explorer TMDB : dans l'application installée</h2><p>${h(WEB_TMDB_MSG)}</p>
+      <div class="row" style="justify-content:center"><a class="btn" href="#/catalogue">Retour à ma base</a><a class="btn primary" href="#/reglages">Transférer ma collection</a></div></div></section>`;
+  }
+  if (!S.tmdbKey) {
+    return `<section class="content" style="max-width:900px">${tabs}
+      <div class="empty"><h2>Branche la base TMDB pour voir tous les dessins animés</h2>
+      <p>TMDB est une base de films gratuite qui recense des dizaines de milliers de films et séries d'animation, avec affiches, résumés en français, voix françaises et plateformes. Les mangas et animes japonais sont écartés automatiquement. Il faut une clé gratuite, à coller une seule fois.</p>
+      <a class="btn primary" href="#/reglages">Ajouter ma clé TMDB</a></div></section>`;
+  }
+  const decs = []; for (let d = 1900; d <= 2020; d += 10) decs.push(d);
+  const sorts = [['popularity.desc', 'Les plus populaires'], ['vote_average.desc', 'Les mieux notés'], ['primary_release_date.desc', 'Les plus récents'], ['primary_release_date.asc', 'Les plus anciens'], ['upcoming', 'Sorties à venir en France']];
+  return `<section class="content">${tabs}
+    <div class="head-row"><div><h1 class="title">Explorer TMDB</h1><p class="muted">Données TMDB : affiches, résumés en français, notes et plateformes. Clique sur un titre pour l'ouvrir ; s'il est déjà dans ta base, sa fiche est complétée.</p></div></div>
+    <form id="ex-form" class="row" style="align-items:flex-end;gap:14px">
+      <label class="field"><span>Chercher parmi</span><select class="sel" id="ex-kind"><option value="movie" ${EX.kind === 'movie' ? 'selected' : ''}>Les films</option><option value="tv" ${EX.kind === 'tv' ? 'selected' : ''}>Les séries</option></select></label>
+      <label class="field" style="flex:1 1 240px"><span>Recherche par titre</span><input class="inp" id="ex-q" type="search" value="${h(EX.q)}" placeholder="Ex. Le Roi lion (vide = parcourir)"></label>
+      <label class="field"><span>Décennie</span><select class="sel" id="ex-dec"><option value="">Toutes</option>${decs.map(d => `<option value="${d}" ${String(EX.dec) === String(d) ? 'selected' : ''}>${d}s</option>`).join('')}</select></label>
+      <label class="field"><span>Ordre</span><select class="sel" id="ex-sort">${sorts.map(([v, l]) => `<option value="${v}" ${EX.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+      <label class="field"><span>Note TMDB mini : <b id="ex-vote-v">${EX.vote ? fmtNote(EX.vote) : 'aucune'}</b></span><input id="ex-vote" type="range" min="0" max="9" step="0.5" value="${EX.vote}" style="accent-color:var(--accent);height:44px"></label>
+      <label class="check" style="min-height:44px"><input type="checkbox" id="ex-only" ${EX.only ? 'checked' : ''}>Animation uniquement</label>
+      <label class="check" style="min-height:44px"><input type="checkbox" id="ex-jp" ${EXJP.v ? 'checked' : ''}>Inclure les animés japonais</label>
+      <button class="btn primary" type="submit">Chercher</button>
+    </form>
+    <p class="muted" id="ex-info"></p>
+    <div id="ex-grid"></div>
+    <div class="pager" id="ex-pager"></div>
+  </section>`;
+}
+function exCard(r) {
+  const title = r.title || r.name || '';
+  const y = (r.release_date || r.first_air_date || '').slice(0, 4);
+  const have = S.films.find(f => sameTmdb(f, r.id, EX.kind)) || findLocal([title, r.original_title || r.original_name], y);
+  return `<div class="card">
+    <button type="button" class="poster" data-act="ex-open" data-id="${r.id}" style="background:#4A4032" aria-label="Ouvrir ${h(title)}">
+      ${r.poster_path ? `<img class="poster-img" src="${IMG}w342${h(r.poster_path)}" alt="" loading="lazy">` : `<span class="poster-title">${h(title)}</span>`}
+      ${r.vote_average ? `<span class="pill note">★ ${fmtNote(r.vote_average)}</span>` : ''}
+      ${have ? `<span class="pill vu">DANS MA BASE</span>` : ''}
+    </button>
+    <div class="card-t">${h(title)}</div>
+    <div class="card-m">${h(EX.sort === 'upcoming' && (r.release_date || r.first_air_date) ? 'Sortie le ' + fmtDate(r.release_date || r.first_air_date) : (y || 'Année inconnue'))}</div>
+    ${have ? '' : `<button type="button" class="btn small" data-act="ex-add" data-id="${r.id}">${ICON.plus}Ajouter à ma base</button>`}
+  </div>`;
+}
+function paintEx() {
+  const g = $('#ex-grid'); if (!g) return;
+  const info = $('#ex-info'), pager = $('#ex-pager');
+  if (EX.loading) { info.innerHTML = '<span class="spin"></span> Recherche sur TMDB…'; return; }
+  if (EX.error) { info.textContent = ''; g.innerHTML = `<div class="empty"><h2>La recherche n'a pas abouti</h2><p>${h(EX.error)}</p></div>`; pager.innerHTML = ''; return; }
+  info.textContent = EX.q.trim()
+    ? `Résultats pour « ${EX.q.trim()} » · page ${EX.page} sur ${Math.max(EX.pages, 1)}`
+    : `${EX.total.toLocaleString('fr-FR')} ${EX.kind === 'tv' ? 'séries animées trouvées' : 'films d\'animation trouvés'} · page ${EX.page} sur ${Math.max(EX.pages, 1)}`;
+  g.innerHTML = EX.results.length ? `<div class="grid">${EX.results.map(exCard).join('')}</div>` :
+    `<div class="empty"><h2>Aucun résultat</h2><p>Essaie un autre titre, retire le filtre « Animation uniquement » ou baisse la note minimum.</p></div>`;
+  pager.innerHTML = EX.pages > 1 ? `<button type="button" class="btn" data-act="ex-page" data-d="-1" ${EX.page <= 1 ? 'disabled' : ''}>Page précédente</button>
+     <span class="muted">${EX.page} / ${EX.pages}</span>
+     <button type="button" class="btn" data-act="ex-page" data-d="1" ${EX.page >= EX.pages ? 'disabled' : ''}>Page suivante</button>` : '';
+}
+async function exLoad() {
+  EX.loading = true; EX.loaded = true; paintEx();
+  try {
+    let data;
+    if (EX.q.trim()) {
+      data = await tmdb('/search/' + EX.kind, {query: EX.q.trim(), language: 'fr-FR', page: EX.page, include_adult: 'false'});
+      let res = data.results || [];
+      if (EX.only) res = res.filter(r => (r.genre_ids || []).includes(16) && (EXJP.v || !ANIME_LANG.includes(r.original_language)));
+      if (EX.dec) res = res.filter(r => decadeOf((r.release_date || r.first_air_date || '').slice(0, 4)) === +EX.dec);
+      if (EX.vote) res = res.filter(r => (r.vote_average || 0) >= EX.vote);
+      data.results = res;
+    } else {
+      const tv = EX.kind === 'tv';
+      const dateKey = tv ? 'first_air_date' : 'primary_release_date';
+      const up = EX.sort === 'upcoming';
+      const p = {with_genres: 16, language: 'fr-FR', sort_by: up ? dateKey + '.asc' : EX.sort.replace('primary_release_date', dateKey), page: EX.page, include_adult: 'false',
+        'vote_count.gte': up ? 0 : EX.sort === 'vote_average.desc' ? (tv ? 20 : 100) : (tv ? 1 : 5)};
+      if (up) { if (tv) p['first_air_date.gte'] = today(); else { p.region = 'FR'; p['release_date.gte'] = today(); p.with_release_type = '2|3'; } }
+      if (EX.vote) p['vote_average.gte'] = EX.vote;
+      if (!EXJP.v) { p.without_keywords = '210024'; p.without_original_language = 'ja'; }
+      if (EX.dec && !up) { p[dateKey + '.gte'] = EX.dec + '-01-01'; p[dateKey + '.lte'] = (+EX.dec + 9) + '-12-31'; }
+      data = await tmdb('/discover/' + EX.kind, p);
+      data.results = (data.results || []).filter(r => EXJP.v || !ANIME_LANG.includes(r.original_language));
+    }
+    EX.results = data.results || []; EX.total = data.total_results || 0; EX.pages = Math.min(data.total_pages || 0, 500); EX.error = '';
+  } catch (e) { EX.error = e.message; EX.results = []; }
+  EX.loading = false; paintEx();
+}
+
+/* =========================================================
+   Vue : Fiche d'un film
+   ========================================================= */
+/* Liens de recherche vers des plateformes légales et gratuites (recherche limitée au site de chaque plateforme) */
+const FREE_SITES = [
+  ['France.tv / Okoo', 'france.tv'], ['Arte', 'arte.tv'], ['TF1+', 'tf1.fr'], ['M6+', 'm6.fr'], ['Pluto TV', 'pluto.tv'], ['Rakuten TV', 'rakuten.tv']
+];
+function watchBox(f) {
+  const t = f.title, q = encodeURIComponent;
+  const g = (site) => 'https://www.google.com/search?q=' + q('site:' + site + ' "' + t + '"');
+  const yt = 'https://www.youtube.com/results?search_query=' + q(t + (isTV(f) ? ' épisode complet' : '') + ' officiel');
+  const jw = 'https://www.justwatch.com/fr/recherche?q=' + q(t);
+  const ia = 'https://archive.org/search?query=' + q('"' + (f.originalTitle || t) + '"') + '&and%5B%5D=mediatype%3A%22movies%22';
+  const fr = FREE[f.id];
+  let now = '';
+  if (!IS_WEB && fr) now = fr.n && fr.n.length
+    ? `<p class="free-now">Gratuit en ce moment sur : ${h(fr.n.join(', '))} <span style="font-weight:400">(vérifié le ${fmtDate(fr.at)})</span></p>${fr.link ? `<a href="${h(fr.link)}" target="_blank" rel="noopener">Voir les offres sur TMDB</a>` : ''}`
+    : `<p class="hint">Pas d'offre gratuite trouvée en France le ${fmtDate(fr.at)}. Les replays changent souvent : relance la vérification plus tard.</p>`;
+  const check = !IS_WEB && S.tmdbKey ? `<button type="button" class="btn small" data-act="free-one" data-id="${h(f.id)}">${ICON.cloud}${fr ? 'Revérifier maintenant' : 'Vérifier si c\'est gratuit en ce moment'}</button>` : '';
+  return `<div class="watch"><h2 class="label">Regarder gratuitement et légalement</h2>
+    ${now}
+    ${f.pd ? `<p style="margin:0">Ce titre est dans le domaine public aux États-Unis : il se regarde gratuitement sur Internet Archive.</p><div class="row"><a class="btn small primary" href="${ia}" target="_blank" rel="noopener">${ICON.play}Regarder sur Internet Archive</a></div>` : ''}
+    <div class="row"><a class="btn small primary" href="${jw}" target="_blank" rel="noopener">Où le voir en France (JustWatch)</a>${check}</div>
+    <div class="row">${FREE_SITES.map(([n, site]) => `<a class="btn small" href="${g(site)}" target="_blank" rel="noopener">${h(n)}</a>`).join('')}<a class="btn small" href="${yt}" target="_blank" rel="noopener">YouTube</a></div>
+    <p class="hint">Chaque bouton cherche ce titre sur la plateforme. France.tv, Arte, TF1+, M6+, Pluto TV et Rakuten TV sont gratuits, parfois avec publicité ; sur YouTube, préfère les chaînes officielles.</p>
+  </div>`;
+}
+
+function viewFilm(id) {
+  const f = byId(id);
+  if (!f) return `<div class="empty"><h2>Ce titre n'existe plus dans ta base</h2><p><a href="#/catalogue">Retour au catalogue</a></p></div>`;
+  const metaBits = [typeLabel(f.type), yearsLabel(f), f.country, f.runtime ? (isSeries(f) ? f.runtime + ' min par épisode' : f.runtime + ' min') : '', f.seasons ? f.seasons + ' saison' + (f.seasons > 1 ? 's' : '') : '', f.episodes ? f.episodes + ' épisodes' : ''].filter(x => x && x !== '?').map(h).join(' · ');
+  const kid = activeKid();
+  const q = encodeURIComponent((f.originalTitle || f.title) + (f.year ? ' ' + f.year : ''));
+  const links = [
+    `<a href="https://fr.wikipedia.org/w/index.php?search=${encodeURIComponent(f.title + ' ' + (f.year || ''))}" target="_blank" rel="noopener">Wikipédia en français</a>`,
+    f.wiki ? `<a href="${h(f.wiki)}" target="_blank" rel="noopener">Article Wikipédia (anglais)</a>` : '',
+    isBook(f) ? '' : f.imdb ? `<a href="https://www.imdb.com/title/${h(f.imdb)}/" target="_blank" rel="noopener">Fiche IMDb</a>` : `<a href="https://www.imdb.com/find/?q=${q}" target="_blank" rel="noopener">Chercher sur IMDb</a>`,
+    isBook(f) ? '' : `<a href="https://www.allocine.fr/rechercher/?q=${encodeURIComponent(f.title)}" target="_blank" rel="noopener">Chercher sur AlloCiné</a>`,
+    isBook(f) ? '' : `<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(f.title + ' ' + (f.year || '') + ' bande annonce VF')}" target="_blank" rel="noopener">Bande-annonce VF sur YouTube</a>`,
+    isBook(f) ? '' : `<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(f.title + (isSeries(f) ? ' générique' : ' chanson'))}" target="_blank" rel="noopener">${isSeries(f) ? 'Le générique' : 'Les chansons'} sur YouTube</a>`
+  ].filter(Boolean).join('');
+  const inLists = S.lists.filter(l => l.ids.includes(f.id));
+  if (isBook(f)) document.title = f.title + ' · Toons & Bulles';
+  return `<div style="display:flex;flex-direction:column;gap:20px;max-width:1200px;margin:0 auto">
+  <a class="back" href="#/catalogue" data-act="back">${ICON.back}Retour</a>
+  <div class="film">
+    <div class="film-side">
+      <div class="poster" style="background:${tone(f)}">${posterOf(f, 'big') ? `<img class="poster-img" src="${h(posterOf(f, 'big'))}" alt="Affiche de ${h(f.title)}" data-title="${h(f.title)}">` : `<span class="poster-title" style="font-size:26px">${h(f.title)}</span>`}</div>
+      <label class="btn" for="own-img">${ICON.up}${IMAGES[f.id] ? 'Changer ma photo' : 'Mettre ma propre photo'}</label>
+      <input type="file" id="own-img" accept="image/*" hidden>
+      ${IMAGES[f.id] ? `<button type="button" class="btn" data-act="img-del">Retirer ma photo</button>` : ''}
+      ${!IMAGES[f.id] && !f.poster && POSTERS[f.id] && POSTERS[f.id].p && !IS_WEB ? `<button type="button" class="btn" data-act="poster-wrong">Ce n'est pas la bonne affiche</button>` : ''}
+      ${f.trailer ? `<a class="btn" href="${h(f.trailer)}" target="_blank" rel="noopener">${ICON.play}Voir la bande-annonce</a>` : ''}
+      <button type="button" class="btn" data-act="edit" data-id="${h(f.id)}">${ICON.edit}Modifier la fiche</button>
+      ${S.tmdbKey && !isBook(f) ? `<button type="button" class="btn" data-act="complete" data-id="${h(f.id)}">${ICON.cloud}${f.tmdbId ? 'Actualiser depuis TMDB' : 'Compléter avec TMDB'}</button>` : ''}
+      <button type="button" class="btn danger" data-act="delete" data-id="${h(f.id)}">${ICON.trash}Supprimer de ma base</button>
+    </div>
+    <div class="film-main">
+      <div>
+        <h1>${h(f.title)}</h1>
+        ${f.originalTitle ? `<p class="orig">Titre original : ${h(f.originalTitle)}</p>` : ''}
+        <p class="meta">${metaBits}${f.director ? `${metaBits ? ' · ' : ''}${isBook(f) ? 'De' : isSeries(f) ? 'Réalisation' : 'Réalisé par'} <a href="#" data-act="search" data-v="${h(f.director)}">${h(f.director)}</a>` : ''}${f.publisher ? ' · ' + h(f.publisher) : ''}${f.coll && f.coll !== 'Magazine' ? ', collection « ' + h(f.coll) + ' »' : ''}${isBook(f) && f.volumes > 1 ? ' · ' + f.volumes + ' tomes' : ''}</p>
+      </div>
+      <div class="tagrow"><span class="tag">${h(f.subgenre)}</span>${f.technique && f.technique !== 'Non précisé' ? `<span class="tag">${h(f.technique)}</span>` : ''}<span class="tag">Dès ${f.age || 6} ans</span>${f.awards ? f.awards.split(' · ').map(a => `<span class="tag" style="border-color:var(--accent);color:var(--accent-soft)">${h(a)}</span>`).join('') : ''}${f.year ? `<span class="tag">Années ${decadeOf(f.year)}</span>` : ''}${inLists.map(l => `<a class="tag" style="color:var(--fg);text-decoration:none" href="#/listes/${h(l.id)}">${h(l.name)}</a>`).join('')}</div>
+      <div class="panel">
+        ${isBook(f) ? '' : `<div style="display:flex;flex-direction:column;gap:4px"><span class="label">Note TMDB</span><span class="bignum">${f.tmdbNote ? fmtNote(f.tmdbNote) : '–'}<small> / 10</small></span></div>`}
+        <div style="display:flex;flex-direction:column;gap:6px"><span class="label">${kid ? 'Note de ' + h(kid.name) : 'Ma note'}</span>
+          <div class="stars" role="group" aria-label="Note">${[1, 2, 3, 4, 5].map(n => `<button type="button" class="star" data-act="star" data-v="${n}" aria-label="${n} étoile${n > 1 ? 's' : ''}" aria-pressed="${noteOf(f) >= n}">${starSvg(noteOf(f) >= n)}</button>`).join('')}</div>
+        </div>
+        ${!kid && f.status === 'vu' ? `<label class="field"><span>${W(f).le}</span><input class="inp" type="date" id="watched" value="${h(f.watchedDate)}" data-ch="watched" style="width:auto"></label>` : ''}
+      </div>
+      <div class="row">
+        ${kid ? `<span class="label" style="width:100%">Profil de ${h(kid.name)}</span>` : ''}
+        <button type="button" class="btn ${stOf(f) === 'vu' ? 'good' : ''}" data-act="status" data-v="vu" aria-pressed="${stOf(f) === 'vu'}">${ICON.check}${W(f).vu}</button>
+        <button type="button" class="btn ${stOf(f) === 'avoir' ? 'wait' : ''}" data-act="status" data-v="avoir" aria-pressed="${stOf(f) === 'avoir'}">${ICON.clock}${W(f).avoir}</button>
+        ${kid ? `<button type="button" class="btn ${favOf(f) ? 'wait' : ''}" data-act="fav" aria-pressed="${favOf(f)}">♥ Coup de cœur</button>` : ''}
+        <button type="button" class="btn ${f.owned ? 'primary' : ''}" data-act="owned" aria-pressed="${f.owned}">${ICON.disc}${f.owned ? (isBook(f) ? 'On l\'a à la maison' : 'Je le possède') : (isBook(f) ? 'Pas à la maison' : 'Je ne le possède pas')}</button>
+        ${f.owned ? `<label class="inline" for="support">Support <select class="sel" id="support" data-ch="support"><option value="">Choisir…</option>${SUPPORTS.map(s => `<option ${f.support === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px"><h2 class="label">Résumé${f.synLang === 'en' ? ' <span style="text-transform:none;letter-spacing:0;font-weight:400">(en anglais)</span>' : ''}</h2>
+        <p class="synopsis" ${f.synLang === 'en' ? 'lang="en"' : ''}>${f.synopsis ? h(f.synopsis) : '<span class="muted">Pas encore de résumé. ' + (S.tmdbKey && !IS_WEB ? 'Clique sur « Compléter avec TMDB » ou écris-le' : 'Écris-le') + ' avec « Modifier la fiche ».</span>'}</p>
+        <div class="links">${links}</div></div>
+      ${f.cast.length ? `<div style="display:flex;flex-direction:column;gap:10px"><h2 class="label">Voix et distribution (version originale)</h2><div class="cast">
+        ${f.cast.map(c => `<button type="button" class="person" data-act="search" data-v="${h(c.name)}" title="Voir ses titres dans ma base"><span class="ini">${h(initials(c.name))}</span><span><b>${h(c.name)}</b>${c.role ? `<i>${h(c.role)}</i>` : ''}</span></button>`).join('')}
+      </div></div>` : ''}
+      ${kidsBox(f)}
+      ${sagaBox(f)}
+      ${f.vf ? `<div style="display:flex;flex-direction:column;gap:10px"><h2 class="label">Voix françaises</h2><div class="cast">
+        ${f.vf.split('|').map(x => x.trim()).filter(Boolean).map(x => { const m = x.match(/^(.*?)\s*\((.*)\)$/); const nm = m ? m[1] : x; return `<button type="button" class="person" data-act="search" data-v="${h(nm)}" title="Voir ses titres dans ma base"><span class="ini">${h(initials(nm))}</span><span><b>${h(nm)}</b>${m ? `<i>${h(m[2])}</i>` : ''}</span></button>`; }).join('')}
+      </div></div>` : ''}
+      ${isBook(f) ? tomesBox(f) + bookBox(f) : watchBox(f)}
+      ${f.owned ? loanBox(f) : ''}
+      <div class="two">
+        ${isBook(f) ? '' : `<div><h2 class="label">Où le regarder en France</h2>
+          <p style="margin:0;color:var(--soft)">${f.providers ? h(f.providers) : '<span class="muted">' + (f.tmdbId ? 'Aucune plateforme répertoriée pour le moment.' : 'Information disponible après « Compléter avec TMDB ».') + '</span>'}</p>
+          ${f.providersLink ? `<a href="${h(f.providersLink)}" target="_blank" rel="noopener">Voir le détail sur TMDB</a>` : ''}</div>`}
+        <div><h2 class="label">Mes listes</h2>
+          ${S.lists.length ? S.lists.map(l => `<label class="check"><input type="checkbox" data-ch="inlist" value="${h(l.id)}" ${l.ids.includes(f.id) ? 'checked' : ''}>${h(l.name)}</label>`).join('') : '<span class="muted">Aucune liste.</span>'}
+          <a href="#/listes">Gérer mes listes</a></div>
+      </div>
+      <label class="field"><span class="label">Mes notes personnelles</span>
+        <textarea class="inp" id="mynotes" rows="4" data-ch="notes" placeholder="Ex. vu avec les enfants, édition collector, chanson préférée…">${h(f.notes)}</textarea></label>
+    </div>
+  </div></div>`;
+}
+
+/* =========================================================
+   Fenêtre : ajouter / modifier un film
+   ========================================================= */
+let editingId = null;
+function openEditor(id) {
+  editingId = id || null;
+  const f = id ? byId(id) : blankFilm();
+  const castTxt = (f.cast || []).map(c => c.role ? c.name + ' — ' + c.role : c.name).join('\n');
+  $('#modal-root').innerHTML = `<div class="overlay" data-act="close-overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="ed-title">
+    <h2 id="ed-title">${id ? 'Modifier la fiche' : 'Ajouter un titre (dessin animé, BD ou livre)'}</h2>
+    <form id="ed-form" class="form" novalidate>
+      <label class="field full"><span>Titre (obligatoire) — film, série, BD ou livre</span><input class="inp" id="e-title" value="${h(f.title)}" required></label>
+      <label class="field"><span>Titre original</span><input class="inp" id="e-orig" value="${h(f.originalTitle)}"></label>
+      <label class="field"><span>Type</span><select class="sel" id="e-type">${TYPES.map(t => `<option ${(f.type || 'Film') === t ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
+      <label class="field"><span>Année de sortie (ou de début)</span><input class="inp" id="e-year" inputmode="numeric" maxlength="4" value="${h(f.year)}" placeholder="1995"></label>
+      <label class="field"><span>Année de fin (séries)</span><input class="inp" id="e-end" inputmode="numeric" maxlength="4" value="${h(f.endYear || '')}" placeholder="2004"></label>
+      <label class="field"><span>Réalisation ou auteurs</span><input class="inp" id="e-dir" value="${h(f.director)}"></label>
+      <label class="field"><span>Éditeur (livres et BD)</span><input class="inp" id="e-publisher" value="${h(f.publisher || '')}" placeholder="Dupuis"></label>
+      <label class="field"><span>Collection (livres)</span><input class="inp" id="e-coll" value="${h(f.coll || '')}" placeholder="Bibliothèque rose"></label>
+      <label class="field"><span>Nombre de tomes</span><input class="inp" id="e-volumes" inputmode="numeric" value="${h(f.volumes || '')}" placeholder="24"></label>
+      <label class="field"><span>Pays</span><input class="inp" id="e-country" value="${h(f.country)}" placeholder="France"></label>
+      <label class="field"><span>Studio / univers</span><select class="sel" id="e-sub">${SUB_LIST.map(s => `<option ${f.subgenre === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>
+      <label class="field"><span>Technique</span><select class="sel" id="e-tech">${TECHS.map(s => `<option ${(f.technique || 'Non précisé') === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>
+      <label class="field"><span>Pour qui</span><select class="sel" id="e-pub">${PUBLICS.map(s => `<option ${(f.public || 'Famille') === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>
+      <label class="field"><span>Durée (minutes)</span><input class="inp" id="e-run" inputmode="numeric" value="${h(f.runtime || '')}" placeholder="81"></label>
+      <label class="field"><span>Âge conseillé</span><select class="sel" id="e-age">${[3, 6, 8, 10, 12, 16].map(a => `<option value="${a}" ${(f.age || 6) === a ? 'selected' : ''}>Dès ${a} ans</option>`).join('')}</select></label>
+      <label class="field"><span>Récompenses</span><input class="inp" id="e-awards" value="${h(f.awards || '')}" placeholder="Oscar du meilleur film d'animation"></label>
+      <label class="field full"><span>Voix françaises</span><input class="inp" id="e-vf" value="${h(f.vf || '')}" placeholder="Roger Carel (Astérix) | Jacques Morel (Obélix)"><span class="hint">Séparer les voix par une barre verticale « | ».</span></label>
+      <label class="field full"><span>Distribution</span><textarea class="inp" id="e-cast" rows="4" placeholder="Tom Hanks — Woody">${h(castTxt)}</textarea><span class="hint">Une voix ou un acteur par ligne. Le rôle est facultatif, après un tiret : « Nom — Rôle ».</span></label>
+      <label class="field full"><span>Résumé</span><textarea class="inp" id="e-syn" rows="4">${h(f.synopsis)}</textarea></label>
+      <label class="field full"><span>Adresse de l'affiche (image)</span><input class="inp" id="e-poster" value="${h(f.poster)}" placeholder="https://…"><span class="hint">Facultatif. Colle l'adresse d'une image trouvée sur Internet.</span></label>
+      <label class="check full"><input type="checkbox" id="e-pd" ${f.pd ? 'checked' : ''}>Ce titre est dans le domaine public (lien Internet Archive sur la fiche)</label>
+      <label class="field full"><span>Lien de la bande-annonce</span><input class="inp" id="e-trailer" value="${h(f.trailer)}" placeholder="https://www.youtube.com/…"></label>
+      <p class="err full" id="e-err" role="alert"></p>
+      <div class="row full" style="justify-content:flex-end">
+        <button type="button" class="btn" data-act="close">Annuler</button>
+        <button type="submit" class="btn primary">${id ? 'Enregistrer les modifications' : 'Ajouter à ma base'}</button>
+      </div>
+    </form></div></div>`;
+  setTimeout(() => $('#e-title') && $('#e-title').focus(), 0);
+}
+function closeEditor() { $('#modal-root').innerHTML = ''; editingId = null; }
+function saveEditor() {
+  const v = (id) => $(id).value.trim();
+  const title = v('#e-title'), year = v('#e-year'), run = v('#e-run'), end = v('#e-end');
+  const err = $('#e-err');
+  if (!title) { err.textContent = 'Indique au moins le titre.'; $('#e-title').focus(); return; }
+  if (year && !/^(18|19|20)\d\d$/.test(year)) { err.textContent = "L'année doit avoir 4 chiffres, par exemple 1966."; $('#e-year').focus(); return; }
+  if (end && (!/^(18|19|20)\d\d$/.test(end) || (year && +end < +year))) { err.textContent = "L'année de fin doit avoir 4 chiffres et venir après l'année de début."; $('#e-end').focus(); return; }
+  if (run && !/^\d{1,3}$/.test(run)) { err.textContent = 'La durée doit être un nombre de minutes, par exemple 161.'; $('#e-run').focus(); return; }
+  const cast = $('#e-cast').value.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+    const m = l.split(/\s+[—–-]\s+/);
+    return {name: m[0].trim(), role: (m.slice(1).join(' - ') || '').trim()};
+  });
+  const data = {title, originalTitle: v('#e-orig'), year, director: v('#e-dir'), country: v('#e-country'), subgenre: $('#e-sub').value,
+    technique: $('#e-tech').value, public: $('#e-pub').value, age: +$('#e-age').value, awards: v('#e-awards'), vf: v('#e-vf'), publisher: v('#e-publisher'), coll: v('#e-coll'), volumes: Math.min(+v('#e-volumes') || 0, 300) || null,
+    runtime: run ? +run : null, cast, synopsis: v('#e-syn'), poster: v('#e-poster'), trailer: v('#e-trailer'), type: $('#e-type').value, endYear: end, pd: $('#e-pd').checked};
+  let f;
+  if (editingId) {
+    f = byId(editingId);
+    if (data.synopsis !== f.synopsis) data.synLang = '';
+    Object.assign(f, data); HAY.delete(f.id);
+  }
+  else { f = Object.assign(blankFilm(), data); S.films.push(f); }
+  save(); closeEditor();
+  toast(editingId ? 'Fiche enregistrée' : '« ' + f.title + ' » ajouté à ta base');
+  if (location.hash === '#/film/' + f.id) render(); else location.hash = '#/film/' + f.id;
+}
+
+/* =========================================================
+   Vue : Ma collection
+   ========================================================= */
+function viewCollection() {
+  const kid = activeKid();
+  const vus = S.films.filter(f => stOf(f) === 'vu'), avoir = S.films.filter(f => stOf(f) === 'avoir'), own = S.films.filter(f => f.owned);
+  const loans = S.films.filter(f => f.loan && f.loan.to), favs = kid ? S.films.filter(f => favOf(f)) : [];
+  const oldLoans = loans.filter(f => f.loan.date && (Date.now() - new Date(f.loan.date).getTime()) > 30 * 86400000);
+  const known = vus.filter(f => f.runtime);
+  const mins = known.reduce((a, f) => a + f.runtime, 0);
+  const tabs = [['tous', 'Tous'], ['vu', 'Vus'], ['avoir', 'À voir'], ['own', 'Possédés'], ['pret', 'Prêtés (' + loans.length + ')']].concat(kid ? [['fav', 'Coups de cœur (' + favs.length + ')']] : []);
+  let rows = S.films.filter(f => stOf(f) || f.owned);
+  if (UI.colTab === 'vu') rows = vus; else if (UI.colTab === 'avoir') rows = avoir; else if (UI.colTab === 'own') rows = own; else if (UI.colTab === 'pret') rows = loans; else if (UI.colTab === 'fav') rows = favs;
+  rows = rows.slice().sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+  const stars = (n) => n ? '★'.repeat(n) + '☆'.repeat(5 - n) : '–';
+  return `<div class="layout"><section class="content">
+    <div class="head-row"><h1 class="title">${kid ? 'Collection de ' + h(kid.name) : 'Ma collection'}</h1>
+      <div class="row"><a class="btn" href="#/scanner">Scanner un DVD ou un livre</a><a class="btn" href="#/imprimer">${ICON.dl}Catalogue imprimable</a>
+      <button type="button" class="btn" data-act="csv">${ICON.dl}Exporter vers Excel</button></div></div>
+    <div class="tiles"><div class="tile"><span class="label">Dessins animés à la maison</span><span class="bignum">${own.filter(f => !isBook(f)).length}</span></div><div class="tile"><span class="label">BD et livres à la maison</span><span class="bignum">${own.filter(isBook).length}</span><small>${own.filter(isBook).reduce((a, f) => a + Math.max((f.vols || []).length, 1), 0)} volumes</small></div></div>
+    ${oldLoans.length ? `<div class="loanwarn"><b>Prêts à récupérer :</b> ${oldLoans.map(f => `<a href="#/film/${h(f.id)}" style="color:var(--fg)">${h(f.title)}</a> (${h(f.loan.to)}, depuis le ${fmtDate(f.loan.date)})`).join(' · ')}</div>` : ''}
+    <div class="tiles">
+      <div class="tile"><span class="label">Vus ou lus</span><span class="bignum">${vus.length}</span></div>
+      <div class="tile"><span class="label">À voir</span><span class="bignum">${avoir.length}</span></div>
+      <div class="tile"><span class="label">Possédés</span><span class="bignum">${own.length}</span></div>
+      <div class="tile"><span class="label">Heures de dessins animés</span><span class="bignum">${(mins / 60).toLocaleString('fr-FR', {maximumFractionDigits: 1})}</span>
+        <small>${vus.length ? `durée connue pour ${known.length} film${known.length > 1 ? 's' : ''} vu${known.length > 1 ? 's' : ''} sur ${vus.length}` : 'aucun film vu'}</small></div>
+    </div>
+    <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" role="tab" class="tab ${UI.colTab === k ? 'on' : ''}" aria-selected="${UI.colTab === k}" data-act="coltab" data-v="${k}">${l}</button>`).join('')}</div>
+    ${rows.length ? `<div class="tbl-wrap"><table><thead><tr><th>Titre</th><th>Statut</th><th>Support</th><th>${kid ? 'Sa note' : 'Ma note'}</th><th>${UI.colTab === 'pret' ? 'Prêté à' : 'Vu le'}</th></tr></thead><tbody>
+      ${rows.map(f => `<tr class="clk" data-act="open" data-id="${h(f.id)}"><td><a class="cellfilm" href="#/film/${h(f.id)}" style="color:var(--fg);text-decoration:none">
+        ${posterOf(f) ? `<img class="thumb" src="${h(posterOf(f))}" alt="">` : `<span class="thumb" style="background:${tone(f)}"></span>`}
+        <span><b style="display:block">${h(f.title)}</b><span class="muted" style="font-size:13px">${h(f.year || '?')} · ${h(f.director || '')}</span></span></a></td>
+        <td>${stOf(f) === 'vu' ? '<span class="badge vu">Vu</span>' : stOf(f) === 'avoir' ? '<span class="badge avoir">À voir</span>' : '<span class="muted">–</span>'}</td>
+        <td>${f.owned ? h(f.support || 'Possédé') : '<span class="muted">–</span>'}</td>
+        <td style="color:var(--accent-soft);letter-spacing:2px">${stars(noteOf(f))}</td>
+        <td class="muted">${UI.colTab === 'pret' && f.loan ? h(f.loan.to) + ' · ' + fmtDate(f.loan.date) : (kid ? fmtDate(kidRec(f, kid).d) : fmtDate(f.watchedDate)) || '–'}</td></tr>`).join('')}
+      </tbody></table></div>` :
+      `<div class="empty"><h2>Rien ici pour l'instant</h2><p>Ouvre un film du catalogue et clique sur « Vu », « À voir » ou « Je le possède » : il apparaîtra ici.</p><a class="btn primary" href="#/catalogue">Parcourir le catalogue</a></div>`}
+  </section>
+  <aside class="listnav" aria-label="Mes listes"><h2 class="label">Mes listes</h2>
+    ${S.lists.map(l => `<a class="listlink" href="#/listes/${h(l.id)}"><span>${h(l.name)}</span><span>${l.ids.length} film${l.ids.length > 1 ? 's' : ''}</span></a>`).join('')}
+    <a class="btn small" href="#/listes">${ICON.plus}Gérer mes listes</a>
+  </aside></div>`;
+}
+function exportCsv(all) {
+  const cols = ['Titre', 'Titre original', 'Type', 'Année', 'Année de fin', 'Réalisation', 'Pays', 'Studio', 'Technique', 'Pour qui', 'Durée (min)', 'Statut', 'Possédé', 'Support', 'Ma note (/5)', 'Vu le', 'Note TMDB', 'Listes', 'Acteurs', 'Mes notes'];
+  const q = (v) => { const s = String(v ?? ''); return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const lines = [cols.join(';')];
+  const inList = new Set(S.lists.flatMap(l => l.ids));
+  const rows = all ? S.films : S.films.filter(f => f.status || f.owned || f.myNote || f.notes || inList.has(f.id));
+  rows.slice().sort((a, b) => a.title.localeCompare(b.title, 'fr')).forEach(f => {
+    lines.push([f.title, f.originalTitle, f.type || 'Film', f.year, f.endYear, f.director, f.country, f.subgenre, f.technique || '', f.public || '', f.runtime || '',
+      f.status === 'vu' ? 'Vu' : f.status === 'avoir' ? 'À voir' : '', f.owned ? 'Oui' : 'Non', f.owned ? f.support : '',
+      f.myNote || '', fmtDate(f.watchedDate), fmtNote(f.tmdbNote), S.lists.filter(l => l.ids.includes(f.id)).map(l => l.name).join(', '),
+      f.cast.map(c => c.name).join(', '), f.notes].map(q).join(';'));
+  });
+  if (lines.length === 1) { toast('Ta collection est vide : rien à exporter pour l\'instant.'); return; }
+  download((all ? 'toons-et-bulles-catalogue-' : 'toons-et-bulles-collection-') + today() + '.csv', '\uFEFF' + lines.join('\r\n'), 'text/csv;charset=utf-8').then(ok => { if (ok) toast('Fichier Excel (CSV) téléchargé'); });
+}
+async function download(name, text, type) {
+  if (IS_WEB) {
+    let dl = null;
+    try { dl = await window.claude.use('downloads'); } catch (e) { dl = null; }
+    if (!dl) { toast("Le téléchargement n'est pas disponible sur cette page."); return false; }
+    try { await dl.save({filename: name, data: text}); return true; }
+    catch (e) { if (e && e.code !== 'declined') toast('Téléchargement impossible : ' + (e.message || e.code)); return false; }
+  }
+  const b = new Blob([text], {type});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  return true;
+}
+
+/* =========================================================
+   Vue : Mes listes
+   ========================================================= */
+function viewListes(id) {
+  const cur = S.lists.find(l => l.id === id) || null;
+  const films = cur ? cur.ids.map(byId).filter(Boolean) : [];
+  return `<div class="layout">
+  <aside class="listnav" aria-label="Mes listes"><h1 class="title" style="font-size:28px">Mes listes</h1>
+    ${S.lists.map(l => `<a class="listlink ${cur && cur.id === l.id ? 'on' : ''}" href="#/listes/${h(l.id)}"><span>${h(l.name)}</span><span>${l.ids.length}</span></a>`).join('') || '<p class="muted">Aucune liste pour le moment.</p>'}
+    <form id="newlist" class="fgroup" style="margin-top:10px"><label class="field"><span>Nouvelle liste</span><input class="inp" id="newlist-name" placeholder="Ex. Les Pixar" maxlength="60"></label>
+      <button type="submit" class="btn primary">${ICON.plus}Créer la liste</button></form>
+  </aside>
+  <section class="content">
+    ${cur ? `<div class="head-row"><div><h2 class="title" style="font-family:var(--display);font-size:32px;margin:0">${h(cur.name)}</h2><p class="muted">${films.length} film${films.length > 1 ? 's' : ''}</p></div>
+      <div class="row"><button type="button" class="btn" data-act="rename-list">${ICON.edit}Renommer</button><button type="button" class="btn danger" data-act="del-list">${ICON.trash}Supprimer la liste</button></div></div>
+      <div id="rename-zone"></div>
+      ${films.length ? `<div class="grid">${films.map(f => `<div class="card">${card(f)}<button type="button" class="btn small" data-act="rm-from-list" data-id="${h(f.id)}">Retirer de la liste</button></div>`).join('')}</div>` :
+        `<div class="empty"><h2>Liste vide</h2><p>Ouvre la fiche d'un film et coche « ${h(cur.name)} » dans « Mes listes ».</p><a class="btn" href="#/catalogue">Aller au catalogue</a></div>`}` :
+      `<div class="empty"><h2>Choisis une liste</h2><p>Sélectionne une liste à gauche ou crée-en une nouvelle. Les listes servent à regrouper des titres : une saga, un studio, des DVD à acheter, la sélection des vacances…</p></div>`}
+  </section></div>`;
+}
+
+/* =========================================================
+   Vue : Statistiques
+   ========================================================= */
+function bars(entries, max) {
+  if (!entries.length) return '<p class="muted">Pas encore de données.</p>';
+  const m = max || Math.max(...entries.map(e => e[1]), 1);
+  return `<div class="bars">${entries.map(([k, v]) => `<div class="bar"><span>${h(k)}</span><div class="track"><div class="fill" style="width:${(v / m * 100).toFixed(1)}%"></div></div><span class="v">${v.toLocaleString('fr-FR')}</span></div>`).join('')}</div>`;
+}
+function countBy(list, fn) {
+  const m = new Map();
+  list.forEach(f => [].concat(fn(f)).filter(Boolean).forEach(k => m.set(k, (m.get(k) || 0) + 1)));
+  return [...m.entries()];
+}
+function viewStats() {
+  const vus = S.films.filter(f => f.status === 'vu');
+  const dec = countBy(vus, f => decadeOf(f.year) ? decadeOf(f.year) + 's' : null).sort((a, b) => a[0].localeCompare(b[0]));
+  const decAll = countBy(S.films, f => decadeOf(f.year) ? decadeOf(f.year) + 's' : null).sort((a, b) => a[0].localeCompare(b[0]));
+  const typeAll = countBy(S.films, f => TYPE_PLURAL[f.type || 'Film'] || f.type).sort((a, b) => b[1] - a[1]);
+  const subAll = countBy(S.films, f => f.subgenre).sort((a, b) => b[1] - a[1]);
+  const sub = countBy(vus, f => f.subgenre).sort((a, b) => b[1] - a[1]);
+  const techAll = countBy(S.films, f => f.technique || 'Non précisé').sort((a, b) => b[1] - a[1]);
+  const dirs = countBy(vus, f => (f.director || '').split(/,\s*| et /).map(s => s.trim())).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 8);
+  const actors = countBy(vus, f => f.cast.map(c => c.name)).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 8);
+  const pct = S.films.length ? Math.round(vus.length / S.films.length * 100) : 0;
+  const noted = vus.filter(f => f.myNote);
+  const avg = noted.length ? noted.reduce((a, f) => a + f.myNote, 0) / noted.length : 0;
+  return `<div style="display:flex;flex-direction:column;gap:24px">
+    <h1 class="title">Statistiques</h1>
+    <div class="tiles">
+      <div class="tile"><span class="label">Vus ou lus</span><span class="bignum">${vus.length}<small> / ${S.films.length.toLocaleString('fr-FR')}</small></span><small>${pct} % de ta base</small></div>
+      <div class="tile"><span class="label">Ma note moyenne</span><span class="bignum">${noted.length ? fmtNote(avg) : '–'}<small> / 5</small></span><small>sur ${noted.length} film${noted.length > 1 ? 's' : ''} noté${noted.length > 1 ? 's' : ''}</small></div>
+      <div class="tile"><span class="label">Possédés</span><span class="bignum">${S.films.filter(f => f.owned).length}</span></div>
+      <div class="tile"><span class="label">Listes</span><span class="bignum">${S.lists.length}</span></div>
+    </div>
+    ${vus.length ? '' : '<div class="note-box">Les graphiques « vus » se remplissent quand tu marques des titres comme « Vu ».</div>'}
+    <div class="cols">
+      <div class="box"><h2>Titres vus par décennie</h2>${bars(dec)}</div>
+      <div class="box"><h2>Titres vus par studio</h2>${bars(sub)}</div>
+      <div class="box"><h2>Réalisateurs les plus vus</h2>${bars(dirs)}</div>
+      <div class="box"><h2>Voix les plus entendues</h2>${bars(actors)}</div>
+      <div class="box"><h2>Ma base par décennie</h2>${bars(decAll)}</div>
+      <div class="box"><h2>Ma base par type</h2>${bars(typeAll)}</div>
+      <div class="box"><h2>Ma base par studio</h2>${bars(subAll)}</div>
+      <div class="box"><h2>Ma base par technique</h2>${bars(techAll)}</div>
+      <div class="box"><h2>Titres vus par enfant</h2>${bars(KIDS().map(k => [k.name, S.films.filter(f => stOf(f, k) === 'vu').length]))}</div>
+      <div class="box"><h2>Ma base par âge conseillé</h2>${bars([3, 6, 8, 10, 12, 16].map(a => ['Dès ' + a + ' ans', S.films.filter(f => (f.age || 6) === a).length]))}</div>
+    </div></div>`;
+}
+
+/* =========================================================
+   Vue : Réglages
+   ========================================================= */
+function viewReglages() {
+  const k = S.tmdbKey;
+  return `<div style="display:flex;flex-direction:column;gap:24px;max-width:900px">
+    <h1 class="title">Réglages</h1>
+    ${IS_WEB ? `<div class="box"><h2>Base de films TMDB</h2><p style="margin:0" class="muted">${h(WEB_TMDB_MSG)}</p></div>` : `<div class="box"><h2>Base de films TMDB</h2>
+      <p style="margin:0" class="muted">La clé donne accès à tous les dessins animés de TMDB (sans les animes japonais) : affiches françaises, résumés en français, voix, plateformes. Elle est gratuite et reste enregistrée uniquement sur cet ordinateur.</p>
+      <div class="note-box"><b>Obtenir ta clé (5 minutes, une seule fois)</b>
+        <ol><li>Crée un compte gratuit sur <a href="https://www.themoviedb.org/signup" target="_blank" rel="noopener">themoviedb.org</a>.</li>
+        <li>Va dans <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">Paramètres › API</a> et demande une clé « Developer » (usage personnel).</li>
+        <li>Copie la « Clé d'API » ou le « Jeton d'accès en lecture » et colle-le ci-dessous.</li></ol></div>
+      <form id="keyform" class="row" style="align-items:flex-end">
+        <label class="field" style="flex:1 1 320px"><span>Clé TMDB</span><input class="inp" id="tmdbkey" type="password" autocomplete="off" value="${h(k)}" placeholder="Colle ta clé ici"></label>
+        <button type="submit" class="btn primary">Enregistrer et tester</button>
+        ${k ? '<button type="button" class="btn" data-act="del-key">Retirer la clé</button>' : ''}
+      </form>
+      <p id="keymsg" class="muted" role="status" style="margin:0">${k ? 'Une clé est enregistrée.' : 'Aucune clé enregistrée : l\'appli fonctionne avec ta base locale.'}</p>
+    </div>`}
+    <div class="box"><h2>Affiches</h2>
+      ${IS_WEB ? `<p style="margin:0" class="muted">Sur cette page, seules tes photos personnelles s'affichent (bouton « Mettre ma propre photo » sur chaque fiche) : ${Object.keys(IMAGES).length} photo${Object.keys(IMAGES).length > 1 ? 's' : ''}. Les affiches Wikipédia et TMDB s'affichent dans l'application installée.</p>` : `
+      <p style="margin:0" class="muted">${countPosters().toLocaleString('fr-FR')} titres ont une image (dont ${Object.keys(IMAGES).length} photo${Object.keys(IMAGES).length > 1 ? 's' : ''} personnelle${Object.keys(IMAGES).length > 1 ? 's' : ''}). ${(() => { const n = Object.values(POSTERS).filter(v => !v).length; return n ? n.toLocaleString('fr-FR') + ' titre' + (n > 1 ? 's ont' : ' a') + ' été vérifié' + (n > 1 ? 's' : '') + ' sans affiche trouvée, souvent des films muets ou très peu connus. ' : ''; })()}Les affiches viennent de Wikipédia et de TMDB et s'affichent avec une connexion Internet.</p>
+      <div class="row">
+        <button type="button" class="btn primary" data-act="posters-open">${ICON.cloud}Ajouter les affiches</button>
+        <button type="button" class="btn" data-act="posters-retry">Revérifier les titres sans affiche</button>
+        <button type="button" class="btn danger" data-act="posters-clear">Effacer les affiches automatiques</button>
+      </div>`}
+    </div>
+    ${IS_WEB ? '' : `<div class="box"><h2>Regarder gratuitement</h2>
+      <p style="margin:0" class="muted">${S.films.filter(isFreeNow).length.toLocaleString('fr-FR')} titres gratuits en ce moment, sur ${Object.keys(FREE).length.toLocaleString('fr-FR')} vérifiés. Les offres viennent de TMDB (données JustWatch) et changent souvent : relance la vérification de temps en temps.</p>
+      <div class="row"><button type="button" class="btn primary" data-act="free-open">${ICON.cloud}Mettre à jour depuis TMDB (durées, épisodes, offres gratuites)</button></div>
+    </div>`}
+    <div class="box"><h2>Profils des enfants</h2>
+      <p style="margin:0" class="muted">Chaque enfant a ses titres vus, à voir, ses coups de cœur, ses notes et l'épisode où il en est. Le catalogue peut se limiter aux titres de son âge.</p>
+      <form id="kidsform" class="fgroup">
+        ${KIDS().map((k, i) => `<div class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 200px"><span>Prénom</span><input class="inp" id="kn-${h(k.id)}" value="${h(k.name)}" maxlength="30"></label>
+          <label class="field"><span>Âge</span><select class="sel" id="ka-${h(k.id)}">${Array.from({length: 18}, (_, a) => a + 1).map(a => `<option value="${a}" ${k.age === a ? 'selected' : ''}>${a} ans</option>`).join('')}</select></label>
+          <button type="button" class="btn danger small" data-act="kid-del" data-k="${h(k.id)}">Retirer</button></div>`).join('')}
+        <div class="row"><button type="submit" class="btn primary">Enregistrer les profils</button><button type="button" class="btn" data-act="kid-add">${ICON.plus}Ajouter un enfant</button></div>
+      </form>
+    </div>
+    <div class="box"><h2>Sauvegarde</h2>
+      <p style="margin:0" class="muted">${MODE === 'db' ? 'Tout est enregistré automatiquement dans ton espace Claude, sur cette page. Une sauvegarde sert à passer ta collection entre cette page et l\'application installée (dans les deux sens).' : 'Tout est enregistré automatiquement sur cet ordinateur.'} Fais une sauvegarde de temps en temps : elle permet de retrouver ta collection sur un autre ordinateur (par exemple ton PC Windows) ou après un nettoyage du navigateur.</p>
+      <div class="row">
+        <button type="button" class="btn primary" data-act="backup">${ICON.dl}Exporter une sauvegarde</button>
+        <label class="btn" for="restore-file">${ICON.up}Restaurer une sauvegarde</label>
+        <input type="file" id="restore-file" accept=".json,application/json" hidden>
+        <button type="button" class="btn" data-act="csv">${ICON.dl}Ma collection vers Excel</button>
+        <button type="button" class="btn" data-act="csv" data-all="1">${ICON.dl}Tout le catalogue vers Excel</button>
+      </div>
+    </div>
+    <div class="box"><h2>Remise à zéro</h2>
+      <p style="margin:0" class="muted">Efface ta collection, tes listes, tes modifications et les titres ajoutés, puis recharge le catalogue complet (${CAT.length.toLocaleString('fr-FR')} titres). Ta clé TMDB est conservée.</p>
+      <div class="row"><button type="button" class="btn danger" data-act="reset">${ICON.trash}Tout remettre à zéro</button></div>
+    </div>
+    <p class="muted" style="font-size:13px">Ce produit utilise l'API TMDB mais n'est ni approuvé ni certifié par TMDB.</p>
+  </div>`;
+}
+
+/* =========================================================
+   Profils, enfants, sagas, prêts, scanner, Ce soir, impression
+   ========================================================= */
+function setWho(id) {
+  UI.kid = id || '';
+  try { localStorage.setItem('cinetoons-kid', UI.kid); } catch (e) { /* stockage indisponible */ }
+}
+function kidsBox(f) {
+  if (!KIDS().length) return '';
+  const ser = isSeries(f);
+  return `<div class="kids"><h2 class="label">Pour les enfants · conseillé dès ${f.age || 6} ans</h2>
+    ${KIDS().map(k => { const r = kidRec(f, k), st = r.s || ''; const young = (f.age || 6) > k.age;
+      return `<div class="kidrow"><b>${h(k.name)}</b><span class="muted" style="font-size:13px">${k.age} ans${young ? ' · un peu jeune' : ''}</span>
+        <button type="button" class="btn small ${st === 'vu' ? 'good' : ''}" data-act="kid-st" data-k="${h(k.id)}" data-v="vu" aria-pressed="${st === 'vu'}">${ICON.check}${W(f).vu}${st === 'vu' && r.d ? ' le ' + fmtDate(r.d) : ''}</button>
+        <button type="button" class="btn small ${st === 'avoir' ? 'wait' : ''}" data-act="kid-st" data-k="${h(k.id)}" data-v="avoir" aria-pressed="${st === 'avoir'}">${W(f).avoir}</button>
+        ${isBook(f) && f.volumes > 1 ? `<span class="muted" style="font-size:13px">${(r.vl || []).length} / ${f.volumes} tomes lus</span>` : ''}
+        <button type="button" class="btn small ${r.fav ? 'wait' : ''}" data-act="kid-fav" data-k="${h(k.id)}" aria-pressed="${!!r.fav}">♥ Coup de cœur</button>
+        ${r.n ? `<span style="color:var(--accent-soft);letter-spacing:2px">${'★'.repeat(r.n)}</span>` : ''}
+        ${ser ? `<label class="inline" for="se-${h(k.id)}">Saison <input class="inp num" type="number" min="1" max="99" id="se-${h(k.id)}" data-ch="kid-ep" data-k="${h(k.id)}" data-f="se" value="${r.se || ''}"></label>
+          <label class="inline" for="ep-${h(k.id)}">Épisode <input class="inp num" type="number" min="1" max="999" id="ep-${h(k.id)}" data-ch="kid-ep" data-k="${h(k.id)}" data-f="ep" value="${r.ep || ''}"></label>` : ''}
+      </div>`; }).join('')}
+    ${ser && f.episodes ? `<p class="muted" style="margin:0;font-size:13px">${f.seasons ? f.seasons + ' saison' + (f.seasons > 1 ? 's' : '') + ', ' : ''}${f.episodes} épisodes en tout.</p>` : ''}
+  </div>`;
+}
+/* Tomes d'une série de BD ou de livres */
+function tomesBox(f) {
+  const n = f.volumes || 0;
+  if (n < 2) return '';
+  const chips = (sel, act, k) => `<div class="chips">${Array.from({length: Math.min(n, 300)}, (_, i) => i + 1).map(i => `<button type="button" class="chip ${sel.includes(i) ? 'on' : ''}" data-act="${act}" data-v="${i}" ${k ? `data-k="${h(k)}"` : ''} aria-pressed="${sel.includes(i)}" style="min-width:44px">${i}</button>`).join('')}</div>`;
+  const own = f.vols || [];
+  return `<div class="kids"><h2 class="label">Tomes · ${n} au total</h2>
+    <p style="margin:0">Tomes qu'on a à la maison : <b>${own.length}</b> / ${n}${own.length && own.length < n ? ' · il manque : ' + Array.from({length: n}, (_, i) => i + 1).filter(i => !own.includes(i)).slice(0, 25).join(', ') + (n - own.length > 25 ? '…' : '') : ''}</p>
+    ${chips(own, 'vol-own')}
+    ${KIDS().map(k => `<details><summary style="cursor:pointer;min-height:36px;display:flex;align-items:center">${h(k.name)} : ${(kidRec(f, k).vl || []).length} / ${n} tomes lus</summary>${chips(kidRec(f, k).vl || [], 'vol-read', k.id)}</details>`).join('')}
+    <p class="muted" style="margin:0;font-size:13px">Clique sur un numéro pour le cocher ou le décocher. Le nombre de tomes se modifie avec « Modifier la fiche ».</p>
+  </div>`;
+}
+/* Où trouver un livre ou une BD */
+function bookBox(f) {
+  const t = encodeURIComponent(f.title.replace(/\s*\((livres?|album|BD)\)$/i, '')), au = encodeURIComponent((f.director || '').split(/,| et /)[0] || '');
+  const bd = f.type === 'Série de BD';
+  return `<div class="watch"><h2 class="label">Trouver, emprunter ou lire gratuitement</h2>
+    ${f.pd ? `<p style="margin:0">Ce texte est dans le domaine public : il se lit gratuitement en ligne, et souvent en livre audio gratuit.</p>
+      <div class="row"><a class="btn small primary" href="https://fr.wikisource.org/w/index.php?search=${t}" target="_blank" rel="noopener">Lire sur Wikisource</a>
+      <a class="btn small primary" href="https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&query=${encodeURIComponent('(gallica all "' + f.title.replace(/\s*\(livre\)$/i, '') + '")')}" target="_blank" rel="noopener">Lire sur Gallica (BnF)</a>
+      <a class="btn small" href="https://www.litteratureaudio.com/?s=${t}" target="_blank" rel="noopener">Livre audio gratuit</a></div>` : ''}
+    <div class="row"><a class="btn small primary" href="https://www.babelio.com/resrecherche.php?Recherche=${t}" target="_blank" rel="noopener">Avis et résumés (Babelio)</a>
+      ${bd ? `<a class="btn small" href="https://www.bedetheque.com/search/albums?RechSerie=${t}" target="_blank" rel="noopener">Liste des tomes (Bédéthèque)</a>` : ''}
+      <a class="btn small" href="https://www.google.com/search?tbm=bks&q=${t}+${au}" target="_blank" rel="noopener">Google Livres</a>
+      <a class="btn small" href="https://search.worldcat.org/search?q=${t}" target="_blank" rel="noopener">Dans quelle bibliothèque ?</a></div>
+    <p class="hint">Pense à la médiathèque : les livres et BD jeunesse s'y empruntent gratuitement, et beaucoup proposent aussi des BD et livres numériques avec la carte.</p>
+  </div>`;
+}
+/* Sagas : titres regroupés et rangés dans l'ordre de sortie */
+const SAGAS = [
+  ['Toy Story', /^Toy Story|^Mini Buzz$|^Vacances à Hawaï$|^Partysaurus Rex$/], ['Shrek et le Chat potté', /^Shrek|^Le Chat potté/], ["L'Âge de glace", /^L'Âge de glace/],
+  ['Madagascar', /^Madagascar|^Les Pingouins de Madagascar$/], ['Kung Fu Panda', /^Kung Fu Panda/], ['Dragons', /^Dragons( \d| :|$)/],
+  ['Moi, moche et méchant et les Minions', /^Moi, moche et méchant|^Les Minions/], ['Cars', /^Cars( \d| :|$)|^Martin et la Lumière/], ['Planes', /^Planes/],
+  ['Les Indestructibles', /^Les Indestructibles|^Jack-Jack attaque/], ['Monstres et Cie', /^Monstres (et Cie|Academy)|^La Nouvelle Voiture de Bob/],
+  ['Le Monde de Nemo', /^Le Monde de (Nemo|Dory)/], ['Vice-versa', /^Vice-versa|^Le Premier Rendez-vous de Riley/], ['La Reine des neiges', /^La Reine des neiges/],
+  ['Raiponce', /^Raiponce/], ['Les Mondes de Ralph', /^Les Mondes de Ralph|^Ralph 2\.0/], ['Vaiana', /^Vaiana/], ['Zootopie', /^Zootopie/],
+  ['Le Roi lion', /^Le Roi lion|^Mufasa/], ['Aladdin', /^Aladdin|^Le Retour de Jafar/], ['La Petite Sirène', /^La Petite Sirène|^Le Secret de la Petite Sirène/],
+  ['La Belle et la Bête', /^La Belle et la Bête|^Le Monde magique de la Belle/], ['Cendrillon', /^Cendrillon/], ['Pocahontas', /^Pocahontas/], ['Mulan', /^Mulan/],
+  ['Tarzan', /^Tarzan/], ['Lilo et Stitch', /^Lilo et Stitch/], ['La Fée Clochette', /^(La Fée )?Clochette/], ['Peter Pan', /^Peter Pan/],
+  ['Le Livre de la jungle', /^Le Livre de la jungle/], ['Les 101 Dalmatiens', /^Les 101 Dalmatiens/], ['Bambi', /^Bambi( 2)?$/], ['Rox et Rouky', /^Rox et Rouky/],
+  ['La Belle et le Clochard', /^La Belle et le Clochard/], ['Bernard et Bianca', /^(Les Aventures de )?Bernard et Bianca/], ['Le Bossu de Notre-Dame', /^Le Bossu de Notre-Dame/],
+  ['Frère des ours', /^Frère des ours/], ['Kuzco', /^Kuzco/], ['Dingo et Max', /^Dingo et Max/],
+  ["Winnie l'ourson", /^(Les Aventures de )?Winnie|^Le Petit Monde de Winnie|^Les Aventures de (Tigrou|Porcinet)/], ['Fantasia', /^Fantasia/],
+  ['Mary Poppins', /^(Le Retour de )?Mary Poppins/], ['Hôtel Transylvanie', /^Hôtel Transylvanie/], ['Les Croods', /^Les Croods/], ['Baby Boss', /^Baby Boss/],
+  ['Les Trolls', /^Les Trolls/], ['Tous en scène', /^Tous en scène/], ['Comme des bêtes', /^Comme des bêtes/], ['Rio', /^Rio( 2)?$/],
+  ['Tempête de boulettes géantes', /^Tempête de boulettes/], ['Les Rebelles de la forêt', /^Les Rebelles de la forêt/], ['Happy Feet', /^Happy Feet/],
+  ['Angry Birds', /^Angry Birds/], ['Lego', /^La Grande Aventure Lego|^Lego (Batman|Ninjago)/], ['Spider-Man (Spider-Verse)', /^Spider-Man : (New Generation|Across)/],
+  ['Les Bad Guys', /^Les Bad Guys/], ["Bob l'éponge", /^Bob l'éponge, le film/], ['Space Jam', /^Space Jam/], ['Astérix', /^Astérix/], ['Tintin (BD et dessins animés)', /Tintin/], ['Les Schtroumpfs (BD et films)', /Schtroumpf/, true], ['Lucky Luke (BD et dessins animés)', /^Lucky Luke|Dalton/, true],
+  ['Kirikou', /^Kirikou/], 
+  ['Arthur et les Minimoys', /^Arthur (et|3)/], ['Minuscule', /^Minuscule/], ['Ernest et Célestine', /^Ernest et Célestine/],
+  ['Wallace et Gromit', /^Wallace et Gromit|^Une grande excursion$|^Un mauvais pantalon$|^Rasé de près$|^Sacré Pétrin$/], ['Shaun le mouton', /^Shaun le mouton/],
+  ['Chicken Run', /^Chicken Run/], ['Paddington', /^Paddington/], ['Sonic', /^Sonic/],
+  ['Le Petit Dinosaure', /^Le Petit Dinosaure/], ['Fievel', /^Fievel/], ['Balto', /^Balto/], ['Brisby', /^Brisby/], ['Charlie', /^Charlie(, mon héros| 2)/],
+  ['Le Cygne et la Princesse', /^Le Cygne et la Princesse/], ['Le Petit Grille-pain courageux', /^Le Petit Grille-pain/], ['FernGully', /FernGully/],
+  ['Opération Casse-noisette', /^Opération Casse-noisette/], ['La Famille Addams', /^La Famille Addams/], ['Scooby-Doo (films)', /^Scooby-Doo/],
+  ['Barbie', /^Barbie/], ['Tom et Jerry (films)', /^Tom et Jerry(, le film| :)/], ['Les Looney Tunes (films)', /^Les Looney Tunes|^Space Jam/],
+  ['Batman et DC', /^Batman|^Superman|^La Ligue des justiciers|^Wonder Woman/], ['Star Wars', /^Star Wars/, true], ['Dragon Ball', /^Dragon Ball/, true],
+  ['Albator', /^Albator/, true], ['Les Mystérieuses Cités d\'or', /^Les Mystérieuses Cités d'or/, true], ['Les Simpson', /^Les Simpson/, true],
+  ['Pokémon', /^Pokémon/, true], ['Studio Ghibli : Hayao Miyazaki', null, false, (f) => /Hayao Miyazaki/.test(f.director) && f.type === 'Film']
+];
+let SAGA_CACHE = null, SAGA_KEY = '';
+function sagaList() {
+  const key = S.films.length + ':' + S.films.reduce((a, f) => a + f.title.length, 0);
+  if (SAGA_CACHE && key === SAGA_KEY) return SAGA_CACHE;
+  SAGA_CACHE = SAGAS.map(([name, re, withSeries, fn]) => {
+    const items = S.films.filter(f => (fn ? fn(f) : re.test(f.title) && (withSeries || !isSeries(f)))).sort((a, b) => (+a.year || 0) - (+b.year || 0) || a.title.localeCompare(b.title, 'fr'));
+    return {name, items};
+  }).filter(sg => sg.items.length > 1);
+  SAGA_KEY = key; return SAGA_CACHE;
+}
+function sagaBox(f) {
+  const sg = sagaList().find(x => x.items.includes(f)); if (!sg) return '';
+  return `<div class="saga"><h2 class="label">Saga ${h(sg.name)} · ordre de visionnage</h2><ol>
+    ${sg.items.map(x => `<li class="${x === f ? 'on' : ''}"><a href="#/film/${h(x.id)}" style="color:inherit">${h(x.title)}</a> <span class="muted">(${h(yearsLabel(x))}${x.type !== 'Film' ? ', ' + h(x.type.toLowerCase()) : ''})</span>${stOf(x) === 'vu' ? `<span class="done">${W(x).vu.toLowerCase()}</span>` : ''}</li>`).join('')}
+  </ol><a href="#/sagas">Voir toutes les sagas</a></div>`;
+}
+function viewSagas() {
+  const list = sagaList(), kid = activeKid();
+  return `<div style="display:flex;flex-direction:column;gap:24px">
+    <div class="head-row"><div><h1 class="title">Sagas</h1><p class="muted">${list.length} sagas, rangées dans l'ordre de visionnage${kid ? ' · progression de ' + h(kid.name) : ''}.</p></div></div>
+    ${list.map(sg => { const done = sg.items.filter(x => stOf(x) === 'vu').length; const next = sg.items.find(x => stOf(x) !== 'vu');
+      return `<section class="box"><div class="head-row"><h2>${h(sg.name)}</h2><span class="muted">${done} / ${sg.items.length} vus${next && done ? ' · prochain : <a href="#/film/' + h(next.id) + '">' + h(next.title) + '</a>' : ''}</span></div>
+      <div class="sagarow">${sg.items.map((x, i) => `<a class="card" href="#/film/${h(x.id)}"><div class="poster" style="background:${tone(x)}"><span class="num">${i + 1}</span>${posterInner(x)}${statusPill(x)}</div><div class="card-m">${h(x.year || '?')}</div></a>`).join('')}</div></section>`; }).join('')}
+  </div>`;
+}
+function loanBox(f) {
+  return `<div class="kids"><h2 class="label">Prêt</h2>
+    ${f.loan && f.loan.to ? `<p style="margin:0">Prêté à <b>${h(f.loan.to)}</b> le ${fmtDate(f.loan.date)}.</p><div class="row"><button type="button" class="btn small primary" data-act="loan-back">On me l'a rendu</button></div>`
+      : `<form id="loanform" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 200px"><span>Prêté à</span><input class="inp" id="loan-to" placeholder="Prénom" maxlength="40"></label>
+        <label class="field"><span>Le</span><input class="inp" type="date" id="loan-date" value="${today()}" style="width:auto"></label><button type="submit" class="btn">Enregistrer le prêt</button></form>`}
+    <h2 class="label" style="margin-top:6px">${isBook(f) ? 'Codes ISBN (un par tome)' : 'Codes-barres de ce DVD'}</h2>
+    ${(f.ean || []).length ? `<div class="row">${f.ean.map(c => `<span class="tag" style="font-variant-numeric:tabular-nums">${h(c)} <button type="button" class="btn small" data-act="ean-del" data-v="${h(c)}" aria-label="Retirer ce code" style="min-height:24px;padding:0 8px;margin-left:6px">×</button></span>`).join('')}</div>` : '<p class="muted" style="margin:0;font-size:13px">Aucun code. Scanne-le depuis la page Scanner, ou tape le code ici.</p>'}
+    <form id="eanform" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 200px"><span>Ajouter un code</span><input class="inp" id="ean-new" inputmode="numeric" placeholder="3459370412345"></label><button type="submit" class="btn small">Ajouter</button></form>
+  </div>`;
+}
+/* Scanner de codes-barres (douchette USB ou Bluetooth en mode clavier) */
+const SCAN = {pending: '', q: '', last: [], info: null, looking: false, err: '', tomeGuess: 0};
+function scanCode(raw) {
+  const c = String(raw || '').replace(/\s+/g, ''); const inp = $('#scan'); if (inp) inp.value = '';
+  if (!c) return;
+  const f = S.films.find(x => (x.ean || []).includes(c));
+  if (f) {
+    const was = f.owned; f.owned = true; if (!f.support) f.support = isBook(f) ? (f.type === 'Série de BD' ? 'Album BD' : 'Livre') : 'DVD';
+    const t = (f.eanT || {})[c]; let msg = was ? 'Déjà dans ta collection' : 'Ajouté à ta collection';
+    if (t) { const had = (f.vols || []).includes(t); f.vols = [...new Set([...(f.vols || []), t])].sort((a, b) => a - b); msg = had ? 'Tome ' + t + ' déjà noté' : 'Tome ' + t + ' ajouté'; }
+    save();
+    SCAN.last.unshift({code: c, id: f.id, msg}); SCAN.pending = '';
+    toast('« ' + f.title + ' » : ' + msg.toLowerCase());
+  } else {
+    SCAN.pending = c; SCAN.q = ''; SCAN.info = null; SCAN.err = '';
+    if (!IS_WEB && /^97[89]\d{10}$/.test(c)) {
+      SCAN.looking = true;
+      lookupIsbn(c).then(b => { SCAN.looking = false; if (SCAN.pending !== c) return; SCAN.info = b || null; if (b) { SCAN.q = seriesGuess(b.title) || b.title; SCAN.tomeGuess = tomeGuess(b.title + ' ' + b.subtitle); } else SCAN.err = 'Ce code n\'a pas été trouvé dans Google Livres ni Open Library.'; if (route().name === 'scanner') render(); })
+        .catch(e => { SCAN.looking = false; SCAN.err = e.message; if (route().name === 'scanner') render(); });
+    }
+  }
+  render();
+}
+function scanResults() {
+  const w = norm(SCAN.q.trim()).split(/\s+/).filter(Boolean);
+  if (!w.length) return '<p class="muted" style="margin:0">Tape quelques lettres du titre.</p>';
+  const tk = (f) => norm(f.title + ' ' + f.originalTitle);
+  const res = S.films.filter(f => w.every(x => hayOf(f).includes(x)))
+    .sort((a, b) => (w.every(x => tk(b).includes(x)) - w.every(x => tk(a).includes(x))) || ((a.owned ? 0 : 1) - (b.owned ? 0 : 1)) || (a.title.length - b.title.length)).slice(0, 10);
+  return res.length ? `<div class="fgroup">${res.map(f => `<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-block:6px"><span><b>${h(f.title)}</b> <span class="muted">${h(yearsLabel(f))} · ${h(f.type)}</span></span><button type="button" class="btn small primary" data-act="scan-link" data-id="${h(f.id)}">Associer ce code</button></div>`).join('')}</div>`
+    : '<p class="muted" style="margin:0">Aucun titre trouvé. Ajoute-le avec « Ajouter un titre » dans le catalogue, puis rescanne.</p>';
+}
+function viewScanner() {
+  return `<div class="scanbox">
+    <h1 class="title">Scanner un DVD, une BD ou un livre</h1>
+    <p class="muted" style="margin:0">Branche ta douchette (USB ou Bluetooth en mode clavier), clique dans la case et scanne le code-barres du boîtier ou le code ISBN au dos du livre. La première fois, choisis le titre correspondant : le code est retenu, et les fois suivantes un simple scan suffit.</p>
+    <form id="scanform" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 320px"><span>Code-barres</span><input class="inp big" id="scan" inputmode="numeric" autocomplete="off" placeholder="Scanne ou tape le code"></label><button type="submit" class="btn primary">Valider</button></form>
+    ${SCAN.pending ? `<div class="box"><h2>Code ${h(SCAN.pending)} inconnu</h2>
+      ${SCAN.looking ? '<p style="margin:0"><span class="spin"></span> Recherche du livre correspondant à ce code ISBN…</p>' : ''}
+      ${SCAN.err ? `<p class="muted" style="margin:0">${h(SCAN.err)}</p>` : ''}
+      ${SCAN.info ? `<div class="tonight" style="grid-template-columns:90px 1fr"><div class="poster" style="background:#4A3A2A;max-width:90px">${SCAN.info.cover ? `<img class="poster-img" src="${h(SCAN.info.cover)}" alt="">` : ''}</div>
+        <div style="display:flex;flex-direction:column;gap:6px;min-width:0"><b>Ce code correspond à : ${h(SCAN.info.title)}${SCAN.info.subtitle ? ' — ' + h(SCAN.info.subtitle) : ''}</b><span class="muted">${h([SCAN.info.authors, SCAN.info.publisher, SCAN.info.year].filter(Boolean).join(' · '))}</span>
+        <div class="row"><button type="button" class="btn small primary" data-act="scan-new">${ICON.plus}Créer une fiche pour ce livre</button><span class="muted" style="font-size:13px">ou associe-le à une série de ta base ci-dessous</span></div></div></div>` : ''}<p style="margin:0" class="muted">À quel titre correspond ce DVD ou ce livre ? Pour une série de BD ou de livres, indique aussi le numéro du tome.</p>
+      <div class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 280px"><span>Chercher le titre</span><input class="inp" id="scan-q" value="${h(SCAN.q)}" placeholder="Ex. Le Roi lion, Astérix" autocomplete="off"></label>
+      <label class="field"><span>Tome n° (facultatif)</span><input class="inp" id="scan-tome" inputmode="numeric" style="width:120px" placeholder="12" value="${SCAN.tomeGuess || ''}"></label></div>
+      <div id="scan-res">${scanResults()}</div><div class="row"><button type="button" class="btn" data-act="scan-cancel">Annuler</button></div></div>` : ''}
+    ${SCAN.last.length ? `<div class="box"><h2>Derniers scans</h2>${SCAN.last.slice(0, 12).map(x => { const f = byId(x.id); return f ? `<div class="row" style="justify-content:space-between"><a href="#/film/${h(f.id)}">${h(f.title)}</a><span class="muted">${h(x.msg)} · ${h(x.code)}</span></div>` : ''; }).join('')}</div>` : ''}
+    <p class="muted" style="margin:0;font-size:13px">${S.films.filter(f => (f.ean || []).length).length} titres ont déjà un code-barres associé.</p>
+  </div>`;
+}
+/* Ce soir, on regarde quoi ? */
+const TN = {kid: null, dur: 0, type: 'tout', unseen: true, owned: false, free: false, pick: null};
+function openTonight() {
+  if (TN.kid === null) TN.kid = UI.kid || '';
+  $('#modal-root').innerHTML = `<div class="overlay" data-act="close-overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="tn-title" style="max-width:700px">
+    <h2 id="tn-title">Ce soir, on regarde ou on lit quoi ?</h2>
+    <form id="tonightform" class="form">
+      <label class="field"><span>Pour qui</span><select class="sel" id="tn-kid"><option value="">Toute la famille (jusqu'à l'âge du plus jeune)</option><option value="*" ${TN.kid === '*' ? 'selected' : ''}>Les adultes</option>${KIDS().map(k => `<option value="${h(k.id)}" ${TN.kid === k.id ? 'selected' : ''}>${h(k.name)} (${k.age} ans)</option>`).join('')}</select></label>
+      <label class="field"><span>Durée maximum</span><select class="sel" id="tn-dur">${[[0, 'Peu importe'], [30, '30 minutes'], [60, '1 heure'], [90, '1 h 30'], [120, '2 heures']].map(([v, l]) => `<option value="${v}" ${TN.dur === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+      <label class="field"><span>Quoi</span><select class="sel" id="tn-type">${[['tout', 'Tout'], ['Film', 'Un film'], ['Série', 'Un épisode de série'], ['Court métrage', 'Des courts métrages'], ['bd', 'Une BD'], ['livre', 'Une histoire à lire']].map(([v, l]) => `<option value="${v}" ${TN.type === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+      <div class="field"><span>Options</span>
+        <label class="check"><input type="checkbox" id="tn-unseen" ${TN.unseen ? 'checked' : ''}>Pas encore vu</label>
+        <label class="check"><input type="checkbox" id="tn-owned" ${TN.owned ? 'checked' : ''}>Seulement nos DVD</label>
+        ${IS_WEB ? '' : `<label class="check"><input type="checkbox" id="tn-free" ${TN.free ? 'checked' : ''}>Gratuit en ce moment</label>`}</div>
+      <div class="row full"><button type="submit" class="btn primary">${ICON.play}Tirer au sort</button><button type="button" class="btn" data-act="close">Fermer</button></div>
+    </form>
+    <div id="tn-res"></div></div></div>`;
+  if (TN.pick) paintTonight();
+}
+function drawTonight() {
+  TN.kid = $('#tn-kid').value; TN.dur = +$('#tn-dur').value; TN.type = $('#tn-type').value; TN.unseen = $('#tn-unseen').checked; TN.owned = $('#tn-owned').checked; TN.free = !!($('#tn-free') && $('#tn-free').checked);
+  const kids = KIDS(), k = kids.find(x => x.id === TN.kid) || null;
+  const maxAge = TN.kid === '*' ? 18 : k ? k.age : (kids.length ? Math.min(...kids.map(x => x.age)) : 18);
+  const pool = S.films.filter(f => (f.age || 6) <= maxAge && (TN.kid === '*' || f.public !== 'Adultes')
+    && (TN.type === 'tout' || (TN.type === 'Série' ? isSeries(f) : TN.type === 'bd' || TN.type === 'livre' ? kindOf(f) === TN.type : f.type === TN.type))
+    && (!TN.dur || (isSeries(f) ? (f.runtime || 22) : durOf(f)) <= TN.dur)
+    && (!TN.unseen || (k ? stOf(f, k) !== 'vu' : TN.kid ? f.status !== 'vu' : !kids.some(x => stOf(f, x) === 'vu') && f.status !== 'vu'))
+    && (!TN.owned || f.owned) && (!TN.free || isFreeNow(f)));
+  const z = $('#tn-res');
+  if (!pool.length) { TN.pick = null; z.innerHTML = '<div class="empty" style="margin-top:16px"><h2>Aucun titre ne correspond</h2><p>Allonge la durée, décoche « Pas encore vu » ou « Seulement nos DVD ».</p></div>'; return; }
+  const w = pool.map(f => 1 + (stOf(f, k) === 'avoir' || f.status === 'avoir' ? 4 : 0) + (f.awards ? 1 : 0));
+  let r = Math.random() * w.reduce((a, b) => a + b, 0), i = 0; while (r > w[i]) { r -= w[i]; i++; }
+  TN.pick = pool[i].id; TN.poolSize = pool.length; paintTonight();
+}
+function paintTonight() {
+  const f = byId(TN.pick), z = $('#tn-res'); if (!f || !z) return;
+  z.innerHTML = `<div class="tonight" style="margin-top:18px"><div class="poster" style="background:${tone(f)}">${posterInner(f)}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:0"><h2 style="margin:0;font-family:var(--display);font-size:26px">${h(f.title)}</h2>
+      <p class="muted" style="margin:0">${h([typeLabel(f.type), yearsLabel(f), f.subgenre, 'dès ' + (f.age || 6) + ' ans', f.runtime ? f.runtime + ' min' : '≈ ' + durOf(f) + ' min'].filter(Boolean).join(' · '))}</p>
+      <p class="synopsis" style="margin:0">${h(f.synopsis || '')}</p>
+      <div class="row"><a class="btn primary" href="#/film/${h(f.id)}" data-act="close">Ouvrir la fiche</a><button type="button" class="btn" data-act="tn-draw">Un autre</button></div>
+      <p class="muted" style="margin:0;font-size:13px">Tiré parmi ${TN.poolSize || 1} titre${(TN.poolSize || 1) > 1 ? 's' : ''}. Les titres « à voir » ont plus de chances de sortir.</p></div></div>`;
+}
+/* Catalogue imprimable */
+function printRows() {
+  const sel = UI.printSel || 'own';
+  if (sel === 'own') return {title: 'Notre collection', rows: S.films.filter(f => f.owned)};
+  if (sel === 'ownv') return {title: 'Nos DVD et Blu-ray', rows: S.films.filter(f => f.owned && !isBook(f))};
+  if (sel === 'ownb') return {title: 'Nos BD et livres', rows: S.films.filter(f => f.owned && isBook(f))};
+  if (sel === 'avoir') return {title: 'À voir', rows: S.films.filter(f => stOf(f) === 'avoir')};
+  if (sel === 'vu') return {title: 'Déjà vus', rows: S.films.filter(f => stOf(f) === 'vu')};
+  const l = S.lists.find(x => x.id === sel); return {title: l ? l.name : 'Liste', rows: l ? l.ids.map(byId).filter(Boolean) : []};
+}
+function printHtml() {
+  const {title, rows} = printRows();
+  const list = rows.slice().sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+  return `<h1>${h(title)}</h1><p style="margin:0 0 14px;color:#555">${list.length} titre${list.length > 1 ? 's' : ''} · Toons & Bulles · ${fmtDate(today())}</p>
+    <table><thead><tr><th style="text-align:left">Titre</th><th style="text-align:left">Année</th><th style="text-align:left">Type</th><th style="text-align:left">Studio</th><th style="text-align:left">Âge</th><th style="text-align:left">Support</th><th style="text-align:left">Tomes</th><th style="text-align:left">Prêté à</th></tr></thead><tbody>
+    ${list.map(f => `<tr><td>${h(f.title)}</td><td>${h(yearsLabel(f))}</td><td>${h(f.type)}</td><td>${h(f.subgenre)}</td><td>${f.age || 6}+</td><td>${h(f.support || '')}</td><td>${isBook(f) && (f.vols || []).length ? h(f.vols.join(', ')) + (f.volumes ? ' / ' + f.volumes : '') : ''}</td><td>${h(f.loan && f.loan.to ? f.loan.to : '')}</td></tr>`).join('')}
+    </tbody></table>`;
+}
+function viewPrint() {
+  const sel = UI.printSel || 'own';
+  return `<div style="display:flex;flex-direction:column;gap:16px">
+    <div class="noprint head-row"><div><h1 class="title">Catalogue imprimable</h1><p class="muted">${IS_WEB ? 'Sur cette page, l\'impression directe n\'est pas possible : télécharge la page, ouvre-la dans ton navigateur et imprime-la (ou « Enregistrer en PDF »).' : 'Imprime la liste ou choisis « Enregistrer en PDF » dans la fenêtre d\'impression.'}</p></div>
+      <div class="row"><label class="inline" for="printsel">Contenu <select class="sel" id="printsel" data-ch="printsel">
+        <option value="own" ${sel === 'own' ? 'selected' : ''}>Tout ce qu'on a à la maison</option><option value="ownv" ${sel === 'ownv' ? 'selected' : ''}>Mes DVD et Blu-ray</option><option value="ownb" ${sel === 'ownb' ? 'selected' : ''}>Mes BD et livres</option><option value="avoir" ${sel === 'avoir' ? 'selected' : ''}>À voir</option><option value="vu" ${sel === 'vu' ? 'selected' : ''}>Déjà vus</option>
+        ${S.lists.map(l => `<option value="${h(l.id)}" ${sel === l.id ? 'selected' : ''}>Liste : ${h(l.name)}</option>`).join('')}</select></label>
+      ${IS_WEB ? `<button type="button" class="btn primary" data-act="print-dl">${ICON.dl}Télécharger la page à imprimer</button>` : `<button type="button" class="btn primary" data-act="print-go">Imprimer ou enregistrer en PDF</button><button type="button" class="btn" data-act="print-dl">${ICON.dl}Télécharger la page</button>`}</div></div>
+    <div class="printpage">${printHtml()}</div></div>`;
+}
+async function printDownload() {
+  const {title} = printRows();
+  const doc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${h(title)}</title><style>body{font-family:Arial,sans-serif;color:#111;margin:24px}h1{font-size:24px;margin:0 0 4px}table{width:100%;border-collapse:collapse;font-size:12px}th{background:#eee;padding:6px;text-align:left}td{border-top:1px solid #ccc;padding:5px 6px}</style></head><body>${printHtml()}</body></html>`;
+  if (await download('toons-et-bulles-' + (title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-')) + '.html', doc, 'text/html')) toast('Page téléchargée : ouvre-la puis imprime-la');
+}
+
+/* =========================================================
+   Routeur et rendu
+   ========================================================= */
+function route() {
+  const parts = (location.hash || '#/catalogue').replace(/^#\/?/, '').split('/');
+  return {name: parts[0] || 'catalogue', id: parts[1] ? decodeURIComponent(parts[1]) : null};
+}
+function render() {
+  const r = route(), v = $('#view');
+  const nav = r.name === 'film' || r.name === 'explorer' || r.name === 'livres-en-ligne' ? 'catalogue' : r.name === 'imprimer' ? 'collection' : r.name;
+  paintWho();
+  document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === nav));
+  if (r.name === 'catalogue') { v.innerHTML = viewCatalogue(); paintCatGrid(); }
+  else if (r.name === 'livres-en-ligne') { v.innerHTML = viewBooksOnline(); paintBO(); }
+  else if (r.name === 'explorer') { v.innerHTML = viewExplorer(); if (S.tmdbKey) { if (!EX.loaded) exLoad(); else paintEx(); } }
+  else if (r.name === 'film') v.innerHTML = viewFilm(r.id);
+  else if (r.name === 'collection') v.innerHTML = viewCollection();
+  else if (r.name === 'listes') v.innerHTML = viewListes(r.id);
+  else if (r.name === 'stats') v.innerHTML = viewStats();
+  else if (r.name === 'reglages') v.innerHTML = viewReglages();
+  else if (r.name === 'sagas') v.innerHTML = viewSagas();
+  else if (r.name === 'scanner') { v.innerHTML = viewScanner(); setTimeout(() => $('#scan') && $('#scan').focus(), 0); }
+  else if (r.name === 'imprimer') v.innerHTML = viewPrint();
+  else { location.hash = '#/catalogue'; return; }
+  document.title = 'Toons & Bulles';
+}
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+/* =========================================================
+   Actions (clics)
+   ========================================================= */
+const currentFilm = () => { const r = route(); return r.name === 'film' ? byId(r.id) : null; };
+document.addEventListener('click', async (ev) => {
+  const el = ev.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act;
+  if (act === 'close-overlay' && ev.target !== el) return;
+  if (el.tagName === 'A' && (act === 'search' || act === 'back')) ev.preventDefault();
+  if (act === 'open' && ev.target.closest('a')) return;
+  const f = currentFilm();
+  switch (act) {
+    case 'dec': { const d = +el.dataset.v; UI.decades.has(d) ? UI.decades.delete(d) : UI.decades.add(d); UI.limit = PAGE; render(); break; }
+    case 'more': UI.limit += PAGE; paintCatGrid(); break;
+    case 'clear-filters': UI.eds.clear(); UI.colls.clear(); UI.ageMax = 0; UI.awardsOnly = false; UI.decades.clear(); UI.subs.clear(); UI.types.clear(); UI.techs.clear(); UI.pubs.clear(); UI.limit = PAGE; UI.hideSeen = UI.ownedOnly = UI.toWatch = UI.freeOnly = UI.pdOnly = false; UI.q = ''; $('#q').value = ''; render(); break;
+    case 'add': openEditor(null); break;
+    case 'posters-open': openPosterPanel(); break;
+    case 'posters-run': if (!RUN.active) runPosters(postersTodo(el.dataset.scope)); break;
+    case 'posters-stop': RUN.stop = true; break;
+    case 'free-open': openFreePanel(); break;
+    case 'free-run': if (!FRUN.active) runFree(freeTodo(el.dataset.scope)); break;
+    case 'free-stop': FRUN.stop = true; break;
+    case 'free-one': {
+      const film = byId(el.dataset.id); if (!film) break;
+      el.disabled = true; el.innerHTML = '<span class="spin"></span> Vérification…';
+      try { const ok = await checkFree(film); saveFree(); savePosters(); save(); toast(ok ? 'Fiche mise à jour : gratuit en ce moment !' : 'Fiche mise à jour : pas d\'offre gratuite pour le moment'); }
+      catch (e) { toast(e.message); }
+      render(); break;
+    }
+    case 'posters-clear': {
+      if (!(await ask('Effacer toutes les affiches trouvées automatiquement ? Tes photos personnelles sont conservées. Tu pourras relancer la recherche ensuite.', 'Effacer les affiches'))) break;
+      POSTERS = {}; savePosters(); toast('Affiches automatiques effacées'); render(); break;
+    }
+    case 'posters-retry': {
+      Object.keys(POSTERS).forEach(k => { if (!POSTERS[k]) delete POSTERS[k]; }); savePosters();
+      toast('Les titres sans affiche seront revérifiés à la prochaine recherche'); render(); break;
+    }
+    case 'img-del': if (f) { try { await removeOwnImage(f); toast('Photo retirée'); } catch (e) { toast('Impossible de retirer la photo : ' + e.message); } render(); } break;
+    case 'poster-wrong': if (f) { POSTERS[f.id] = 0; savePosters(); toast('Affiche retirée. Tu peux mettre ta propre photo ou utiliser « Compléter avec TMDB ».'); render(); } break;
+    case 'back': if (history.length > 1) history.back(); else location.hash = '#/catalogue'; break;
+    case 'load-base': {
+      const have = new Set(S.films.map(f => f.id));
+      let n = 0; CAT.forEach(c => { if (!have.has(c.id)) { S.films.push(Object.assign({}, c)); n++; } });
+      if (!S.lists.length) S.lists = defaultLists();
+      HAY.clear(); save(); toast(n.toLocaleString('fr-FR') + ' titres rechargés'); render(); break;
+    }
+    case 'edit': openEditor(el.dataset.id); break;
+    case 'close': case 'close-overlay': closeEditor(); break;
+    case 'search': UI.q = el.dataset.v; $('#q').value = el.dataset.v; UI.decades.clear(); UI.subs.clear(); UI.types.clear(); UI.techs.clear(); UI.pubs.clear(); UI.limit = PAGE; UI.hideSeen = UI.ownedOnly = UI.toWatch = UI.freeOnly = UI.pdOnly = false; location.hash = '#/catalogue'; if (route().name === 'catalogue') render(); break;
+    case 'star': if (f) { const n = +el.dataset.v, k = activeKid(); if (k) setKid(f, k, {n: noteOf(f) === n ? 0 : n}); else f.myNote = f.myNote === n ? 0 : n; save(); render(); } break;
+    case 'status': if (f) { const s = el.dataset.v, k = activeKid();
+      if (k) { const ns = stOf(f) === s ? '' : s; setKid(f, k, {s: ns, d: ns === 'vu' ? (kidRec(f, k).d || today()) : ''}); }
+      else { f.status = f.status === s ? '' : s; if (f.status === 'vu' && !f.watchedDate) f.watchedDate = today(); }
+      save(); render(); } break;
+    case 'fav': if (f && activeKid()) { setKid(f, activeKid(), {fav: !favOf(f)}); save(); render(); } break;
+    case 'kid-st': if (f) { const k = KIDS().find(x => x.id === el.dataset.k); if (k) { const s = el.dataset.v, ns = stOf(f, k) === s ? '' : s; setKid(f, k, {s: ns, d: ns === 'vu' ? (kidRec(f, k).d || today()) : ''}); save(); render(); } } break;
+    case 'kid-fav': if (f) { const k = KIDS().find(x => x.id === el.dataset.k); if (k) { setKid(f, k, {fav: !favOf(f, k)}); save(); render(); } } break;
+    case 'kind': UI.kind = el.dataset.v; UI.eds.clear(); UI.colls.clear(); UI.types.clear(); UI.subs.clear(); UI.techs.clear(); UI.limit = PAGE; if (route().name !== 'catalogue') location.hash = '#/catalogue'; else render(); break;
+    case 'agemax': UI.ageMax = +el.dataset.v; UI.limit = PAGE; render(); break;
+    case 'tonight': openTonight(); break;
+    case 'tn-draw': drawTonight(); break;
+    case 'loan-back': if (f) { f.loan = null; save(); toast('« ' + f.title + ' » est rendu'); render(); } break;
+    case 'ean-del': if (f) { f.ean = (f.ean || []).filter(c => c !== el.dataset.v); save(); render(); } break;
+    case 'scan-link': {
+      const film = byId(el.dataset.id); if (!film || !SCAN.pending) break;
+      film.ean = [...new Set([...(film.ean || []), SCAN.pending])]; film.owned = true; if (!film.support) film.support = isBook(film) ? (film.type === 'Série de BD' ? 'Album BD' : 'Livre') : 'DVD';
+      const tome = +(($('#scan-tome') || {}).value || 0);
+      if (tome > 0) { film.eanT = Object.assign({}, film.eanT || {}, {[SCAN.pending]: tome}); film.vols = [...new Set([...(film.vols || []), tome])].sort((a, b) => a - b); }
+      SCAN.info = null;
+      SCAN.last.unshift({code: SCAN.pending, id: film.id, msg: tome > 0 ? 'Code associé au tome ' + tome : 'Code associé et ajouté à ta collection'}); SCAN.pending = ''; SCAN.q = '';
+      save(); toast('Code associé à « ' + film.title + ' »'); render(); break;
+    }
+    case 'scan-cancel': SCAN.pending = ''; SCAN.q = ''; SCAN.info = null; SCAN.err = ''; render(); break;
+    case 'scan-new': {
+      if (!SCAN.info) break;
+      const nf = bookFromGoogle(SCAN.info); nf.ean = [SCAN.pending]; nf.owned = true; nf.support = nf.type === 'Série de BD' ? 'Album BD' : 'Livre';
+      S.films.push(nf); LOCAL_IDX = null; HAY.delete(nf.id);
+      SCAN.last.unshift({code: SCAN.pending, id: nf.id, msg: 'Nouvelle fiche créée'}); SCAN.pending = ''; SCAN.info = null; SCAN.q = '';
+      save(); toast('« ' + nf.title + ' » ajouté à ta base'); render(); break;
+    }
+    case 'bo-add': {
+      const b = BO.results[+el.dataset.i]; if (!b) break;
+      const nf = bookFromGoogle(b); S.films.push(nf); LOCAL_IDX = null; save(); toast('« ' + nf.title + ' » ajouté à ta base'); paintBO(); break;
+    }
+    case 'kid-add': { S.kids = KIDS().concat([{id: uid(), name: 'Enfant ' + (KIDS().length + 1), age: 6}]); save(); render(); break; }
+    case 'kid-del': {
+      const k = KIDS().find(x => x.id === el.dataset.k); if (!k) break;
+      if (!(await ask('Retirer le profil « ' + k.name + ' » ? Ses titres vus, ses notes et ses coups de cœur seront effacés.', 'Retirer'))) break;
+      S.kids = KIDS().filter(x => x.id !== k.id); S.films.forEach(x => { if (x.kids && x.kids[k.id]) { x.kids = Object.assign({}, x.kids); delete x.kids[k.id]; } });
+      if (UI.kid === k.id) setWho(''); save(); render(); break;
+    }
+    case 'print-go': if (IS_WEB) printDownload(); else window.print(); break;
+    case 'print-dl': printDownload(); break;
+    case 'owned': if (f) { f.owned = !f.owned; if (f.owned && !f.support && isBook(f)) f.support = f.type === 'Série de BD' ? 'Album BD' : 'Livre'; save(); render(); } break;
+    case 'vol-own': case 'vol-read': if (f) { const n = +el.dataset.v; const key = act === 'vol-own' ? 'vols' : 'readVols'; const k = act === 'vol-read' && el.dataset.k ? KIDS().find(x => x.id === el.dataset.k) : null;
+      if (k) { const cur = new Set(kidRec(f, k).vl || []); cur.has(n) ? cur.delete(n) : cur.add(n); setKid(f, k, {vl: cur.size ? [...cur].sort((a, b) => a - b) : ''}); }
+      else { const cur = new Set(f[key] || []); cur.has(n) ? cur.delete(n) : cur.add(n); f[key] = [...cur].sort((a, b) => a - b); if (key === 'vols' && f[key].length) { f.owned = true; if (!f.support) f.support = f.type === 'Série de BD' ? 'Album BD' : 'Livre'; } }
+      save(); render(); } break;
+    case 'delete': {
+      const film = byId(el.dataset.id); if (!film) break;
+      if (!(await ask('Supprimer « ' + film.title + ' » de ta base ? Ta note et tes remarques sur ce film seront effacées.', 'Supprimer'))) break;
+      S.films = S.films.filter(x => x.id !== film.id); S.lists.forEach(l => { l.ids = l.ids.filter(i => i !== film.id); });
+      save(); toast('« ' + film.title + ' » supprimé'); location.hash = '#/catalogue'; break;
+    }
+    case 'complete': {
+      const film = byId(el.dataset.id); if (!film) break;
+      el.disabled = true; el.innerHTML = '<span class="spin"></span> Recherche sur TMDB…';
+      try { await completeFromTmdb(film); toast('Fiche complétée avec TMDB'); }
+      catch (e) { toast(e.message); }
+      render(); break;
+    }
+    case 'ex-open': case 'ex-add': {
+      const id = +el.dataset.id; el.disabled = true;
+      try {
+        const film = await importTmdb(id, EX.kind);
+        if (act === 'ex-open') location.hash = '#/film/' + film.id;
+        else { toast('« ' + film.title + ' » ajouté à ta base'); paintEx(); }
+      } catch (e) { toast(e.message); el.disabled = false; }
+      break;
+    }
+    case 'ex-page': EX.page = Math.max(1, Math.min(EX.pages, EX.page + +el.dataset.d)); exLoad(); window.scrollTo(0, 0); break;
+    case 'coltab': UI.colTab = el.dataset.v; render(); break;
+    case 'open': location.hash = '#/film/' + el.dataset.id; break;
+    case 'csv': exportCsv(el.dataset.all === '1'); break;
+    case 'rename-list': {
+      const l = S.lists.find(x => x.id === route().id); if (!l) break;
+      $('#rename-zone').innerHTML = `<form id="renameform" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 260px"><span>Nouveau nom</span><input class="inp" id="rename-name" value="${h(l.name)}" maxlength="60"></label><button class="btn primary" type="submit">Enregistrer</button></form>`;
+      $('#rename-name').focus(); $('#rename-name').select(); break;
+    }
+    case 'del-list': {
+      const l = S.lists.find(x => x.id === route().id); if (!l) break;
+      if (!(await ask('Supprimer la liste « ' + l.name + ' » ? Les films restent dans ta base.', 'Supprimer la liste'))) break;
+      S.lists = S.lists.filter(x => x.id !== l.id); save(); toast('Liste supprimée'); location.hash = '#/listes'; break;
+    }
+    case 'rm-from-list': { const l = S.lists.find(x => x.id === route().id); if (l) { l.ids = l.ids.filter(i => i !== el.dataset.id); save(); render(); } break; }
+    case 'del-key': S.tmdbKey = ''; EX.loaded = false; save(); render(); toast('Clé TMDB retirée'); break;
+    case 'backup': {
+      const {over, deleted} = computeOver();
+      const data = {app: 'Toons & Bulles', v: 2, date: today(), over, deleted, lists: S.lists, kids: S.kids, images: IMAGES};
+      if (!IS_WEB) { data.posters = POSTERS; data.free = FREE; }
+      if (!IS_WEB && S.tmdbKey) data.tmdbKey = S.tmdbKey;
+      if (await download('toons-et-bulles-sauvegarde-' + today() + '.json', JSON.stringify(data, null, 1), 'application/json')) toast('Sauvegarde téléchargée');
+      break;
+    }
+    case 'reset': {
+      if (!(await ask('Tout remettre à zéro ? Ta collection, tes listes, tes modifications et les titres ajoutés seront effacés. Pense à exporter une sauvegarde avant.', 'Tout effacer'))) break;
+      const key = S.tmdbKey, kids = S.kids; S = initialState(); S.tmdbKey = key; S.kids = kids; HAY.clear(); save(); toast('Base remise à zéro'); location.hash = '#/catalogue'; render(); break;
+    }
+  }
+});
+
+/* =========================================================
+   Saisies (champs, cases, formulaires)
+   ========================================================= */
+let notesTimer, qTimer;
+document.addEventListener('input', (ev) => {
+  const t = ev.target;
+  if (t.id === 'q') {
+    UI.q = t.value; UI.limit = PAGE;
+    if (route().name !== 'catalogue') location.hash = '#/catalogue';
+    else { clearTimeout(qTimer); qTimer = setTimeout(paintCatGrid, 150); }
+  } else if (t.id === 'scan-q') {
+    SCAN.q = t.value; const z = $('#scan-res'); if (z) z.innerHTML = scanResults();
+  } else if (t.dataset.ch === 'notes') {
+    const f = currentFilm(); if (!f) return;
+    f.notes = t.value; clearTimeout(notesTimer); notesTimer = setTimeout(save, 400);
+  } else if (t.id === 'ex-vote') {
+    $('#ex-vote-v').textContent = +t.value ? fmtNote(+t.value) : 'aucune';
+  }
+});
+document.addEventListener('change', (ev) => {
+  const t = ev.target, ch = t.dataset.ch, f = currentFilm();
+  if (ch === 'sub') { t.checked ? UI.subs.add(t.value) : UI.subs.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'ed') { t.checked ? UI.eds.add(t.value) : UI.eds.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'coll') { t.checked ? UI.colls.add(t.value) : UI.colls.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'tech') { t.checked ? UI.techs.add(t.value) : UI.techs.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'pub') { t.checked ? UI.pubs.add(t.value) : UI.pubs.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'type') { t.checked ? UI.types.add(t.value) : UI.types.delete(t.value); UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'flag') { UI[t.dataset.k] = t.checked; UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'sort') { UI.sort = t.value; UI.limit = PAGE; paintCatGrid(); }
+  else if (ch === 'support' && f) { f.support = t.value; save(); }
+  else if (ch === 'watched' && f) { f.watchedDate = t.value; save(); }
+  else if (ch === 'who') { setWho(t.value); UI.limit = PAGE; render(); }
+  else if (ch === 'kid-ep' && f) { const k = KIDS().find(x => x.id === t.dataset.k); if (k) { setKid(f, k, {[t.dataset.f]: +t.value || 0}); save(); toast(k.name + ' : saison ' + (kidRec(f, k).se || '?') + ', épisode ' + (kidRec(f, k).ep || '?')); } }
+  else if (ch === 'printsel') { UI.printSel = t.value; render(); }
+  else if (ch === 'inlist' && f) {
+    const l = S.lists.find(x => x.id === t.value); if (!l) return;
+    if (t.checked) { if (!l.ids.includes(f.id)) l.ids.push(f.id); } else l.ids = l.ids.filter(i => i !== f.id);
+    save(); toast(t.checked ? 'Ajouté à « ' + l.name + ' »' : 'Retiré de « ' + l.name + ' »');
+  } else if (t.id === 'own-img' && t.files && t.files[0] && f) {
+    const file = t.files[0]; t.value = '';
+    setOwnImage(f, file).then(() => { toast('Photo ajoutée'); render(); }).catch(e => toast(e.message || 'Impossible d\'enregistrer la photo.'));
+  } else if (t.id === 'restore-file' && t.files && t.files[0]) {
+    const rd = new FileReader();
+    rd.onload = async () => {
+      try {
+        const data = JSON.parse(rd.result);
+        const st = stateFrom(data);
+        if (!st) throw new Error();
+        const nMod = data.over ? Object.keys(data.over).length : (data.films || []).length;
+        if (!(await ask('Remplacer ta collection actuelle par cette sauvegarde (' + nMod + ' fiche' + (nMod > 1 ? 's' : '') + ' avec tes notes ou modifications, ' + st.lists.length + ' liste' + (st.lists.length > 1 ? 's' : '') + ') ?', 'Remplacer'))) return;
+        const key = S.tmdbKey;
+        st.tmdbKey = IS_WEB ? '' : (st.tmdbKey || key);
+        S = st; HAY.clear(); save(); EX.loaded = false;
+        if (data.posters && typeof data.posters === 'object' && !IS_WEB) { POSTERS = Object.assign({}, POSTERS, data.posters); savePosters(); }
+        if (data.free && typeof data.free === 'object' && !IS_WEB) { FREE = Object.assign({}, FREE, data.free); saveFree(); }
+        if (data.images && typeof data.images === 'object') {
+          for (const [id, img] of Object.entries(data.images)) {
+            if (typeof img === 'string' && img.startsWith('data:image/')) { try { await imgStore.put(id, img); IMAGES[id] = img; } catch (e) { /* on continue */ } }
+          }
+        }
+        toast('Sauvegarde restaurée'); render();
+      } catch (e) { toast("Ce fichier n'est pas une sauvegarde Toons & Bulles (ou Ciné Toons) valide."); }
+    };
+    rd.readAsText(t.files[0]); t.value = '';
+  }
+});
+document.addEventListener('submit', async (ev) => {
+  const t = ev.target; ev.preventDefault();
+  if (t.id === 'ed-form') saveEditor();
+  else if (t.id === 'ex-form') {
+    EX.kind = $('#ex-kind').value; EX.q = $('#ex-q').value; EX.dec = $('#ex-dec').value; EX.sort = $('#ex-sort').value; EX.vote = +$('#ex-vote').value; EX.only = $('#ex-only').checked; EXJP.v = $('#ex-jp').checked; EX.page = 1;
+    exLoad();
+  } else if (t.id === 'newlist') {
+    const name = $('#newlist-name').value.trim(); if (!name) { $('#newlist-name').focus(); return; }
+    const l = {id: uid(), name, ids: []}; S.lists.push(l); save(); toast('Liste « ' + name + ' » créée'); location.hash = '#/listes/' + l.id;
+  } else if (t.id === 'renameform') {
+    const l = S.lists.find(x => x.id === route().id); const name = $('#rename-name').value.trim();
+    if (l && name) { l.name = name; save(); render(); toast('Liste renommée'); }
+  } else if (t.id === 'kidsform') {
+    S.kids = KIDS().map(k => ({id: k.id, name: ($('#kn-' + k.id).value.trim() || k.name).slice(0, 30), age: +$('#ka-' + k.id).value || k.age}));
+    save(); toast('Profils enregistrés'); render();
+  } else if (t.id === 'loanform') {
+    const f = currentFilm(); const to = $('#loan-to').value.trim();
+    if (f && to) { f.loan = {to, date: $('#loan-date').value || today()}; save(); toast('Prêt enregistré'); render(); }
+  } else if (t.id === 'eanform') {
+    const f = currentFilm(); const c = $('#ean-new').value.replace(/\s+/g, '');
+    if (f && c) { const other = S.films.find(x => x !== f && (x.ean || []).includes(c)); if (other) { toast('Ce code est déjà associé à « ' + other.title + ' »'); return; } f.ean = [...new Set([...(f.ean || []), c])]; save(); render(); }
+  } else if (t.id === 'bo-form') {
+    BO.q = $('#bo-q').value; if (BO.q.trim()) boSearch();
+  } else if (t.id === 'scanform') {
+    scanCode($('#scan').value);
+  } else if (t.id === 'tonightform') {
+    drawTonight();
+  } else if (t.id === 'keyform') {
+    const key = $('#tmdbkey').value.trim(), msg = $('#keymsg');
+    if (!key) { msg.textContent = 'Colle d\'abord ta clé dans le champ.'; return; }
+    const old = S.tmdbKey; S.tmdbKey = key; msg.innerHTML = '<span class="spin"></span> Test de la clé…';
+    try { await tmdb('/configuration'); EX.loaded = false; save(); render(); toast('Clé TMDB enregistrée : tous les dessins animés sont disponibles'); }
+    catch (e) { S.tmdbKey = old; msg.textContent = e.message; }
+  }
+});
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && $('#modal-root').innerHTML) closeEditor(); });
+
+document.addEventListener('error', (ev) => {
+  const t = ev.target; if (!t || t.tagName !== 'IMG') return;
+  if (t.dataset.title) { const sp = document.createElement('span'); sp.className = 'poster-title'; sp.textContent = t.dataset.title; t.replaceWith(sp); }
+  else t.remove();
+}, true);
+boot();
+</script>
+
+
+</body></html>
