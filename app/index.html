@@ -1735,7 +1735,7 @@ function viewReglages() {
       </form>
     </div>
     <div class="box"><h2>Sauvegarde</h2>
-      <p style="margin:0" class="muted">${MODE === 'db' ? 'Tout est enregistré automatiquement dans ton espace Claude, sur cette page. Une sauvegarde sert à passer ta collection entre cette page et l\'application installée (dans les deux sens).' : 'Tout est enregistré automatiquement sur cet ordinateur.'} Fais une sauvegarde de temps en temps : elle permet de retrouver ta collection sur un autre ordinateur (par exemple ton PC Windows) ou après un nettoyage du navigateur.</p>
+      <p style="margin:0" class="muted">${MODE === 'db' ? 'Tout est enregistré automatiquement dans ton espace Claude, sur cette page. Une sauvegarde sert à passer ta collection entre cette page et l\'application installée (dans les deux sens).' : 'Tout est enregistré automatiquement sur cet ordinateur.'} Fais une sauvegarde de temps en temps : elle permet de retrouver ta collection sur un autre ordinateur (par exemple ton PC Windows) ou après un nettoyage du navigateur.${!IS_WEB && (S.tmdbKey || CLAUDE_KEY) ? ' <b>La sauvegarde emporte aussi tes clés ' + [S.tmdbKey ? 'TMDB' : '', CLAUDE_KEY ? 'Claude' : ''].filter(Boolean).join(' et ') + '</b> : en la restaurant sur ton autre ordinateur, elles y sont installées automatiquement. Garde ce fichier pour toi, ne le partage pas.' : ''}</p>
       <div class="row">
         <button type="button" class="btn primary" data-act="backup">${ICON.dl}Exporter une sauvegarde</button>
         <label class="btn" for="restore-file">${ICON.up}Restaurer une sauvegarde</label>
@@ -2933,6 +2933,7 @@ document.addEventListener('click', async (ev) => {
       const data = {app: 'Toons & Bulles', v: 2, date: today(), over, deleted, lists: S.lists, kids: S.kids, games: S.games || {}, images: IMAGES};
       if (!IS_WEB) { data.posters = POSTERS; data.free = FREE; }
       if (!IS_WEB && S.tmdbKey) data.tmdbKey = S.tmdbKey;
+      if (!IS_WEB && CLAUDE_KEY) data.claudeKey = CLAUDE_KEY;
       if (await download('toons-et-bulles-sauvegarde-' + today() + '.json', JSON.stringify(data, null, 1), 'application/json')) toast('Sauvegarde téléchargée');
       break;
     }
@@ -2998,6 +2999,7 @@ document.addEventListener('change', (ev) => {
         S = st; HAY.clear(); save(); EX.loaded = false;
         if (data.posters && typeof data.posters === 'object' && !IS_WEB) { POSTERS = Object.assign({}, POSTERS, data.posters); savePosters(); }
         if (data.free && typeof data.free === 'object' && !IS_WEB) { FREE = Object.assign({}, FREE, data.free); saveFree(); }
+        if (!IS_WEB && typeof data.claudeKey === 'string' && /^sk-ant-/.test(data.claudeKey)) { CLAUDE_KEY = data.claudeKey; try { localStorage.setItem(CLAUDE_KEY_STORE, CLAUDE_KEY); } catch (e) { /* rien */ } }
         if (data.images && typeof data.images === 'object') {
           for (const [id, img] of Object.entries(data.images)) {
             if (typeof img === 'string' && img.startsWith('data:image/')) { try { await imgStore.put(id, img); IMAGES[id] = img; } catch (e) { /* on continue */ } }

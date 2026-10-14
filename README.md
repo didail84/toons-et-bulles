@@ -43,6 +43,7 @@ Si tu utilisais déjà Toons & Bulles (ancienne version installée ou page Claud
 ## Passer d'un ordinateur à l'autre
 
 Dans **Réglages**, « Exporter une sauvegarde » crée un fichier ; « Restaurer une sauvegarde » le recharge sur l'autre ordinateur ou sur ta page Claude.
+La sauvegarde emporte aussi tes clés TMDB et Claude (si tu en as saisi) : garde ce fichier pour toi et ne le publie pas.
 
 ## Pour les curieux et les développeurs
 
