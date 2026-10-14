@@ -171,7 +171,7 @@ function pageEval(url, code) {
 
 /* ---------- Nouvelle version sur GitHub ? ---------- */
 const newer = (a, b) => {
-  const pa = String(a).replace(/^v/, '').split('.').map(Number), pb = String(b).replace(/^v/, '').split('.').map(Number);
+  const pa = String(a).replace(/^v/i, '').split('.').map(Number), pb = String(b).replace(/^v/i, '').split('.').map(Number);
   for (let i = 0; i < 3; i++) { if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) > (pb[i] || 0); }
   return false;
 };
@@ -184,7 +184,7 @@ async function checkUpdate() {
     if (!rel.tag_name || !newer(rel.tag_name, app.getVersion())) return;
     const {response} = await dialog.showMessageBox(win, {
       type: 'info', buttons: ['Télécharger', 'Plus tard'], defaultId: 0, cancelId: 1,
-      message: `Une nouvelle version de ${PKG.productName} est disponible (${rel.tag_name.replace(/^v/, '')}).`,
+      message: `Une nouvelle version de ${PKG.productName} est disponible (${rel.tag_name.replace(/^v/i, '')}).`,
       detail: `Tu as la version ${app.getVersion()}. Ta collection est conservée lors de la mise à jour.`
     });
     if (response === 0) shell.openExternal(rel.html_url);
