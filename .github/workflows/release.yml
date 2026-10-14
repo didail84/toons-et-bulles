@@ -55,6 +55,6 @@ jobs:
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
-          name: Toons & Bulles ${{ github.ref_name }}
+          tag_name: ${{ inputs.tag || github.ref_name }}
           files: out/*
           generate_release_notes: true
