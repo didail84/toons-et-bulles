@@ -12,6 +12,10 @@ Si tu réutilises ces données, cite Wikipédia et garde la même licence.
 Les affiches, résumés et informations complémentaires sont lus à la demande sur des services publics (TMDB, Wikipédia, Wikidata, Google Livres, Open Library…). Chacun a ses propres conditions d'utilisation. Pour TMDB, chaque utilisateur saisit sa propre clé gratuite dans Réglages : aucune clé n'est incluse dans ce dépôt.
 « This product uses the TMDB API but is not endorsed or certified by TMDB. »
 
+## Listes de titres — `app/series.js`
+
+Titres des livres de chaque série, d'après Wikipédia (CC BY-SA 4.0) et Babelio. Seuls les titres sont cités.
+
 ## Quiz — `app/quiz.js`
 
 Questions écrites pour Toons & Bulles (licence MIT, comme le code). Seuls les **titres** des chansons sont cités, jamais leurs paroles. Les personnages et les œuvres appartiennent à leurs ayants droit.

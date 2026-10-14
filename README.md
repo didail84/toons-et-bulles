@@ -8,6 +8,7 @@ Toons & Bulles rassemble les dessins animés (Disney, Pixar, Warner, Cartoon, s�
 - **Chercher un livre** dans Google Livres et l'ajouter à ta base avec sa couverture.
 - **Profils enfants** : âge, envies et « Ce soir, on fait quoi ? ».
 - **Bandes-annonces et musique** : bande-annonce officielle (en VF quand elle existe) et extraits de 30 secondes de la bande originale.
+- **Séries de livres à collectionner** : la liste des livres de chaque série (Monsieur Madame, Max et Lili, Babar, Cornebidouille, Astérix, Tintin…) à cocher « On l'a » et « Lu », les livres manquants à imprimer, et l'ajout de titres à la main ou depuis Google Livres.
 - **Quiz** : un quiz de 10 questions se débloque quand un titre est vu ou lu (96 grands classiques avec un quiz sur l'histoire), quiz musical, quiz des chansons, étoiles, trophées et défi famille.
 
 ## Installer

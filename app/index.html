@@ -226,6 +226,7 @@ tr.clk:hover td{background:var(--surface)}
 .qz-head{display:flex;align-items:center;gap:16px}
 .qz-poster{width:70px;flex:0 0 70px;aspect-ratio:2/3;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--fg);font-size:11px;text-align:center}
 .qz-poster img{width:100%;height:100%;object-fit:cover}
+.qz-poster .poster-title{font-size:11px;padding:4px;line-height:1.15;overflow:hidden}
 .qz-card{padding:22px;border-radius:14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
 .qz-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .qz-bar,.mq-time{height:8px;border-radius:4px;background:var(--raised);overflow:hidden}
@@ -278,6 +279,27 @@ tr.clk:hover td{background:var(--surface)}
 .mq-disc svg{width:34px;height:34px}
 .spin2{animation:sp 3s linear infinite}
 @media (prefers-reduced-motion:reduce){.spin2{animation:none}}
+
+/* Séries de livres */
+.ser-stats{display:flex;flex-wrap:wrap;gap:10px 28px}
+.ser-stats>div{flex:1 1 200px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.ser-bar{height:8px;border-radius:4px;background:var(--raised);overflow:hidden}
+.ser-bar span{display:block;height:100%;background:var(--accent)}
+.ser-bar.read span{background:#3FB68B}
+.ser-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px;max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.ser-g{padding:8px 12px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);background:var(--bg);position:sticky;top:0;z-index:1}
+.ser-row{display:flex;align-items:center;gap:8px;padding:4px 10px;border-top:1px solid var(--line)}
+.ser-row.have{background:rgba(255,201,60,.07)}
+.ser-n{flex:0 0 34px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.ser-t{flex:1;min-width:0}
+.ser-row .chip{min-height:32px;padding:0 10px}
+.linkbtn{border:0;background:none;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:12px;padding:0 4px}
+.ser-props{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;max-height:320px;overflow:auto}
+.ser-props li{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ser-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+@media (max-width:420px){.ser-cards{grid-template-columns:1fr}}
+.ser-card{display:flex;gap:14px;padding:14px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.pill-inline{align-self:flex-start;padding:3px 8px;border-radius:4px;background:var(--good);color:var(--good-fg);font-size:12px;font-weight:600}
 </style>
 <header class="top">
   <a class="brand" href="#/catalogue">
@@ -313,6 +335,7 @@ tr.clk:hover td{background:var(--surface)}
 
 <script src="catalogue.js"></script>
 <script src="quiz.js"></script>
+<script src="series.js"></script>
 <script>
 'use strict';
 /* =========================================================
@@ -1116,7 +1139,7 @@ const PAGE = 120;
 const HAY = new Map();   // texte de recherche par fiche (mis en cache)
 const hayOf = (f) => {
   let s = HAY.get(f.id);
-  if (s === undefined) { s = norm([f.title, f.originalTitle, f.director, f.publisher, f.coll, (f.cast || []).map(c => c.name).join(' '), f.country, f.subgenre, f.synopsis].join(' ')); HAY.set(f.id, s); }
+  if (s === undefined) { s = norm([f.title, f.originalTitle, f.director, f.publisher, f.coll, (f.cast || []).map(c => c.name).join(' '), f.country, f.subgenre, f.synopsis, ((window.CT_TITLES || {})[f.id] || []).map(g => g[1].join(' ')).join(' '), Object.values(f.xt || {}).join(' ')].join(' ')); HAY.set(f.id, s); }
   return s;
 };
 const yearsLabel = (f) => (f.endYear && f.endYear !== f.year ? f.year + '–' + f.endYear : (f.year || '?'));
@@ -1539,7 +1562,7 @@ function viewCollection() {
   const stars = (n) => n ? '★'.repeat(n) + '☆'.repeat(5 - n) : '–';
   return `<div class="layout"><section class="content">
     <div class="head-row"><h1 class="title">${kid ? 'Collection de ' + h(kid.name) : 'Ma collection'}</h1>
-      <div class="row"><a class="btn" href="#/scanner">Scanner un DVD ou un livre</a><a class="btn" href="#/imprimer">${ICON.dl}Catalogue imprimable</a>
+      <div class="row"><a class="btn primary" href="#/series">Mes séries de livres et BD</a><a class="btn" href="#/scanner">Scanner un DVD ou un livre</a><a class="btn" href="#/imprimer">${ICON.dl}Catalogue imprimable</a>
       <button type="button" class="btn" data-act="csv">${ICON.dl}Exporter vers Excel</button></div></div>
     <div class="tiles"><div class="tile"><span class="label">Dessins animés à la maison</span><span class="bignum">${own.filter(f => !isBook(f)).length}</span></div><div class="tile"><span class="label">BD et livres à la maison</span><span class="bignum">${own.filter(isBook).length}</span><small>${own.filter(isBook).reduce((a, f) => a + Math.max((f.vols || []).length, 1), 0)} volumes</small></div></div>
     ${oldLoans.length ? `<div class="loanwarn"><b>Prêts à récupérer :</b> ${oldLoans.map(f => `<a href="#/film/${h(f.id)}" style="color:var(--fg)">${h(f.title)}</a> (${h(f.loan.to)}, depuis le ${fmtDate(f.loan.date)})`).join(' · ')}</div>` : ''}
@@ -1754,7 +1777,7 @@ function kidsBox(f) {
   </div>`;
 }
 /* Tomes d'une série de BD ou de livres */
-function tomesBox(f) {
+function tomesBoxOld(f) {
   const n = f.volumes || 0;
   if (n < 2) return '';
   const chips = (sel, act, k) => `<div class="chips">${Array.from({length: Math.min(n, 300)}, (_, i) => i + 1).map(i => `<button type="button" class="chip ${sel.includes(i) ? 'on' : ''}" data-act="${act}" data-v="${i}" ${k ? `data-k="${h(k)}"` : ''} aria-pressed="${sel.includes(i)}" style="min-width:44px">${i}</button>`).join('')}</div>`;
@@ -1985,7 +2008,7 @@ function route() {
 }
 function render() {
   const r = route(), v = $('#view');
-  const nav = r.name === 'film' || r.name === 'explorer' || r.name === 'livres-en-ligne' ? 'catalogue' : r.name === 'imprimer' ? 'collection' : /^(quiz|defi)/.test(r.name) ? 'quiz' : r.name;
+  const nav = r.name === 'film' || r.name === 'explorer' || r.name === 'livres-en-ligne' ? 'catalogue' : r.name === 'imprimer' ? 'collection' : /^(quiz|defi)/.test(r.name) ? 'quiz' : r.name === 'series' ? 'collection' : r.name;
   paintWho();
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === nav));
   if (r.name === 'catalogue') { v.innerHTML = viewCatalogue(); paintCatGrid(); }
@@ -2003,6 +2026,7 @@ function render() {
   else if (r.name === 'quiz-musique') v.innerHTML = viewMusicQuiz(r.id);
   else if (r.name === 'quiz-chansons') v.innerHTML = viewSongsQuiz(r.id);
   else if (r.name === 'defi') v.innerHTML = viewDefi();
+  else if (r.name === 'series') v.innerHTML = viewSeriesPage();
   else { location.hash = '#/catalogue'; return; }
   document.title = 'Toons & Bulles';
 }
@@ -2581,6 +2605,192 @@ function claudeBox() {
       <button type="submit" class="btn primary">Enregistrer et tester</button>${CLAUDE_KEY ? '<button type="button" class="btn" data-act="del-claude">Retirer la clé</button>' : ''}</form>
     <p id="claudemsg" class="muted" role="status" style="margin:0">${CLAUDE_KEY ? 'Une clé est enregistrée.' : 'Aucune clé : les quiz de la fiche sont utilisés pour les titres sans quiz écrit.'}</p></div>`;
 }
+
+/* =========================================================
+   Séries de livres : liste des titres, cases « On l'a » / « Lu », mes séries (1.7.0)
+   ========================================================= */
+const TITLES_DB = window.CT_TITLES || {};
+const isSeriesBook = (f) => f.type === 'Série de livres' || f.type === 'Série de BD';
+/* Titre du n-ième livre : ajouté par moi (f.xt), sinon liste fournie */
+function seriesInfo(f) {
+  const groups = TITLES_DB[f.id] || [];
+  const flat = []; groups.forEach(([g, list]) => list.forEach(t => flat.push({t, g})));
+  const xt = f.xt && typeof f.xt === 'object' ? f.xt : {};
+  const xmax = Object.keys(xt).reduce((m, k) => Math.max(m, +k || 0), 0);
+  const total = Math.max(+f.volumes || 0, flat.length, xmax);
+  const items = Array.from({length: total}, (_, i) => {
+    const n = i + 1, base = flat[i];
+    return {n, t: xt[n] || (base ? base.t : ''), g: base ? base.g : (xmax && n > flat.length ? 'Ajoutés par moi' : ''), mine: !!xt[n]};
+  });
+  return {items, total, titled: flat.length > 0 || xmax > 0};
+}
+const readSet = (f, k = activeKid()) => new Set(k ? (kidRec(f, k).vl || []) : (f.readVols || []));
+const SER = {filter: 'tous', q: '', fid: '', props: null, loading: false, err: ''};
+function seriesRows(f) {
+  const {items} = seriesInfo(f), own = new Set(f.vols || []), rd = readSet(f), k = activeKid();
+  const q = norm(SER.q.trim());
+  let list = items;
+  if (SER.filter === 'manquants') list = list.filter(it => !own.has(it.n));
+  else if (SER.filter === 'nonlus') list = list.filter(it => !rd.has(it.n));
+  if (q) list = list.filter(it => norm(it.t).includes(q) || String(it.n) === q);
+  if (!list.length) return '<p class="muted" style="margin:0">Aucun livre ne correspond.</p>';
+  let lastG = null;
+  return `<ol class="ser-list">${list.map(it => {
+    const head = it.g && it.g !== lastG ? `<li class="ser-g">${h(it.g)}</li>` : ''; lastG = it.g;
+    return head + `<li class="ser-row ${own.has(it.n) ? 'have' : ''}"><span class="ser-n">${it.n}</span><span class="ser-t">${it.t ? h(it.t) : '<span class="muted">Tome ' + it.n + '</span>'}${it.mine ? ` <button type="button" class="linkbtn" data-act="ser-del" data-v="${it.n}" title="Retirer ce titre ajouté">retirer</button>` : ''}</span>
+      <button type="button" class="chip ${own.has(it.n) ? 'on' : ''}" data-act="vol-own" data-v="${it.n}" aria-pressed="${own.has(it.n)}">On l'a</button>
+      <button type="button" class="chip ${rd.has(it.n) ? 'on' : ''}" data-act="vol-read" data-v="${it.n}" ${k ? `data-k="${h(k.id)}"` : ''} aria-pressed="${rd.has(it.n)}">${f.type === 'Série de BD' ? 'Lu' : 'Lu'}</button></li>`;
+  }).join('')}</ol>`;
+}
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+function tomesBox(f) {
+  if (!isSeriesBook(f) && !(f.volumes > 1)) return '';
+  if (SER.fid !== f.id) { SER.fid = f.id; SER.filter = 'tous'; SER.q = ''; SER.props = null; SER.err = ''; }
+  const {items, total, titled} = seriesInfo(f);
+  const own = (f.vols || []).filter(n => n <= total), rd = [...readSet(f)].filter(n => n <= total), k = activeKid();
+  const next = total + 1;
+  const addForm = `<form id="ser-add-form" class="row" style="align-items:flex-end">
+      <label class="field" style="flex:1 1 260px"><span>Ajouter un livre à la série</span><input class="inp" id="ser-new" placeholder="Titre du livre" maxlength="140"></label>
+      <label class="field" style="width:90px"><span>N°</span><input class="inp" id="ser-num" inputmode="numeric" value="${next}"></label>
+      <button type="submit" class="btn">${ICON.plus}Ajouter</button>
+      ${IS_WEB ? '' : `<button type="button" class="btn" data-act="ser-gb">${ICON.cloud}Remplir depuis Google Livres</button>`}</form>
+    <div id="ser-props">${serPropsInner(f)}</div>`;
+  if (!total) return `<div class="kids"><h2 class="label">Les livres de la série</h2>
+    <p style="margin:0">La liste des livres de cette série n'est pas encore remplie. Ajoute les titres que tu as${IS_WEB ? '' : ', ou laisse l\'appli les chercher dans Google Livres'} : tu pourras ensuite cocher ceux que tu as et ceux qui sont lus. Le scanner peut aussi associer un code-barres à un numéro.</p>${addForm}</div>`;
+  const bar = (a, cls) => `<div class="ser-bar ${cls}"><span style="width:${pct(a, total)}%"></span></div>`;
+  return `<div class="kids"><div class="row" style="justify-content:space-between"><h2 class="label">Les livres de la série · ${total} ${titled ? 'titres' : 'tomes'}</h2><a href="#/series" style="font-size:13px">Toutes mes séries</a></div>
+    <div class="ser-stats"><div><span><b>${own.length}</b> / ${total} à la maison</span>${bar(own.length, 'own')}</div><div><span><b>${rd.length}</b> / ${total} lus${k ? ' par ' + h(k.name) : ''}</span>${bar(rd.length, 'read')}</div></div>
+    <div class="row" style="gap:6px">${[['tous', 'Tous'], ['manquants', 'Manquants (' + (total - own.length) + ')'], ['nonlus', 'Pas encore lus (' + (total - rd.length) + ')']].map(([v, l]) => `<button type="button" class="chip ${SER.filter === v ? 'on' : ''}" data-act="ser-filter" data-v="${v}" aria-pressed="${SER.filter === v}">${l}</button>`).join('')}
+      ${total > 12 ? `<input class="inp" id="ser-q" type="search" placeholder="Chercher un titre…" value="${h(SER.q)}" style="max-width:220px;min-height:36px">` : ''}
+      <button type="button" class="btn small" data-act="ser-all-own">Tout cocher « On l'a »</button></div>
+    <div id="ser-rows">${titled ? seriesRows(f) : tomesBoxNumChips(f, total)}</div>
+    <p class="muted" style="margin:0;font-size:13px">« Lu » s'enregistre pour ${k ? h(k.name) : 'toute la famille'} : change de profil en haut pour cocher les lectures de chaque enfant.</p>
+    ${addForm}</div>`;
+}
+function tomesBoxNumChips(f, n) {
+  const own = f.vols || [], rd = [...readSet(f)], k = activeKid();
+  const chips = (sel, act) => `<div class="chips">${Array.from({length: Math.min(n, 400)}, (_, i) => i + 1).map(i => `<button type="button" class="chip ${sel.includes(i) ? 'on' : ''}" data-act="${act}" data-v="${i}" ${act === 'vol-read' && k ? `data-k="${h(k.id)}"` : ''} aria-pressed="${sel.includes(i)}" style="min-width:44px">${i}</button>`).join('')}</div>`;
+  return `<p class="label" style="margin:0">À la maison</p>${chips(own, 'vol-own')}<p class="label" style="margin:0">Lus${k ? ' par ' + h(k.name) : ''}</p>${chips(rd, 'vol-read')}`;
+}
+/* ---------- Google Livres : proposer les titres manquants ---------- */
+function serPropsInner(f) {
+  if (SER.fid !== f.id) return '';
+  if (SER.loading) return '<p style="margin:0"><span class="spin"></span> Recherche des titres dans Google Livres…</p>';
+  if (SER.err) return `<p class="warn" style="margin:0">${h(SER.err)}</p>`;
+  if (!SER.props) return '';
+  if (!SER.props.length) return '<p class="muted" style="margin:0">Aucun nouveau titre trouvé dans Google Livres pour cette série.</p>';
+  return `<div class="box" style="padding:14px"><b>${SER.props.length} titre${SER.props.length > 1 ? 's' : ''} trouvé${SER.props.length > 1 ? 's' : ''} dans Google Livres</b>
+    <p class="muted" style="margin:0;font-size:13px">Vérifie avant d'ajouter : Google Livres mélange parfois les éditions et les séries.</p>
+    <ul class="ser-props">${SER.props.map((p, i) => `<li><span>${p.n ? '<b>' + p.n + '.</b> ' : ''}${h(p.t)}${p.y ? ' <span class="muted">(' + h(p.y) + ')</span>' : ''}</span><button type="button" class="btn small" data-act="ser-prop" data-i="${i}">${ICON.plus}Ajouter</button></li>`).join('')}</ul>
+    <div class="row"><button type="button" class="btn small primary" data-act="ser-prop-all">Tout ajouter</button><button type="button" class="btn small" data-act="ser-prop-close">Fermer</button></div></div>`;
+}
+async function serFromGoogle(f) {
+  const base = cleanTitle(f.title).replace(/\s*\((livres|BD)\)$/i, '');
+  const author = ((f.director || '').split(/,| et | puis /)[0] || '').trim().split(' ').slice(-1)[0] || '';
+  const key = tkey(base);
+  const have = new Set(seriesInfo(f).items.map(it => tkey(it.t)).filter(Boolean));
+  const seen = new Set(), out = [];
+  const queries = [base + (author && !/collectif|apres|d'après/i.test(f.director || '') ? ' inauthor:' + author : ''), 'intitle:' + base];
+  for (const q of queries) {
+    const res = await gbooks(q, 40);
+    res.forEach(b => {
+      if (b.lang && b.lang !== 'fr') return;
+      const full = (b.title + (b.subtitle ? ' : ' + b.subtitle : '')).replace(/\s+/g, ' ').trim();
+      const sameSeries = tkey(full).includes(key) || (author && norm(b.authors).includes(norm(author)));
+      if (!sameSeries) return;
+      let t = b.subtitle && tkey(b.title) === key ? b.subtitle : b.title;
+      t = t.replace(/^\s*(tome|t\.)\s*\d+\s*[-:.]?\s*/i, '').trim();
+      if (!t || tkey(t) === key || t.length > 120) return;
+      const tk = tkey(t); if (have.has(tk) || seen.has(tk)) return;
+      seen.add(tk); out.push({t, n: tomeGuess(full) || 0, y: b.year});
+    });
+    if (out.length >= 30) break;
+  }
+  return out.sort((a, b) => (a.n || 999) - (b.n || 999) || (a.y || '').localeCompare(b.y || '')).slice(0, 60);
+}
+function addSeriesTitle(f, t, n) {
+  const info = seriesInfo(f);
+  let num = +n || 0;
+  if (!num || num < 1 || num > 2000) { const free = info.items.find(it => !it.t); num = free ? free.n : info.total + 1; }
+  if (!num || (info.items[num - 1] && info.items[num - 1].t && !info.items[num - 1].mine)) {
+    const free = info.items.find(it => !it.t); num = free ? free.n : info.total + 1;
+  }
+  f.xt = Object.assign({}, f.xt || {}, {[num]: String(t).trim().slice(0, 140)});
+  return num;
+}
+
+/* ---------- Page « Mes séries de livres » ---------- */
+const COLV = {started: true, kind: ''};
+function viewSeriesPage() {
+  const k = activeKid();
+  const all = S.films.filter(f => isBook(f) && f.public !== 'Adultes' && (isSeriesBook(f) || f.volumes > 1) && (!COLV.kind || kindOf(f) === COLV.kind));
+  const rows = all.map(f => { const {items, total} = seriesInfo(f); const own = (f.vols || []).filter(n => n <= total); const rd = [...readSet(f)].filter(n => n <= total);
+    return {f, items, total, own, rd}; }).filter(r => COLV.started ? (r.own.length || r.rd.length || r.f.owned) : true)
+    .sort((a, b) => (pct(b.own.length, b.total) - pct(a.own.length, a.total)) || a.f.title.localeCompare(b.f.title, 'fr'));
+  const card = (r) => {
+    const miss = r.items.filter(it => !r.own.includes(it.n));
+    return `<div class="ser-card"><a class="qz-poster" href="#/film/${h(r.f.id)}" style="background:${tone(r.f)}">${posterInner(r.f)}</a>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><a href="#/film/${h(r.f.id)}" class="card-t" style="color:var(--fg);text-decoration:none">${h(r.f.title)}</a>
+        <span class="card-m">${h([edOf(r.f), r.f.coll && r.f.coll !== 'Magazine' ? 'coll. ' + r.f.coll : ''].filter(Boolean).join(' · '))}</span>
+        ${r.total ? `<div class="ser-stats"><div><span><b>${r.own.length}</b> / ${r.total} à la maison</span><div class="ser-bar own"><span style="width:${pct(r.own.length, r.total)}%"></span></div></div><div><span><b>${r.rd.length}</b> / ${r.total} lus${k ? ' par ' + h(k.name) : ''}</span><div class="ser-bar read"><span style="width:${pct(r.rd.length, r.total)}%"></span></div></div></div>
+        ${miss.length && miss.length < r.total ? `<span class="muted" style="font-size:13px">Il manque : ${miss.slice(0, 6).map(it => it.t ? h(it.t) : 'n° ' + it.n).join(', ')}${miss.length > 6 ? '… (' + miss.length + ')' : ''}</span>` : miss.length ? '' : '<span class="pill-inline">Série complète !</span>'}`
+          : '<span class="muted" style="font-size:13px">Liste des livres pas encore remplie</span>'}</div></div>`;
+  };
+  return `<div style="display:flex;flex-direction:column;gap:20px">
+    <a class="back" href="#/collection">${ICON.back}Ma collection</a>
+    <div class="head-row"><div><h1 class="title">Mes séries de livres et de BD</h1><p class="muted">Pour chaque série : les livres qu'on a à la maison, ceux qui manquent et ceux qui sont lus${k ? ' par ' + h(k.name) : ''}.</p></div>
+      <div class="row"><button type="button" class="btn primary" data-act="ser-print">${ICON.dl}Imprimer la liste des livres manquants</button></div></div>
+    <div class="row">${[['', 'Tout'], ['livre', 'Livres'], ['bd', 'BD']].map(([v, l]) => `<button type="button" class="chip ${COLV.kind === v ? 'on' : ''}" data-act="ser-kind" data-v="${v}">${l}</button>`).join('')}
+      <label class="check"><input type="checkbox" data-ch="ser-started" ${COLV.started ? 'checked' : ''}>Seulement les séries commencées</label></div>
+    ${rows.length ? `<div class="ser-cards">${rows.map(card).join('')}</div>` : `<div class="empty"><h2>Aucune série commencée</h2><p>Ouvre la fiche d'une série (Monsieur Madame, Astérix, Max et Lili…) et coche les livres que tu as à la maison. ${COLV.started ? '<button type="button" class="btn small" data-act="ser-showall">Voir toutes les séries</button>' : ''}</p></div>`}
+  </div>`;
+}
+function missingDoc() {
+  const rows = S.films.filter(f => isBook(f) && (isSeriesBook(f) || f.volumes > 1)).map(f => { const {items, total} = seriesInfo(f); const own = new Set(f.vols || []); return {f, total, miss: items.filter(it => !own.has(it.n)), n: own.size}; })
+    .filter(r => r.n && r.miss.length).sort((a, b) => a.f.title.localeCompare(b.f.title, 'fr'));
+  const body = rows.length ? rows.map(r => `<h2>${h(r.f.title)} <small>(${r.n} / ${r.total} à la maison${edOf(r.f) ? ' · ' + h(edOf(r.f)) : ''})</small></h2><ul>${r.miss.map(it => `<li>☐ ${it.n}. ${it.t ? h(it.t) : 'Tome ' + it.n}</li>`).join('')}</ul>`).join('')
+    : '<p>Aucun livre manquant dans les séries commencées.</p>';
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Livres manquants — Toons & Bulles</title><style>body{font-family:Arial,sans-serif;color:#111;margin:24px}h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:18px 0 4px;break-after:avoid}small{color:#555;font-weight:normal}ul{margin:0;padding-left:4px;list-style:none;columns:2;font-size:12px}li{padding:1px 0;break-inside:avoid}</style></head><body><h1>Livres manquants dans mes séries</h1><p style="font-size:12px;color:#555">Toons & Bulles · ${fmtDate(today())}</p>${body}</body></html>`;
+}
+async function printMissing() {
+  const doc = missingDoc();
+  if (IS_WEB) { if (await download('livres-manquants-' + today() + '.html', doc, 'text/html')) toast('Liste téléchargée : ouvre-la puis imprime-la'); return; }
+  const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+  document.body.appendChild(fr); fr.srcdoc = doc;
+  fr.onload = () => { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { toast('Impression impossible'); } setTimeout(() => fr.remove(), 60000); };
+}
+
+/* ---------- Clics et saisies ---------- */
+document.addEventListener('click', async (ev) => {
+  const el = ev.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act, f = currentFilm();
+  switch (act) {
+    case 'ser-filter': SER.filter = el.dataset.v; render(); break;
+    case 'ser-all-own': if (f) { const {total} = seriesInfo(f); if (!total) break; if (!(await ask('Cocher les ' + total + ' livres comme « On l\'a » ?', 'Tout cocher'))) break; f.vols = Array.from({length: total}, (_, i) => i + 1); f.owned = true; if (!f.support) f.support = f.type === 'Série de BD' ? 'Album BD' : 'Livre'; save(); render(); } break;
+    case 'ser-del': if (f && f.xt) { const n = el.dataset.v; const x = Object.assign({}, f.xt); delete x[n]; f.xt = Object.keys(x).length ? x : undefined; if (!f.xt) delete f.xt; save(); render(); } break;
+    case 'ser-gb': if (f) { SER.loading = true; SER.err = ''; SER.props = null; const z = $('#ser-props'); if (z) z.innerHTML = serPropsInner(f);
+      try { SER.props = await serFromGoogle(f); } catch (e) { SER.err = e.message; }
+      SER.loading = false; const z2 = $('#ser-props'); if (z2) z2.innerHTML = serPropsInner(f); } break;
+    case 'ser-prop': if (f && SER.props) { const p = SER.props[+el.dataset.i]; if (!p) break; const n = addSeriesTitle(f, p.t, p.n); SER.props.splice(+el.dataset.i, 1); save(); toast('« ' + p.t + ' » ajouté (n° ' + n + ')'); render(); } break;
+    case 'ser-prop-all': if (f && SER.props) { SER.props.forEach(p => addSeriesTitle(f, p.t, p.n)); toast(SER.props.length + ' titres ajoutés'); SER.props = null; save(); render(); } break;
+    case 'ser-prop-close': SER.props = null; SER.err = ''; render(); break;
+    case 'ser-kind': COLV.kind = el.dataset.v; render(); break;
+    case 'ser-showall': COLV.started = false; render(); break;
+    case 'ser-print': printMissing(); break;
+  }
+});
+document.addEventListener('input', (ev) => {
+  if (ev.target.id !== 'ser-q') return;
+  SER.q = ev.target.value; const f = currentFilm(), z = $('#ser-rows'); if (f && z) z.innerHTML = seriesRows(f);
+});
+document.addEventListener('change', (ev) => { if (ev.target.dataset.ch === 'ser-started') { COLV.started = ev.target.checked; render(); } });
+document.addEventListener('submit', (ev) => {
+  if (ev.target.id !== 'ser-add-form') return;
+  ev.preventDefault();
+  const f = currentFilm(), t = $('#ser-new').value.trim(); if (!f || !t) return;
+  const n = addSeriesTitle(f, t, $('#ser-num').value); save(); toast('« ' + t + ' » ajouté (n° ' + n + ')'); render();
+  setTimeout(() => { const i = $('#ser-new'); if (i) i.focus(); }, 0);
+});
 
 /* =========================================================
    Actions (clics)
