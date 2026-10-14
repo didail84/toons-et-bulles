@@ -1,8 +1,8 @@
 {
   "name": "toons-et-bulles",
   "productName": "Toons & Bulles",
-  "version": "1.0.0",
-  "description": "Dessins animés, BD et livres jeunesse pour toute la famille : catalogue, collection, listes, sagas, profils enfants.",
+  "version": "1.6.0",
+  "description": "Dessins animés, BD et livres jeunesse pour toute la famille : catalogue, collection, listes, sagas, profils enfants, bandes-annonces, musique et quiz.",
   "author": {
     "name": "Didier Beltran"
   },
@@ -28,7 +28,8 @@
   "desktop": {
     "host": "toons-et-bulles",
     "repo": "didail84/toons-et-bulles",
-    "background": "#0F1426"
+    "background": "#0F1426",
+    "api": "toonsNet"
   },
   "build": {
     "appId": "io.github.didail84.toonsetbulles",

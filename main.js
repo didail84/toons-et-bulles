@@ -48,8 +48,16 @@ const isAppUrl = (url) => url.startsWith(`${SCHEME}://${HOST}/`);
 function openOutside(url) {
   if (/^(https?|mailto):/i.test(url)) shell.openExternal(url);
 }
+const isYoutube = (url) => /^https:\/\/(www\.)?youtube\.com\/(watch|embed)/i.test(url);
 function guardWindow(w) {
-  w.webContents.setWindowOpenHandler(({url}) => { openOutside(url); return {action: 'deny'}; });
+  w.webContents.setWindowOpenHandler(({url, frameName}) => {
+    /* Bande-annonce : fenêtre de l'appli dédiée à YouTube */
+    if (frameName === 'toons-video' && isYoutube(url)) {
+      return {action: 'allow', overrideBrowserWindowOptions: {width: 1100, height: 680, title: 'Bande-annonce', backgroundColor: '#000000', autoHideMenuBar: true,
+        webPreferences: {contextIsolation: true, sandbox: true}}};
+    }
+    openOutside(url); return {action: 'deny'};
+  });
   w.webContents.on('will-navigate', (ev, url) => { if (!isAppUrl(url)) { ev.preventDefault(); openOutside(url); } });
 }
 

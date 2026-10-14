@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Toons &amp; Bulles</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><title>Toons &amp; Bulles</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
 <style>
@@ -217,6 +216,68 @@ tr.clk:hover td{background:var(--surface)}
   .film-main h1{font-size:32px}
   .bar{grid-template-columns:100px 1fr 32px}
 }
+
+/* Quiz, musique */
+.quizbox{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 18px;border-radius:10px;background:var(--accent-deep);border:1px solid var(--accent)}
+.quizbox.locked{background:var(--surface);border:1px dashed var(--line2)}
+.lockico{color:var(--muted);display:inline-flex}
+.qz-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;background:var(--bg);font-size:13px}
+.qz-wrap{display:flex;flex-direction:column;gap:18px;max-width:860px;margin:0 auto}
+.qz-head{display:flex;align-items:center;gap:16px}
+.qz-poster{width:70px;flex:0 0 70px;aspect-ratio:2/3;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--fg);font-size:11px;text-align:center}
+.qz-poster img{width:100%;height:100%;object-fit:cover}
+.qz-card{padding:22px;border-radius:14px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.qz-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.qz-bar,.mq-time{height:8px;border-radius:4px;background:var(--raised);overflow:hidden}
+.qz-bar span,.mq-time span{display:block;height:100%;background:var(--accent);transition:width .4s}
+.mq-time span{background:var(--coral);transition:width 1s linear}
+.qz-turn{margin:0;font-family:var(--display);font-size:22px;color:var(--coral)}
+.qz-q{margin:0;font-family:var(--display);font-size:24px;line-height:1.25;text-align:center}
+.qz-ans{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.qz-ans{grid-template-columns:1fr}.qz-q{font-size:20px}}
+.qz-btn{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border-radius:10px;border:2px solid var(--line2);background:var(--raised);cursor:pointer;text-align:left;font-size:16px;font-weight:600}
+.qz-btn:hover:not([disabled]){border-color:var(--accent)}
+.qz-btn.good{background:var(--good);border-color:#3FB68B;color:var(--good-fg)}
+.qz-btn.bad{background:#5C2626;border-color:var(--danger)}
+.qz-btn.off{opacity:.55}
+.qz-btn[disabled]{cursor:default}
+.qz-l{flex:0 0 30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--bg);color:var(--accent-soft);font-family:var(--display)}
+.qz-fb{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:10px}
+.qz-fb.ok{background:var(--good);color:var(--good-fg)}
+.qz-fb.ko{background:var(--wait);color:var(--accent-soft)}
+.qz-end{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.qz-big{font-family:var(--display);font-size:64px;font-weight:800;color:var(--accent);line-height:1}
+.qz-big small{font-size:24px;color:var(--muted)}
+.qz-board{display:flex;flex-direction:column;gap:8px;width:100%;max-width:420px}
+.qz-rank{display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:10px;background:var(--raised);text-align:left}
+.qz-rank b{flex:1}
+.qz-rank.win{background:var(--accent-deep);border:1px solid var(--accent)}
+.qz-newt{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.trophies{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.trophy{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);text-align:center;opacity:.6}
+.trophy.on{opacity:1;border-color:var(--accent);background:var(--accent-deep)}
+.trophy span{font-size:12px;color:var(--muted)}
+.qz-games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.qz-game{display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:12px;background:var(--surface);border:1px solid var(--line2);color:var(--fg);text-decoration:none}
+.qz-game:hover{border-color:var(--accent);background:var(--raised)}
+.qz-game b{font-family:var(--display);font-size:22px}
+.qz-game span{color:var(--muted);font-size:14px}
+.qz-gi{color:var(--accent)!important;font-size:28px!important;line-height:1;height:34px;display:flex;align-items:center}
+.qz-gi svg{width:30px;height:30px}
+.table-wrap{overflow-x:auto}
+.qz-table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px}
+.qz-table th,.qz-table td{padding:8px 10px;border-top:1px solid var(--line);text-align:left}
+.qz-table thead th{border-top:0;color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.locks{display:flex;flex-wrap:wrap;gap:8px}
+.lockcard{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:16px;border:1px dashed var(--line2);color:var(--muted);text-decoration:none;font-size:13px}
+.lockcard:hover{color:var(--fg);border-color:var(--accent)}
+.tracks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;max-height:340px;overflow:auto}
+.tracks li{display:flex;align-items:center;gap:10px}
+.btn.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.mq-disc{width:110px;height:110px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,var(--bg) 18%,var(--accent-deep) 19%,var(--raised) 60%,var(--line2) 61%);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.mq-disc svg{width:34px;height:34px}
+.spin2{animation:sp 3s linear infinite}
+@media (prefers-reduced-motion:reduce){.spin2{animation:none}}
 </style>
 <header class="top">
   <a class="brand" href="#/catalogue">
@@ -229,6 +290,7 @@ tr.clk:hover td{background:var(--surface)}
     <a href="#/listes" data-nav="listes">Mes listes</a>
     <a href="#/stats" data-nav="stats">Statistiques</a>
     <a href="#/sagas" data-nav="sagas">Sagas</a>
+    <a href="#/quiz" data-nav="quiz">Quiz</a>
     <a href="#/scanner" data-nav="scanner">Scanner</a>
     <a href="#/reglages" data-nav="reglages">Réglages</a>
   </nav>
@@ -250,6 +312,7 @@ tr.clk:hover td{background:var(--surface)}
 <div id="toast" class="toast" hidden></div>
 
 <script src="catalogue.js"></script>
+<script src="quiz.js"></script>
 <script>
 'use strict';
 /* =========================================================
@@ -349,16 +412,16 @@ function defaultLists() {
 }
 function defaultKids() { return [{id: 'k1', name: 'Enfant 1', age: 5}, {id: 'k2', name: 'Enfant 2', age: 8}, {id: 'k3', name: 'Enfant 3', age: 10}]; }
 const kidsFrom = (arr) => Array.isArray(arr) && arr.length ? arr.map(k => ({id: String(k.id || uid()), name: String(k.name || 'Enfant'), age: +k.age || 6})) : defaultKids();
-function initialState() { return {v: 2, films: assemble({}, []), lists: defaultLists(), tmdbKey: '', kids: defaultKids()}; }
+function initialState() { return {v: 2, films: assemble({}, []), lists: defaultLists(), tmdbKey: '', kids: defaultKids(), games: gamesFrom(null)}; }
 /* Accepte le format actuel (v2 : over/deleted) et l'ancien (v1 : liste complète des films) */
 function stateFrom(data) {
   if (!data) return null;
   const lists = Array.isArray(data.lists) ? data.lists.map(l => ({id: l.id || uid(), name: l.name || 'Liste', ids: [...(l.ids || [])]})) : [];
-  if (data.over && typeof data.over === 'object') return {v: 2, films: assemble(data.over, data.deleted || []), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids)};
+  if (data.over && typeof data.over === 'object') return {v: 2, films: assemble(data.over, data.deleted || []), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids), games: gamesFrom(data.games)};
   if (Array.isArray(data.films)) {
     const over = {}; data.films.forEach(f => { if (f && f.id) over[f.id] = f; });
     const deleted = [];
-    return {v: 2, films: assemble(over, deleted), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids)};
+    return {v: 2, films: assemble(over, deleted), lists, tmdbKey: data.tmdbKey || '', kids: kidsFrom(data.kids), games: gamesFrom(data.games)};
   }
   return null;
 }
@@ -392,7 +455,7 @@ function save() {
   saveTimer = setTimeout(() => {
     try {
       const {over, deleted} = computeOver();
-      localStorage.setItem(STORE_V2, JSON.stringify({v: 2, over, deleted, lists: S.lists, tmdbKey: S.tmdbKey, kids: S.kids}));
+      localStorage.setItem(STORE_V2, JSON.stringify({v: 2, over, deleted, lists: S.lists, tmdbKey: S.tmdbKey, kids: S.kids, games: S.games || {}}));
       storageOk = true;
     } catch (e) { storageOk = false; }
     paintWarn();
@@ -406,7 +469,7 @@ async function flushDb() {
   const jobs = [];
   Object.keys(over).forEach(id => { const j = JSON.stringify(over[id]); if (written.get(id) !== j) jobs.push(() => DB.doc('films/' + id).set(JSON.parse(j)).then(() => written.set(id, j))); });
   [...written.keys()].forEach(id => { if (!over[id]) jobs.push(() => DB.doc('films/' + id).delete().then(() => written.delete(id))); });
-  const meta = JSON.stringify({v: 2, lists: S.lists, deleted, kids: S.kids});
+  const meta = JSON.stringify({v: 2, lists: S.lists, deleted, kids: S.kids, games: S.games || {}});
   if (meta !== metaWritten) jobs.push(() => DB.doc('meta/main').set(JSON.parse(meta)).then(() => { metaWritten = meta; }));
   let failed = null;
   for (let i = 0; i < jobs.length; i += 8) {
@@ -440,7 +503,7 @@ async function boot() {
         fs.docs.forEach(d => { const data = JSON.parse(JSON.stringify(d.data())); over[d.id] = data; written.set(d.id, JSON.stringify(data)); });
         const m = meta.exists ? JSON.parse(JSON.stringify(meta.data())) : null;
         const lists = m && Array.isArray(m.lists) ? m.lists.map(l => ({id: l.id, name: l.name, ids: [...(l.ids || [])]})) : defaultLists();
-        S = {v: 2, films: assemble(over, (m && m.deleted) || []), lists, tmdbKey: '', kids: kidsFrom(m && m.kids)};
+        S = {v: 2, films: assemble(over, (m && m.deleted) || []), lists, tmdbKey: '', kids: kidsFrom(m && m.kids), games: gamesFrom(m && m.games)};
         metaWritten = m ? JSON.stringify(m) : '';
         MODE = 'db';
       } catch (e) { DB = null; }
@@ -463,6 +526,7 @@ async function boot() {
   save();   // range les anciennes données au nouveau format (n'écrit que ce qui a changé)
   loadPosters();
   loadFree();
+  loadOst();
   IMAGES = await imgStore.load();
   paintWarn();
   render();
@@ -1334,7 +1398,7 @@ function viewFilm(id) {
       <input type="file" id="own-img" accept="image/*" hidden>
       ${IMAGES[f.id] ? `<button type="button" class="btn" data-act="img-del">Retirer ma photo</button>` : ''}
       ${!IMAGES[f.id] && !f.poster && POSTERS[f.id] && POSTERS[f.id].p && !IS_WEB ? `<button type="button" class="btn" data-act="poster-wrong">Ce n'est pas la bonne affiche</button>` : ''}
-      ${f.trailer ? `<a class="btn" href="${h(f.trailer)}" target="_blank" rel="noopener">${ICON.play}Voir la bande-annonce</a>` : ''}
+      ${isBook(f) ? '' : `<button type="button" class="btn" data-act="qz-trailer">${ICON.play}Voir la bande-annonce</button>`}
       <button type="button" class="btn" data-act="edit" data-id="${h(f.id)}">${ICON.edit}Modifier la fiche</button>
       ${S.tmdbKey && !isBook(f) ? `<button type="button" class="btn" data-act="complete" data-id="${h(f.id)}">${ICON.cloud}${f.tmdbId ? 'Actualiser depuis TMDB' : 'Compléter avec TMDB'}</button>` : ''}
       <button type="button" class="btn danger" data-act="delete" data-id="${h(f.id)}">${ICON.trash}Supprimer de ma base</button>
@@ -1361,6 +1425,7 @@ function viewFilm(id) {
         <button type="button" class="btn ${f.owned ? 'primary' : ''}" data-act="owned" aria-pressed="${f.owned}">${ICON.disc}${f.owned ? (isBook(f) ? 'On l\'a à la maison' : 'Je le possède') : (isBook(f) ? 'Pas à la maison' : 'Je ne le possède pas')}</button>
         ${f.owned ? `<label class="inline" for="support">Support <select class="sel" id="support" data-ch="support"><option value="">Choisir…</option>${SUPPORTS.map(s => `<option ${f.support === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}
       </div>
+      ${quizBox(f)}
       <div style="display:flex;flex-direction:column;gap:8px"><h2 class="label">Résumé${f.synLang === 'en' ? ' <span style="text-transform:none;letter-spacing:0;font-weight:400">(en anglais)</span>' : ''}</h2>
         <p class="synopsis" ${f.synLang === 'en' ? 'lang="en"' : ''}>${f.synopsis ? h(f.synopsis) : '<span class="muted">Pas encore de résumé. ' + (S.tmdbKey && !IS_WEB ? 'Clique sur « Compléter avec TMDB » ou écris-le' : 'Écris-le') + ' avec « Modifier la fiche ».</span>'}</p>
         <div class="links">${links}</div></div>
@@ -1372,7 +1437,7 @@ function viewFilm(id) {
       ${f.vf ? `<div style="display:flex;flex-direction:column;gap:10px"><h2 class="label">Voix françaises</h2><div class="cast">
         ${f.vf.split('|').map(x => x.trim()).filter(Boolean).map(x => { const m = x.match(/^(.*?)\s*\((.*)\)$/); const nm = m ? m[1] : x; return `<button type="button" class="person" data-act="search" data-v="${h(nm)}" title="Voir ses titres dans ma base"><span class="ini">${h(initials(nm))}</span><span><b>${h(nm)}</b>${m ? `<i>${h(m[2])}</i>` : ''}</span></button>`; }).join('')}
       </div></div>` : ''}
-      ${isBook(f) ? tomesBox(f) + bookBox(f) : watchBox(f)}
+      ${isBook(f) ? tomesBox(f) + bookBox(f) : watchBox(f) + musicBox(f)}
       ${f.owned ? loanBox(f) : ''}
       <div class="two">
         ${isBook(f) ? '' : `<div><h2 class="label">Où le regarder en France</h2>
@@ -1623,6 +1688,7 @@ function viewReglages() {
       </form>
       <p id="keymsg" class="muted" role="status" style="margin:0">${k ? 'Une clé est enregistrée.' : 'Aucune clé enregistrée : l\'appli fonctionne avec ta base locale.'}</p>
     </div>`}
+    ${claudeBox()}
     <div class="box"><h2>Affiches</h2>
       ${IS_WEB ? `<p style="margin:0" class="muted">Sur cette page, seules tes photos personnelles s'affichent (bouton « Mettre ma propre photo » sur chaque fiche) : ${Object.keys(IMAGES).length} photo${Object.keys(IMAGES).length > 1 ? 's' : ''}. Les affiches Wikipédia et TMDB s'affichent dans l'application installée.</p>` : `
       <p style="margin:0" class="muted">${countPosters().toLocaleString('fr-FR')} titres ont une image (dont ${Object.keys(IMAGES).length} photo${Object.keys(IMAGES).length > 1 ? 's' : ''} personnelle${Object.keys(IMAGES).length > 1 ? 's' : ''}). ${(() => { const n = Object.values(POSTERS).filter(v => !v).length; return n ? n.toLocaleString('fr-FR') + ' titre' + (n > 1 ? 's ont' : ' a') + ' été vérifié' + (n > 1 ? 's' : '') + ' sans affiche trouvée, souvent des films muets ou très peu connus. ' : ''; })()}Les affiches viennent de Wikipédia et de TMDB et s'affichent avec une connexion Internet.</p>
@@ -1919,7 +1985,7 @@ function route() {
 }
 function render() {
   const r = route(), v = $('#view');
-  const nav = r.name === 'film' || r.name === 'explorer' || r.name === 'livres-en-ligne' ? 'catalogue' : r.name === 'imprimer' ? 'collection' : r.name;
+  const nav = r.name === 'film' || r.name === 'explorer' || r.name === 'livres-en-ligne' ? 'catalogue' : r.name === 'imprimer' ? 'collection' : /^(quiz|defi)/.test(r.name) ? 'quiz' : r.name;
   paintWho();
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === nav));
   if (r.name === 'catalogue') { v.innerHTML = viewCatalogue(); paintCatGrid(); }
@@ -1933,10 +1999,588 @@ function render() {
   else if (r.name === 'sagas') v.innerHTML = viewSagas();
   else if (r.name === 'scanner') { v.innerHTML = viewScanner(); setTimeout(() => $('#scan') && $('#scan').focus(), 0); }
   else if (r.name === 'imprimer') v.innerHTML = viewPrint();
+  else if (r.name === 'quiz') v.innerHTML = r.id ? viewQuizPlay(r.id) : viewQuiz();
+  else if (r.name === 'quiz-musique') v.innerHTML = viewMusicQuiz(r.id);
+  else if (r.name === 'quiz-chansons') v.innerHTML = viewSongsQuiz(r.id);
+  else if (r.name === 'defi') v.innerHTML = viewDefi();
   else { location.hash = '#/catalogue'; return; }
   document.title = 'Toons & Bulles';
 }
 window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+/* =========================================================
+   Bandes-annonces, musique, quiz, quiz musical, trophées, défi famille (1.6.0)
+   ========================================================= */
+const QBANK = window.CT_QUIZ || {};
+const SONGS = window.CT_SONGS || {};
+const CLAUDE_KEY_STORE = 'cinetoons-claude';
+let CLAUDE_KEY = (() => { try { return IS_WEB ? '' : (localStorage.getItem(CLAUDE_KEY_STORE) || ''); } catch (e) { return ''; } })();
+const shuffle = (a) => { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; };
+const gamesFrom = (g) => { const o = g && typeof g === 'object' ? g : {}; return {m: Object.assign({}, o.m), s: Object.assign({}, o.s), n: Object.assign({}, o.n), w: Object.assign({}, o.w)}; };
+const GAMES = () => (S.games = S.games || gamesFrom(null));
+
+/* ---------- Joueurs ---------- */
+const playerId = () => (activeKid() ? activeKid().id : 'fam');
+const playerName = (pid) => pid === 'fam' ? 'Toute la famille' : ((KIDS().find(k => k.id === pid) || {}).name || 'Joueur');
+const allPlayers = () => [{id: 'fam', name: 'Toute la famille'}].concat(KIDS().map(k => ({id: k.id, name: k.name})));
+function seenBy(f, pid) {
+  if (f.status === 'vu') return true;
+  if (pid === 'fam') return KIDS().some(k => kidRec(f, k).s === 'vu');
+  return ((f.kids || {})[pid] || {}).s === 'vu';
+}
+const bestOf = (f, pid) => pid === 'fam' ? (+f.qz || 0) : (+(((f.kids || {})[pid] || {}).qz) || 0);
+function setBest(f, pid, score) {
+  if (score <= bestOf(f, pid)) return false;
+  if (pid === 'fam') f.qz = score; else setKid(f, {id: pid}, {qz: score});
+  return true;
+}
+const starsFor = (n) => n >= 10 ? 3 : n >= 7 ? 2 : n >= 5 ? 1 : 0;
+const starRow = (n, size = 16) => [1, 2, 3].map(i => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3-4.6-4.5 6.4-.9z" fill="${i <= n ? '#FFC93C' : 'none'}" stroke="${i <= n ? '#FFC93C' : '#3A4775'}" stroke-width="1.6"/></svg>`).join('');
+const TROPHY_SVG = (on) => `<svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v3h3v2a5 5 0 01-5 5h-.3A5 5 0 0113 15.6V18h3v3H8v-3h3v-2.4A5 5 0 019.3 13H9a5 5 0 01-5-5V6h3zm0 5V8H6a3 3 0 001 2.2zm10 0v2.2A3 3 0 0018 8z" fill="${on ? '#FFC93C' : 'none'}" stroke="${on ? '#FFC93C' : '#3A4775'}" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+const LOCK_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>';
+const NOTE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>';
+
+/* ---------- Sources de questions ---------- */
+function quizSource(f) {
+  if (QBANK[f.id]) return {kind: 'histoire', label: 'Quiz de l\'histoire', items: QBANK[f.id]};
+  if (Array.isArray(f.qgen) && f.qgen.length >= 6) return {kind: 'claude', label: 'Quiz de l\'histoire (créé par Claude)', items: f.qgen};
+  const fq = ficheQuiz(f);
+  return fq.length >= 5 ? {kind: 'fiche', label: 'Quiz de la fiche', items: fq} : {kind: 'aucun', label: '', items: []};
+}
+const sameKind = (f) => S.films.filter(x => x.id !== f.id && kindOf(x) === kindOf(f) && x.public !== 'Adultes');
+function pick3(good, values) {
+  const g = String(good).trim(), seen = new Set([norm(g)]), out = [];
+  for (const v of shuffle(values)) { const s = String(v || '').trim(); if (!s || s.length > 90 || seen.has(norm(s))) continue; seen.add(norm(s)); out.push(s); if (out.length === 3) break; }
+  return out.length === 3 ? [g, ...out] : null;
+}
+function ficheQuiz(f) {
+  const book = isBook(f), pool = sameKind(f), T = '« ' + f.title + ' »', Q = [];
+  const add = (q, arr) => { if (arr) Q.push([q, ...arr]); };
+  const y = +f.year;
+  if (y) add(`En quelle année ${book ? 'est paru' : isSeries(f) ? 'a commencé' : 'est sorti'} ${T} ?`, pick3(String(y), shuffle([-9, -7, -5, -4, -3, -2, 2, 3, 4, 5, 7, 9]).map(d => String(y + d)).filter(v => +v <= new Date().getFullYear() + 1)));
+  if (f.director && f.director.length < 70) add(book ? `Qui a écrit ou dessiné ${T} ?` : isSeries(f) ? `Qui a créé la série ${T} ?` : `Qui a réalisé ${T} ?`, pick3(f.director, pool.map(x => x.director).filter(d => d && d.length < 70 && !d.includes(f.director) && !f.director.includes(d))));
+  if (f.subgenre && f.subgenre !== 'Non classé') add(book ? `Dans quel rayon range-t-on ${T} ?` : `De quel studio ou univers vient ${T} ?`, pick3(f.subgenre, [...new Set(pool.map(x => x.subgenre))].filter(s => s && s !== 'Non classé')));
+  if (f.country) { const c = f.country.split(/,| \/ /)[0].trim(); add(`De quel pays vient ${T} ?`, pick3(c, ['France', 'États-Unis', 'Belgique', 'Royaume-Uni', 'Japon', 'Canada', 'Italie', 'Allemagne', 'Suisse', 'Espagne', 'Suède', 'Irlande'].filter(x => !f.country.includes(x)))); }
+  add(`Qu'est-ce que ${T} ?`, pick3(typeLabel(f.type), (book ? BOOK_TYPES : ['Film', 'Série', 'Mini-série', 'Téléfilm / spécial', 'Court métrage']).filter(t => t !== f.type).map(typeLabel)));
+  if (f.synopsis && f.synopsis.length > 50) {
+    let s = f.synopsis.split(/(?<=[.!?])\s+/).reduce((acc, p) => acc.length < 120 ? (acc ? acc + ' ' : '') + p : acc, '');
+    if (s.length > 260) s = s.slice(0, 250).replace(/\s+\S*$/, '') + '…';
+    const bare = f.title.replace(/\s*\(.*\)$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    s = s.replace(new RegExp(bare, 'gi'), '…');
+    const others = pool.filter(x => x.subgenre === f.subgenre).map(x => x.title);
+    add(`De quel titre parle ce résumé ? « ${s} »`, pick3(f.title, others.length >= 6 ? others : pool.map(x => x.title)));
+  }
+  const vf = (f.vf || '').split('|').map(x => x.trim().match(/^(.*?)\s*\((.*)\)$/)).filter(Boolean);
+  if (vf.length) {
+    const otherRoles = pool.flatMap(x => (x.vf || '').split('|').map(v => (v.match(/\((.*)\)$/) || [])[1])).filter(r => r && !vf.some(m => norm(m[2]) === norm(r)));
+    const m = shuffle(vf)[0];
+    add(`Lequel de ces personnages apparaît dans ${T} ?`, pick3(m[2], otherRoles));
+    const m2 = shuffle(vf).find(x => x !== m) || m;
+    add(`Qui fait la voix française de ${m2[2]} dans ${T} ?`, pick3(m2[1], pool.flatMap(x => (x.vf || '').split('|').map(v => (v.match(/^(.*?)\s*\(/) || [])[1])).filter(n => n && !vf.some(z => z[1] === n))));
+  } else if ((f.cast || []).some(c => c.role)) {
+    const roles = f.cast.map(c => c.role).filter(Boolean);
+    add(`Lequel de ces personnages apparaît dans ${T} ?`, pick3(shuffle(roles)[0], pool.flatMap(x => (x.cast || []).map(c => c.role)).filter(r => r && !roles.includes(r))));
+  }
+  if (book && edOf(f)) add(`Quel éditeur publie ${T} ?`, pick3(edOf(f), [...new Set(pool.map(edOf))]));
+  if (book && f.coll && f.coll !== 'Magazine') add(`Dans quelle collection trouve-t-on ${T} ?`, pick3(f.coll, [...new Set(pool.map(x => x.coll))].concat(['Bibliothèque rose', 'Folio Cadet', 'Lutin poche', 'Père Castor', 'J\'aime lire'])));
+  if (f.volumes > 1) add(`Combien de tomes compte ${T} ?`, pick3(f.volumes + ' tomes', shuffle([-12, -6, -3, -2, 2, 4, 7, 15]).map(d => f.volumes + d).filter(n => n > 1).map(n => n + ' tomes')));
+  if (f.seasons > 1) add(`Combien de saisons compte ${T} ?`, pick3(f.seasons + ' saisons', [1, 2, 3, 4, 5, 6, 8, 10, 12].filter(n => n !== f.seasons).map(n => n + (n > 1 ? ' saisons' : ' saison'))));
+  if (f.awards) { const a = f.awards.split(' · ')[0]; add(`Quelle récompense a reçue ${T} ?`, pick3(a, [...new Set(pool.flatMap(x => (x.awards || '').split(' · ')))].concat(['Ours d\'or', 'Palme d\'or', 'Grammy Award', 'Prix Goncourt', 'Fauve d\'or à Angoulême']).filter(x => !f.awards.includes(x)))); }
+  if (f.technique && f.technique !== 'Non précisé') add(`Comment est fabriqué ${T} ?`, pick3(f.technique, [...new Set(pool.map(x => x.technique))].filter(t => t && t !== 'Non précisé')));
+  if (y) { const same = pool.filter(x => +x.year === y), diff = pool.filter(x => x.year && Math.abs(+x.year - y) >= 3); if (same.length && diff.length >= 3) add(`Lequel de ces titres est sorti la même année que ${T} ?`, pick3(shuffle(same)[0].title, diff.map(x => x.title))); }
+  add(`À partir de quel âge conseille-t-on ${T} ?`, pick3('Dès ' + (f.age || 6) + ' ans', [3, 6, 8, 10, 12, 16].filter(a => a !== (f.age || 6)).map(a => 'Dès ' + a + ' ans')));
+  return shuffle(Q).slice(0, 10);
+}
+function quizUnlocked(f, pid = playerId()) { return seenBy(f, pid); }
+const quizKind = (f) => QBANK[f.id] ? 'histoire' : Array.isArray(f.qgen) && f.qgen.length >= 6 ? 'claude' : 'fiche';
+
+/* ---------- Quiz créé par Claude ---------- */
+const claudeAvailable = () => IS_WEB || !!CLAUDE_KEY;
+function claudePrompt(f) {
+  const age = activeKid() ? activeKid().age : 8;
+  return `Tu crées un quiz pour des enfants d'environ ${age} ans et leurs parents, en français.
+Œuvre : « ${f.title} » (${typeLabel(f.type)}${f.year ? ', ' + f.year : ''}${f.director ? ', de ' + f.director : ''}${f.originalTitle ? ', titre original : ' + f.originalTitle : ''}${f.publisher ? ', éditeur : ' + f.publisher : ''}).
+Résumé de la fiche : ${(f.synopsis || 'non renseigné').slice(0, 1500)}
+Écris exactement 10 questions à choix multiples sur l'HISTOIRE : personnages, lieux, objets, événements, chansons. Pas de questions sur les dates de sortie, les studios ou les acteurs. Utilise les noms de la version française. Pour chaque question : une seule bonne réponse et trois fausses réponses plausibles, chacune de moins de 60 caractères. Vocabulaire simple.
+Si tu ne connais pas assez bien cette œuvre pour être sûr de chaque réponse, réponds exactement {"inconnu": true}.
+Réponds uniquement avec ce JSON : {"questions":[{"q":"…","bonne":"…","fausses":["…","…","…"]}]}`;
+}
+function parseLoose(text) {
+  try { return JSON.parse(text); } catch (e) { /* suite */ }
+  const a = text.indexOf('{'), b = text.lastIndexOf('}');
+  if (a >= 0 && b > a) { try { return JSON.parse(text.slice(a, b + 1)); } catch (e) { /* suite */ } }
+  return null;
+}
+async function askClaudeQuiz(f) {
+  const prompt = claudePrompt(f);
+  let data;
+  if (IS_WEB) {
+    const sample = await window.claude.use('sample');
+    if (!sample) throw new Error('Claude n\'est pas disponible sur cette page pour le moment.');
+    try { data = await sample.json(prompt, {modelTier: 'default'}); }
+    catch (e) {
+      const c = e && e.code;
+      throw new Error(c === 'not_granted' || c === 'sampling_disabled' ? 'La page n\'a pas l\'autorisation de demander à Claude. Tu peux l\'accorder dans le menu « Autorisations » de la page.'
+        : c === 'rate_limited' ? 'Claude demande de patienter un peu. Réessaie dans quelques minutes.'
+        : c === 'invalid_json' ? 'La réponse de Claude n\'était pas lisible. Réessaie.' : 'Claude n\'a pas pu créer le quiz. Réessaie dans un moment.');
+    }
+  } else {
+    if (!CLAUDE_KEY) throw new Error('Ajoute ta clé Claude dans Réglages pour créer des quiz sur l\'histoire.');
+    let r;
+    try {
+      r = await fetch('https://api.anthropic.com/v1/messages', {method: 'POST', headers: {'content-type': 'application/json', 'x-api-key': CLAUDE_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify({model: 'claude-sonnet-5-5', max_tokens: 3000, messages: [{role: 'user', content: prompt}]})});
+    } catch (e) { throw new Error('Impossible de joindre Claude. Vérifie ta connexion Internet.'); }
+    if (r.status === 401 || r.status === 403) throw new Error('Claude refuse la clé. Vérifie-la dans Réglages.');
+    if (r.status === 429 || r.status === 529) throw new Error('Claude est très demandé en ce moment. Réessaie dans une minute.');
+    if (!r.ok) throw new Error('Claude a répondu avec une erreur (' + r.status + ').');
+    const d = await r.json();
+    data = parseLoose(((d.content || []).find(c => c.type === 'text') || {}).text || '');
+  }
+  if (!data) throw new Error('La réponse de Claude n\'était pas lisible. Réessaie.');
+  if (data.inconnu) throw new Error('Claude ne connaît pas assez bien ce titre pour faire un quiz fiable. Le quiz de la fiche reste disponible.');
+  const items = (data.questions || []).map(x => [String(x.q || '').trim(), String(x.bonne || '').trim(), ...((x.fausses || []).slice(0, 3).map(s => String(s).trim()))])
+    .filter(x => x.length === 5 && x.every(Boolean) && new Set(x.slice(1).map(norm)).size === 4);
+  if (items.length < 6) throw new Error('Claude n\'a pas donné assez de questions valables. Réessaie.');
+  return items.slice(0, 10);
+}
+
+/* ---------- Bande-annonce ---------- */
+function openVideo(url) {
+  if (!IS_WEB) { const w = window.open(url, 'toons-video', 'width=1100,height=680'); if (w) return; }
+  window.open(url, '_blank', 'noopener');
+}
+const ytSearch = (f, extra) => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(f.title + (f.year ? ' ' + f.year : '') + ' ' + extra);
+async function findTrailer(f) {
+  const ref = await tmdbRef(f); savePosters();
+  if (!ref) return '';
+  const pickV = (arr) => { const v = (arr || []).filter(x => x.site === 'YouTube'); return v.find(x => x.type === 'Trailer' && x.iso_639_1 === 'fr') || v.find(x => x.type === 'Teaser' && x.iso_639_1 === 'fr') || v.find(x => x.iso_639_1 === 'fr') || v.find(x => x.type === 'Trailer') || v.find(x => x.type === 'Teaser') || v[0]; };
+  let v = pickV((await tmdb('/' + ref.k + '/' + ref.t + '/videos', {language: 'fr-FR'})).results);
+  if (!v) v = pickV((await tmdb('/' + ref.k + '/' + ref.t + '/videos', {})).results);
+  return v ? 'https://www.youtube.com/watch?v=' + v.key : '';
+}
+async function playTrailer(f, btn) {
+  if (f.trailer) return openVideo(f.trailer);
+  if (!IS_WEB && S.tmdbKey) {
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Recherche…'; }
+    try { const u = await findTrailer(f); if (u) { f.trailer = u; save(); render(); return openVideo(u); } toast('Pas de bande-annonce sur TMDB : recherche sur YouTube'); }
+    catch (e) { toast(e.message); }
+    render();
+  }
+  window.open(ytSearch(f, 'bande annonce VF'), '_blank', 'noopener');
+}
+
+/* ---------- Musique : extraits officiels de 30 secondes (Apple Music, sans clé) ---------- */
+const OST_KEY = 'cinetoons-ost';
+let OST = {};
+function loadOst() { if (IS_WEB) return; try { OST = JSON.parse(localStorage.getItem(OST_KEY) || '{}') || {}; } catch (e) { OST = {}; } }
+function saveOst() { try { localStorage.setItem(OST_KEY, JSON.stringify(OST)); } catch (e) { /* stockage plein */ } }
+const AUDIO = new Audio(); AUDIO.preload = 'auto';
+let PLAYING = '';
+function stopAudio() { try { AUDIO.pause(); } catch (e) { /* rien */ } PLAYING = ''; document.querySelectorAll('[data-act="qz-play"].on').forEach(b => b.classList.remove('on')); }
+AUDIO.addEventListener('ended', () => { PLAYING = ''; document.querySelectorAll('[data-act="qz-play"].on').forEach(b => { b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); }); });
+async function itunes(path, params) {
+  if (IS_WEB) throw new Error('Les extraits musicaux s\'écoutent dans l\'application installée.');
+  const u = 'https://itunes.apple.com/' + path + '?' + new URLSearchParams(Object.assign({country: 'FR', lang: 'fr_fr'}, params)).toString();
+  try {
+    const n = window.toonsNet;
+    if (n && n.fetchJson) return await n.fetchJson(u);
+    if (n && n.json) return await n.json(u);
+    const r = await fetch(u); if (!r.ok) throw new Error(String(r.status)); return await r.json();
+  } catch (e) { throw new Error('Impossible de joindre Apple Music pour les extraits. Vérifie ta connexion Internet.'); }
+}
+const cleanTitle = (t) => String(t || '').replace(/\s*\((série|film|livres?|album|BD|\d{4}|saisons?.*)\)$/i, '').trim();
+async function findOst(f) {
+  const names = [...new Set([cleanTitle(f.title), cleanTitle(f.originalTitle)].filter(Boolean))];
+  const keys = names.map(tkey).filter(k => k.length >= 3);
+  const y = +f.year || 0;
+  const terms = [...new Set([names[0] + ' bande originale', (names[1] || names[0]) + ' soundtrack', ...names])];
+  let best = null, bestScore = 4;
+  for (const term of terms) {
+    const d = await itunes('search', {term, media: 'music', entity: 'album', limit: 15});
+    (d.results || []).forEach(a => {
+      const ck = tkey(a.collectionName || ''); let s = 0;
+      if (keys.some(k => ck.includes(k))) s += 5;
+      if (/bande originale|original|soundtrack|b\.o\.?|chansons|songs|générique|musique du film|score/i.test(a.collectionName || '')) s += 3;
+      if (/karaok|piano|lullab|berceuse|cover|tribute|guitar|relax|hommage|reprise|workout|remix/i.test(a.collectionName || '')) s -= 5;
+      const ay = +(a.releaseDate || '').slice(0, 4); if (y && ay && ay >= y - 1 && ay <= y + 2) s += 2;
+      if (/disney|walt|pixar|dreamworks|cast|chorus|orchestra|studio/i.test(a.artistName || '')) s += 1;
+      if (s > bestScore) { bestScore = s; best = a; }
+    });
+    if (bestScore >= 10) break;
+  }
+  let tracks = [];
+  if (best) {
+    const d = await itunes('lookup', {id: best.collectionId, entity: 'song', limit: 60});
+    tracks = (d.results || []).filter(t => t.wrapperType === 'track' && t.previewUrl).map(t => ({n: t.trackName, a: t.artistName, p: t.previewUrl}));
+  }
+  if (!tracks.length) {
+    const d = await itunes('search', {term: names[0] + (isSeries(f) ? ' générique' : ''), media: 'music', entity: 'song', limit: 25});
+    tracks = (d.results || []).filter(t => t.previewUrl && keys.some(k => tkey((t.trackName || '') + ' ' + (t.collectionName || '')).includes(k)) && !/karaok|cover|tribute|relax|berceuse|lullab/i.test(t.collectionName || ''))
+      .map(t => ({n: t.trackName, a: t.artistName, p: t.previewUrl}));
+    if (tracks.length) best = {collectionName: names[0], artistName: tracks[0].a, collectionViewUrl: ''};
+  }
+  OST[f.id] = tracks.length ? {name: best.collectionName, artist: best.artistName, url: best.collectionViewUrl || '', art: (best.artworkUrl100 || ''), t: tracks.slice(0, 30), at: today()} : {none: 1, at: today()};
+  saveOst();
+  return OST[f.id];
+}
+function musicBox(f) {
+  const songs = SONGS[f.id] || [];
+  const q = encodeURIComponent(cleanTitle(f.title) + (isSeries(f) ? ' générique' : ' bande originale'));
+  const links = `<div class="row"><a class="btn small" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">YouTube</a><a class="btn small" href="https://www.deezer.com/search/${q}" target="_blank" rel="noopener">Deezer</a><a class="btn small" href="https://open.spotify.com/search/${q}" target="_blank" rel="noopener">Spotify</a>${OST[f.id] && OST[f.id].url ? `<a class="btn small" href="${h(OST[f.id].url)}" target="_blank" rel="noopener">Album complet sur Apple Music</a>` : ''}</div>`;
+  const songLine = songs.length ? `<p style="margin:0">Chansons à reconnaître : ${songs.map(s => '« ' + h(s) + ' »').join(', ')}</p>` : '';
+  if (IS_WEB) return `<div class="watch"><h2 class="label">Musique ${isSeries(f) ? 'et générique' : 'du dessin animé'}</h2>${songLine}<p class="hint" style="margin:0">Les extraits de 30 secondes s'écoutent directement dans l'application installée. Ici, chaque bouton ouvre la recherche de la bande originale.</p>${links}</div>`;
+  const o = OST[f.id];
+  let body;
+  if (!o) body = `<div class="row"><button type="button" class="btn small primary" data-act="qz-ost">${NOTE_SVG}Écouter des extraits de la bande originale</button></div>`;
+  else if (o.none) body = `<p class="hint" style="margin:0">Pas d'extrait trouvé sur Apple Music (vérifié le ${fmtDate(o.at)}). <button type="button" class="btn small" data-act="qz-ost">Chercher à nouveau</button></p>`;
+  else body = `<p style="margin:0"><b>${h(o.name)}</b>${o.artist ? ' · ' + h(o.artist) : ''}</p>
+    <ol class="tracks">${o.t.map((t, i) => `<li><button type="button" class="btn small ${PLAYING === t.p ? 'on' : ''}" data-act="qz-play" data-u="${h(t.p)}" aria-pressed="${PLAYING === t.p}" aria-label="Écouter ${h(t.n)}">${ICON.play}</button><span>${h(t.n)}</span></li>`).join('')}</ol>
+    <p class="hint" style="margin:0">Extraits officiels de 30 secondes fournis par Apple Music. <button type="button" class="btn small" data-act="qz-ost">Ce n'est pas le bon album</button></p>`;
+  return `<div class="watch"><h2 class="label">Musique ${isSeries(f) ? 'et générique' : 'du dessin animé'}</h2>${songLine}<div id="ost-zone">${body}</div>${links}</div>`;
+}
+
+/* ---------- Encadré quiz sur la fiche ---------- */
+function quizBox(f) {
+  const pid = playerId(), src = quizSource(f), open = quizUnlocked(f, pid);
+  const w = W(f).vu.toLowerCase();
+  if (!open) return `<div class="quizbox locked"><span class="lockico">${LOCK_SVG}</span><div><b>Quiz à débloquer</b><p class="muted" style="margin:2px 0 0">Marque ce titre comme « ${W(f).vu} »${activeKid() ? ' pour ' + h(activeKid().name) : ''} pour débloquer ${src.kind === 'histoire' ? 'son quiz de 10 questions sur l\'histoire' : 'son quiz de 10 questions'}.</p></div></div>`;
+  const others = allPlayers().filter(p => bestOf(f, p.id)).map(p => `<span class="qz-chip">${h(p.name)} ${starRow(starsFor(bestOf(f, p.id)), 13)} ${bestOf(f, p.id)}/10</span>`).join('');
+  const gen = src.kind !== 'histoire' && claudeAvailable() ? `<button type="button" class="btn small" data-act="qz-gen">${src.kind === 'claude' ? 'Recréer le quiz avec Claude' : 'Créer un quiz sur l\'histoire avec Claude'}</button>` : '';
+  return `<div class="quizbox"><div style="flex:1 1 260px"><b>Quiz débloqué !</b> <span class="muted">${src.kind === 'aucun' ? 'La fiche n\'a pas assez d\'informations pour un quiz.' : h(src.label) + ' · ' + src.items.length + ' questions'}</span>
+      ${others ? `<div class="row" style="margin-top:6px;gap:6px">${others}</div>` : ''}<p id="qz-gen-msg" class="muted" style="margin:6px 0 0" role="status"></p></div>
+    <div class="row">${src.kind !== 'aucun' ? `<a class="btn primary" href="#/quiz/${h(f.id)}">Jouer au quiz</a>` : ''}${gen}</div></div>`;
+}
+
+/* ---------- Moteur de quiz (questions à 4 choix) ---------- */
+let QZ = null;
+function mkItems(rows) { return rows.map(r => { const c = shuffle(r.slice(1)); return {q: r[0], c, g: c.indexOf(r[1])}; }); }
+function startFilmQuiz(f, players) {
+  const src = quizSource(f); if (src.kind === 'aucun') return null;
+  let rows = src.kind === 'fiche' ? ficheQuiz(f) : shuffle(src.items);
+  if (players && players.length > 1) rows = rows.slice(0, Math.max(players.length, Math.floor(rows.length / players.length) * players.length));
+  QZ = {kind: 'film', fid: f.id, title: f.title, label: src.label, items: mkItems(rows), i: 0, ans: null, score: 0, players: players || null, done: false, newT: []};
+  return QZ;
+}
+function startSongsQuiz(players, all) {
+  const pid = playerId();
+  const films = Object.keys(SONGS).map(byId).filter(Boolean);
+  const pool = all ? films : films.filter(f => players ? players.some(p => seenBy(f, p.id)) : seenBy(f, pid));
+  if (pool.length < 2) return null;
+  const rows = shuffle(pool.flatMap(f => SONGS[f.id].map(s => ({f, s})))).slice(0, players ? Math.max(players.length * 3, 9) : 10)
+    .map(({f, s}) => { const c = pick3(f.title, films.filter(x => x.id !== f.id).map(x => x.title)); return [`Dans quel dessin animé entend-on la chanson « ${s} » ?`, ...c]; });
+  QZ = {kind: 'songs', title: 'Quiz des chansons', label: all ? 'Toutes les chansons' : 'Chansons des titres vus', items: mkItems(rows), i: 0, ans: null, score: 0, players: players || null, done: false, newT: []};
+  return QZ;
+}
+const curPlayer = () => QZ && QZ.players ? QZ.players[QZ.i % QZ.players.length] : null;
+function answer(idx) {
+  if (!QZ || QZ.ans !== null || QZ.done) return;
+  const it = QZ.items[QZ.i]; QZ.ans = idx; const ok = idx === it.g;
+  if (QZ.kind === 'music') { stopMq(); const pts = ok ? Math.max(4, Math.min(10, 4 + Math.ceil(MQ.left / 5))) : 0; it.pts = pts; QZ.score += pts; if (QZ.players) curPlayer().score += pts; }
+  else if (ok) { QZ.score++; if (QZ.players) curPlayer().score++; }
+  paintQuiz();
+}
+function nextQ() {
+  if (!QZ) return;
+  if (QZ.i + 1 >= QZ.items.length) return finishQuiz();
+  QZ.i++; QZ.ans = null; paintQuiz();
+  if (QZ.kind === 'music') startRound();
+}
+function finishQuiz() {
+  QZ.done = true; stopMq();
+  const before = earnedSet(playerId());
+  const pid = playerId(), g = GAMES();
+  if (QZ.players) {
+    const top = Math.max(...QZ.players.map(p => p.score));
+    const winners = QZ.players.filter(p => p.score === top);
+    QZ.winners = winners;
+    if (winners.length === 1) g.w[winners[0].id] = (+g.w[winners[0].id] || 0) + 1;
+  } else if (QZ.kind === 'film') {
+    const f = byId(QZ.fid); QZ.wasBest = f ? bestOf(f, pid) : 0; if (f) setBest(f, pid, QZ.score);
+  } else if (QZ.kind === 'songs') {
+    if (QZ.score > (+g.s[pid] || 0)) g.s[pid] = QZ.score;
+  } else if (QZ.kind === 'music') {
+    g.n[pid] = (+g.n[pid] || 0) + 1; if (QZ.score > (+g.m[pid] || 0)) g.m[pid] = QZ.score;
+  }
+  save();
+  const after = earnedSet(playerId());
+  QZ.newT = TROPHIES.filter(t => after.has(t.id) && !before.has(t.id));
+  paintQuiz();
+}
+function paintQuiz() { const z = $('#qz-zone'); if (z) z.innerHTML = quizInner(); }
+function quizInner() {
+  if (!QZ) return '';
+  const n = QZ.items.length, max = QZ.kind === 'music' ? n * 10 : n;
+  if (QZ.done) {
+    const pct = QZ.score / max;
+    const msg = pct >= 1 ? 'Sans faute, bravo !' : pct >= .7 ? 'Super résultat !' : pct >= .5 ? 'Bien joué !' : 'Pas mal ! Tu peux rejouer pour faire mieux.';
+    const board = QZ.players ? `<div class="qz-board">${QZ.players.slice().sort((a, b) => b.score - a.score).map((p, i) => `<div class="qz-rank ${QZ.winners && QZ.winners.includes(p) ? 'win' : ''}"><span class="bignum" style="font-size:22px">${i + 1}</span><b>${h(p.name)}</b><span>${p.score}${QZ.kind === 'music' ? ' pts' : ' bonne' + (p.score > 1 ? 's' : '') + ' réponse' + (p.score > 1 ? 's' : '')}</span></div>`).join('')}</div>
+      <p style="margin:0;font-size:20px;font-family:var(--display)">${QZ.winners.length === 1 ? h(QZ.winners[0].name) + ' gagne le défi !' : 'Égalité entre ' + QZ.winners.map(p => h(p.name)).join(' et ') + ' !'}</p>` : '';
+    return `<div class="qz-end">
+      ${QZ.players ? board : `<div class="qz-big">${QZ.kind === 'music' ? QZ.score + '<small> / ' + max + ' points</small>' : QZ.score + '<small> / ' + n + '</small>'}</div>
+      ${QZ.kind === 'film' ? `<div>${starRow(starsFor(QZ.score), 34)}</div>` : ''}<p style="margin:0;font-size:20px;font-family:var(--display)">${msg}</p>
+      ${QZ.kind === 'film' && QZ.wasBest && QZ.score <= QZ.wasBest ? `<p class="muted" style="margin:0">Meilleur score de ${h(playerName(playerId()))} : ${QZ.wasBest}/10</p>` : QZ.kind === 'film' && QZ.score > (QZ.wasBest || 0) && QZ.wasBest ? '<p class="muted" style="margin:0">Nouveau record !</p>' : ''}`}
+      ${QZ.newT.length ? `<div class="qz-newt">${QZ.newT.map(t => `<div class="trophy on">${TROPHY_SVG(true)}<b>Nouveau trophée : ${h(t.name)}</b><span>${h(t.desc)}</span></div>`).join('')}</div>` : ''}
+      <div class="row" style="justify-content:center"><button type="button" class="btn primary" data-act="qz-again">Rejouer</button><a class="btn" href="#/quiz">Tous les quiz</a>${QZ.fid ? `<a class="btn" href="#/film/${h(QZ.fid)}">Voir la fiche</a>` : ''}</div></div>`;
+  }
+  const it = QZ.items[QZ.i], p = curPlayer();
+  const head = `<div class="qz-top"><span class="label">${QZ.kind === 'music' ? 'Extrait' : 'Question'} ${QZ.i + 1} / ${n}</span><span class="label">${QZ.players ? QZ.players.map(x => h(x.name) + ' ' + x.score).join(' · ') : 'Score : ' + QZ.score}</span></div>
+    <div class="qz-bar"><span style="width:${Math.round(QZ.i / n * 100)}%"></span></div>
+    ${p ? `<p class="qz-turn">À toi, ${h(p.name)} !</p>` : ''}`;
+  let main;
+  if (QZ.kind === 'music') {
+    const playing = QZ.ans === null;
+    main = `<div class="mq-disc ${playing && MQ.on ? 'spin2' : ''}" aria-hidden="true">${NOTE_SVG}</div>
+      <p class="qz-q">${playing ? 'Quel dessin animé joue cette musique ?' : 'C\'était « ' + h(it.c[it.g]) + ' »'}</p>
+      ${playing ? `<div class="mq-time"><span id="mq-bar" style="width:${Math.round(MQ.left / 30 * 100)}%"></span></div><p class="muted" style="margin:0;text-align:center" id="mq-left">${MQ.left} s</p>
+        <div class="row" style="justify-content:center"><button type="button" class="btn small" data-act="mq-replay">Réécouter</button></div>` : `<p class="muted" style="margin:0;text-align:center">Morceau : ${h(it.track.n)}${it.track.a ? ' · ' + h(it.track.a) : ''}</p>`}`;
+  } else main = `<p class="qz-q">${h(it.q)}</p>`;
+  const answers = `<div class="qz-ans">${it.c.map((c, i) => { const cls = QZ.ans === null ? '' : i === it.g ? 'good' : i === QZ.ans ? 'bad' : 'off'; return `<button type="button" class="qz-btn ${cls}" data-act="qz-ans" data-i="${i}" ${QZ.ans !== null ? 'disabled' : ''}><span class="qz-l">${'ABCD'[i]}</span>${h(c)}</button>`; }).join('')}</div>`;
+  const fb = QZ.ans === null ? '' : `<div class="qz-fb ${QZ.ans === it.g ? 'ok' : 'ko'}"><b>${QZ.ans === it.g ? (QZ.kind === 'music' ? 'Bravo ! +' + it.pts + ' points' : 'Bonne réponse !') : QZ.ans < 0 ? 'Temps écoulé ! C\'était : ' + h(it.c[it.g]) : 'Raté ! C\'était : ' + h(it.c[it.g])}</b>
+    <button type="button" class="btn primary" data-act="qz-next">${QZ.i + 1 >= n ? 'Voir le résultat' : 'Question suivante'}</button></div>`;
+  return head + main + answers + fb;
+}
+function viewQuizPlay(id) {
+  const f = byId(id);
+  if (!f) return '<div class="empty"><h2>Ce titre n\'existe plus</h2><p><a href="#/quiz">Retour aux quiz</a></p></div>';
+  if (!quizUnlocked(f) && !(QZ && QZ.players && QZ.fid === f.id)) return `<div class="empty"><h2>Quiz pas encore débloqué</h2><p>Marque « ${h(f.title)} » comme ${W(f).vu.toLowerCase()} pour débloquer son quiz.</p><p><a class="btn primary" href="#/film/${h(f.id)}">Ouvrir la fiche</a></p></div>`;
+  if (!QZ || QZ.fid !== f.id || (QZ.done && !QZ.keep)) { if (!startFilmQuiz(f)) return '<div class="empty"><h2>Pas assez d\'informations pour un quiz</h2></div>'; }
+  QZ.keep = false;
+  return quizShell(`<a href="#/film/${h(f.id)}" class="qz-poster" style="background:${tone(f)}">${posterInner(f)}</a><div><h1 class="title" style="margin:0">${h(f.title)}</h1><p class="muted" style="margin:2px 0 0">${h(QZ.label)}${QZ.players ? ' · Défi famille' : ' · Joueur : ' + h(playerName(playerId()))}</p></div>`);
+}
+const quizShell = (head) => `<div class="qz-wrap"><a class="back" href="#/quiz">${ICON.back}Tous les quiz</a><div class="qz-head">${head}</div><div id="qz-zone" class="qz-card">${quizInner()}</div></div>`;
+
+/* ---------- Quiz musical (application installée) ---------- */
+const MQ = {left: 30, timer: null, on: false, loading: false, msg: '', pool: 'vus', prog: ''};
+function stopMq() { clearInterval(MQ.timer); MQ.timer = null; MQ.on = false; stopAudio(); }
+function startRound() {
+  const it = QZ.items[QZ.i]; MQ.left = 30; MQ.on = true;
+  try { AUDIO.src = it.track.p; AUDIO.currentTime = 0; const pr = AUDIO.play(); if (pr && pr.catch) pr.catch(() => { MQ.on = false; paintQuiz(); }); } catch (e) { /* rien */ }
+  paintQuiz();
+  clearInterval(MQ.timer);
+  MQ.timer = setInterval(() => {
+    if (!QZ || QZ.kind !== 'music' || QZ.ans !== null) { clearInterval(MQ.timer); return; }
+    MQ.left--; const b = $('#mq-bar'), l = $('#mq-left'); if (b) b.style.width = Math.round(MQ.left / 30 * 100) + '%'; if (l) l.textContent = MQ.left + ' s';
+    if (MQ.left <= 0) { clearInterval(MQ.timer); QZ.ans = -1; QZ.items[QZ.i].pts = 0; stopMq(); paintQuiz(); }
+  }, 1000);
+}
+function musicPool(players, mode) {
+  const vids = S.films.filter(f => kindOf(f) === 'video' && f.public !== 'Adultes');
+  if (mode === 'tous') return vids.filter(f => QBANK[f.id] || SONGS[f.id] || (OST[f.id] && OST[f.id].t));
+  const ids = players ? players.map(p => p.id) : [playerId()];
+  return vids.filter(f => ids.some(pid => seenBy(f, pid)));
+}
+function pickTrack(f, o) {
+  const songs = (SONGS[f.id] || []).map(tkey), tk = tkey(cleanTitle(f.title));
+  const fav = o.t.filter(t => songs.some(s => tkey(t.n).includes(s)) || (tk.length > 3 && tkey(t.n).includes(tk)) || /main title|générique|theme|thème|prologue|ouverture|opening/i.test(t.n));
+  return shuffle(fav.length ? fav : o.t.slice(0, 8))[0];
+}
+async function startMusicQuiz(players) {
+  if (MQ.loading) return;
+  const pool = shuffle(musicPool(players, MQ.pool));
+  if (pool.length < 4) { MQ.msg = MQ.pool === 'tous' ? 'Pas assez de dessins animés connus dans ta base.' : 'Il faut au moins 4 dessins animés marqués comme vus pour jouer. Tu peux aussi choisir « Tous les grands classiques ».'; paintMusicSetup(); return; }
+  const rounds = players && players.length > 1 ? Math.min(12, players.length * Math.ceil(9 / players.length)) : 10;
+  MQ.loading = true; MQ.msg = ''; MQ.prog = 'Préparation des extraits…'; paintMusicSetup();
+  const got = []; let tries = 0, err = '';
+  for (const f of pool) {
+    if (got.length >= rounds || tries >= rounds * 3) break;
+    let o = OST[f.id];
+    try { if (!o) { tries++; o = await findOst(f); } } catch (e) { err = e.message; break; }
+    if (o && o.t && o.t.length) got.push({f, track: pickTrack(f, o)});
+    MQ.prog = 'Préparation des extraits… ' + got.length + ' / ' + rounds; paintMusicSetup();
+  }
+  MQ.loading = false;
+  if (got.length < 3) { MQ.msg = err || 'Pas assez d\'extraits trouvés pour ces titres. Choisis « Tous les grands classiques » ou marque d\'autres dessins animés comme vus.'; paintMusicSetup(); return; }
+  const names = musicPool(players, MQ.pool).concat(S.films.filter(f => QBANK[f.id] && kindOf(f) === 'video'));
+  const items = got.map(({f, track}) => { const c = shuffle(pick3(f.title, names.filter(x => x.id !== f.id && x.title !== f.title).map(x => x.title))); return {q: '', c, g: c.indexOf(f.title), track, fid: f.id}; });
+  QZ = {kind: 'music', title: 'Quiz musical', label: 'Reconnais la musique', items, i: 0, ans: null, score: 0, players: players || null, done: false, newT: []};
+  if (location.hash === '#/quiz-musique/jeu') render(); else location.hash = '#/quiz-musique/jeu';
+  setTimeout(startRound, 50);
+}
+function paintMusicSetup() { const z = $('#mq-setup'); if (z) z.innerHTML = musicSetupInner(); }
+function musicSetupInner() {
+  if (MQ.loading) return `<p><span class="spin"></span> ${h(MQ.prog)}</p>`;
+  const inDefi = route().name === 'defi', n = musicPool(inDefi ? DEFI.players : null, 'vus').length;
+  return `<div class="fgroup"><label class="check"><input type="radio" name="mqpool" data-ch="mqpool" value="vus" ${MQ.pool === 'vus' ? 'checked' : ''}>Seulement les dessins animés vus (${n})</label>
+    <label class="check"><input type="radio" name="mqpool" data-ch="mqpool" value="tous" ${MQ.pool === 'tous' ? 'checked' : ''}>Tous les grands classiques</label></div>
+    ${MQ.msg ? `<p class="warn" style="margin:0">${h(MQ.msg)}</p>` : ''}
+    <div class="row"><button type="button" class="btn primary" data-act="${inDefi ? 'defi-go' : 'mq-start'}" ${inDefi && DEFI.players.length < 2 ? 'disabled' : ''}>${NOTE_SVG}${inDefi ? 'Lancer le défi musical' : 'Lancer le quiz musical (10 extraits)'}</button></div>
+    <p class="hint" style="margin:0">Un extrait officiel de 30 secondes (Apple Music) se lance : trouve le dessin animé parmi 4 réponses. Plus tu réponds vite, plus tu gagnes de points (10 au maximum). Il faut une connexion Internet.</p>`;
+}
+function viewMusicQuiz(sub) {
+  if (IS_WEB) return `<div class="qz-wrap"><a class="back" href="#/quiz">${ICON.back}Tous les quiz</a><div class="empty"><h2>Quiz musical : dans l'application installée</h2><p>La page Claude ne peut pas lire les extraits de musique d'autres sites. Le quiz musical marche dans l'application installée sur ton Mac ou ton PC. Ici, essaie le <a href="#/quiz-chansons">quiz des chansons</a>.</p></div></div>`;
+  if (sub === 'jeu' && QZ && QZ.kind === 'music') return quizShell(`<div><h1 class="title" style="margin:0">Quiz musical</h1><p class="muted" style="margin:2px 0 0">${QZ.players ? 'Défi famille' : 'Joueur : ' + h(playerName(playerId()))}</p></div>`);
+  return `<div class="qz-wrap"><a class="back" href="#/quiz">${ICON.back}Tous les quiz</a>
+    <div class="box"><h2>Quiz musical : reconnais la musique</h2><p class="muted" style="margin:0">Joueur : ${h(playerName(playerId()))} (change de joueur avec le menu « Profil » en haut).</p><div id="mq-setup">${musicSetupInner()}</div></div></div>`;
+}
+function viewSongsQuiz(sub) {
+  if (sub === 'jeu' && QZ && QZ.kind === 'songs') return quizShell(`<div><h1 class="title" style="margin:0">Quiz des chansons</h1><p class="muted" style="margin:2px 0 0">${QZ.players ? 'Défi famille' : 'Joueur : ' + h(playerName(playerId()))} · ${h(QZ.label)}</p></div>`);
+  const pid = playerId(), films = Object.keys(SONGS).map(byId).filter(Boolean), seen = films.filter(f => seenBy(f, pid));
+  return `<div class="qz-wrap"><a class="back" href="#/quiz">${ICON.back}Tous les quiz</a>
+    <div class="box"><h2>Quiz des chansons</h2><p class="muted" style="margin:0">Trouve de quel dessin animé vient chaque chanson. Joueur : ${h(playerName(pid))}.</p>
+    <p style="margin:0">${seen.length} dessin${seen.length > 1 ? 's' : ''} animé${seen.length > 1 ? 's' : ''} vu${seen.length > 1 ? 's' : ''} sur ${films.length} ont des chansons dans le quiz${seen.length < 2 ? ' : marque-en au moins 2 comme vus, ou joue avec toutes les chansons' : ''}.</p>
+    <div class="row">${seen.length >= 2 ? '<button type="button" class="btn primary" data-act="sq-start">Jouer avec les titres vus</button>' : ''}<button type="button" class="btn ${seen.length >= 2 ? '' : 'primary'}" data-act="sq-start" data-all="1">Jouer avec toutes les chansons</button></div>
+    <details><summary class="muted">Voir les dessins animés du quiz</summary><p class="muted" style="font-size:13px">${films.map(f => (seenBy(f, pid) ? '✓ ' : '') + h(f.title)).join(' · ')}</p></details></div></div>`;
+}
+
+/* ---------- Défi famille ---------- */
+const DEFI = {on: false, players: [], game: 'titre', fid: ''};
+function viewDefi() {
+  const ps = allPlayers().map(p => p.id === 'fam' ? {id: 'fam', name: 'Les parents'} : p);
+  if (!DEFI.players.length) DEFI.players = ps.filter(p => p.id !== 'fam').map(p => ({id: p.id, name: p.name, score: 0}));
+  const ids = DEFI.players.map(p => p.id);
+  const common = S.films.filter(f => ids.length && f.public !== 'Adultes' && ids.some(id => seenBy(f, id))).sort((a, b) => (QBANK[b.id] ? 1 : 0) - (QBANK[a.id] ? 1 : 0) || a.title.localeCompare(b.title, 'fr'));
+  if (!DEFI.fid || !common.some(f => f.id === DEFI.fid)) DEFI.fid = common[0] ? common[0].id : '';
+  return `<div class="qz-wrap"><a class="back" href="#/quiz">${ICON.back}Tous les quiz</a>
+    <div class="box"><h2>Défi famille</h2><p class="muted" style="margin:0">Chacun répond à son tour. À la fin, le classement désigne le champion !</p>
+      <div class="fgroup"><h3 class="label">Qui joue ?</h3>${ps.map(p => `<label class="check"><input type="checkbox" data-ch="defi-p" value="${h(p.id)}" ${ids.includes(p.id) ? 'checked' : ''}>${h(p.name)}</label>`).join('')}</div>
+      <div class="fgroup"><h3 class="label">Quel jeu ?</h3>
+        <label class="check"><input type="radio" name="defig" data-ch="defi-g" value="titre" ${DEFI.game === 'titre' ? 'checked' : ''}>Quiz sur un titre</label>
+        ${IS_WEB ? '' : `<label class="check"><input type="radio" name="defig" data-ch="defi-g" value="musique" ${DEFI.game === 'musique' ? 'checked' : ''}>Quiz musical</label>`}
+        <label class="check"><input type="radio" name="defig" data-ch="defi-g" value="chansons" ${DEFI.game === 'chansons' ? 'checked' : ''}>Quiz des chansons</label></div>
+      ${DEFI.game === 'titre' ? (common.length ? `<label class="field"><span>Titre (vu par au moins un joueur)</span><select class="sel" data-ch="defi-f">${common.map(f => `<option value="${h(f.id)}" ${f.id === DEFI.fid ? 'selected' : ''}>${h(f.title)}${QBANK[f.id] ? ' ★' : ''}</option>`).join('')}</select><span class="hint">★ : quiz écrit sur l'histoire.</span></label>` : '<p class="warn" style="margin:0">Aucun titre vu par ces joueurs : marque d\'abord des titres comme vus ou lus.</p>') : ''}
+      ${DEFI.game === 'musique' ? `<div id="mq-setup">${musicSetupInner()}</div>` : `<div class="row"><button type="button" class="btn primary" data-act="defi-go" ${DEFI.players.length < 2 ? 'disabled' : ''}>Lancer le défi</button>${DEFI.players.length < 2 ? '<span class="muted">Choisis au moins 2 joueurs.</span>' : ''}</div>`}
+    </div></div>`;
+}
+function defiGo() {
+  const players = DEFI.players.map(p => ({id: p.id, name: p.name, score: 0}));
+  if (players.length < 2) { toast('Choisis au moins 2 joueurs'); return; }
+  DEFI.on = true;
+  if (DEFI.game === 'titre') { const f = byId(DEFI.fid); if (!f || !startFilmQuiz(f, players)) { toast('Choisis un titre'); return; } QZ.keep = true; location.hash = '#/quiz/' + f.id; render(); }
+  else if (DEFI.game === 'chansons') { if (!startSongsQuiz(players, false) && !startSongsQuiz(players, true)) { toast('Pas assez de chansons'); return; } location.hash = '#/quiz-chansons/jeu'; render(); }
+  else startMusicQuiz(players);
+}
+
+/* ---------- Trophées ---------- */
+function statsFor(pid) {
+  const s = {passed: 0, stars: 0, perfect: 0, disney: 0, pixar: 0, bd: 0, livre: 0, retro: 0, played: 0};
+  S.films.forEach(f => {
+    const b = bestOf(f, pid); if (!b) return; s.played++;
+    if (b >= 5) s.passed++; if (b >= 10) s.perfect++; s.stars += starsFor(b);
+    if (b >= 7) { if (f.subgenre === 'Disney') s.disney++; if (f.subgenre === 'Pixar') s.pixar++; if (kindOf(f) === 'bd') s.bd++; if (kindOf(f) === 'livre') s.livre++; if (f.subgenre === 'Animés et style japonais' || (isSeries(f) && +f.year && +f.year < 1990)) s.retro++; }
+  });
+  const g = GAMES(); s.music = +g.m[pid] || 0; s.songs = +g.s[pid] || 0; s.mplays = +g.n[pid] || 0; s.wins = +g.w[pid] || 0;
+  return s;
+}
+const TROPHIES = [
+  {id: 'first', name: 'Premier quiz', desc: 'Réussir un quiz (5/10 ou plus)', ok: s => s.passed >= 1},
+  {id: 'perfect', name: 'Sans faute', desc: 'Faire 10/10 à un quiz', ok: s => s.perfect >= 1},
+  {id: 'quiz10', name: 'Grand quizzeur', desc: 'Réussir 10 quiz différents', ok: s => s.passed >= 10},
+  {id: 'stars10', name: 'Pluie d\'étoiles', desc: 'Gagner 10 étoiles', ok: s => s.stars >= 10},
+  {id: 'stars30', name: 'Ciel étoilé', desc: 'Gagner 30 étoiles', ok: s => s.stars >= 30},
+  {id: 'disney', name: 'Expert Disney', desc: '5 quiz Disney avec 2 étoiles ou plus', ok: s => s.disney >= 5},
+  {id: 'pixar', name: 'Expert Pixar', desc: '3 quiz Pixar avec 2 étoiles ou plus', ok: s => s.pixar >= 3},
+  {id: 'retro', name: 'Nostalgie Récré', desc: '3 quiz de séries d\'avant 1990 ou d\'animés', ok: s => s.retro >= 3},
+  {id: 'bd', name: 'As de la BD', desc: '3 quiz de BD avec 2 étoiles ou plus', ok: s => s.bd >= 3},
+  {id: 'livre', name: 'Rat de bibliothèque', desc: '3 quiz de livres avec 2 étoiles ou plus', ok: s => s.livre >= 3},
+  {id: 'ear', name: 'Oreille d\'or', desc: 'Faire 80 points ou plus au quiz musical', ok: s => s.music >= 80},
+  {id: 'melo', name: 'Mélomane', desc: 'Jouer 5 fois au quiz musical', ok: s => s.mplays >= 5},
+  {id: 'juke', name: 'Juke-box', desc: 'Faire 10/10 au quiz des chansons', ok: s => s.songs >= 10},
+  {id: 'champ', name: 'Champion du défi', desc: 'Gagner un défi famille', ok: s => s.wins >= 1}
+];
+function earnedSet(pid) { const s = statsFor(pid); return new Set(TROPHIES.filter(t => t.ok(s)).map(t => t.id)); }
+
+/* ---------- Onglet Quiz ---------- */
+const QUI = {kind: '', limit: 60};
+function viewQuiz() {
+  const pid = playerId(), st = statsFor(pid), got = earnedSet(pid);
+  const pool = S.films.filter(f => f.public !== 'Adultes' && (!QUI.kind || kindOf(f) === QUI.kind));
+  const open = pool.filter(f => quizUnlocked(f, pid))
+    .sort((a, b) => (bestOf(a, pid) ? 1 : 0) - (bestOf(b, pid) ? 1 : 0) || (QBANK[b.id] ? 1 : 0) - (QBANK[a.id] ? 1 : 0) || a.title.localeCompare(b.title, 'fr'));
+  const locked = pool.filter(f => QBANK[f.id] && !quizUnlocked(f, pid)).sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+  const qcard = (f) => { const b = bestOf(f, pid); return `<a class="card" href="#/quiz/${h(f.id)}"><div class="poster" style="background:${tone(f)}">${posterInner(f)}${QBANK[f.id] ? '<span class="pill note">HISTOIRE</span>' : ''}${b ? `<span class="pill own">${b}/10</span>` : '<span class="pill free">NOUVEAU</span>'}</div><div class="card-t">${h(f.title)}</div><div class="card-m">${b ? starRow(starsFor(b), 14) : 'Pas encore joué'}</div></a>`; };
+  const board = allPlayers().map(p => { const s = statsFor(p.id); return `<tr><th scope="row">${h(p.name)}</th><td>${s.passed}</td><td>${s.stars}</td><td>${s.perfect}</td><td>${IS_WEB ? '–' : s.music ? s.music + ' pts' : '–'}</td><td>${s.songs ? s.songs + '/10' : '–'}</td><td>${s.wins}</td><td>${earnedSet(p.id).size} / ${TROPHIES.length}</td></tr>`; }).join('');
+  return `<div style="display:flex;flex-direction:column;gap:24px">
+    <div class="head-row"><div><h1 class="title">Quiz</h1><p class="muted">Joueur : <b>${h(playerName(pid))}</b> — change de joueur avec le menu « Profil » en haut. Un quiz se débloque quand le titre est marqué vu ou lu.</p></div></div>
+    <div class="qz-games">
+      <a class="qz-game" href="#/quiz-musique"><span class="qz-gi">${NOTE_SVG}</span><b>Quiz musical</b><span>${IS_WEB ? 'Dans l\'application installée' : 'Reconnais la musique en 30 secondes'}</span></a>
+      <a class="qz-game" href="#/quiz-chansons"><span class="qz-gi">♪</span><b>Quiz des chansons</b><span>De quel dessin animé vient cette chanson ?</span></a>
+      <a class="qz-game" href="#/defi"><span class="qz-gi">${TROPHY_SVG(true)}</span><b>Défi famille</b><span>Chacun son tour, qui sera le champion ?</span></a>
+    </div>
+    <div class="box"><h2>Tableau des scores</h2><div class="table-wrap"><table class="qz-table"><thead><tr><th>Joueur</th><th>Quiz réussis</th><th>Étoiles</th><th>Sans faute</th><th>Quiz musical</th><th>Chansons</th><th>Défis gagnés</th><th>Trophées</th></tr></thead><tbody>${board}</tbody></table></div></div>
+    <div class="box"><h2>Trophées de ${h(playerName(pid))}</h2><div class="trophies">${TROPHIES.map(t => `<div class="trophy ${got.has(t.id) ? 'on' : ''}">${TROPHY_SVG(got.has(t.id))}<b>${h(t.name)}</b><span>${h(t.desc)}</span></div>`).join('')}</div></div>
+    <div class="tabs">${[['', 'Tout'], ['video', 'Dessins animés'], ['bd', 'BD'], ['livre', 'Livres']].map(([k, l]) => `<button type="button" class="tab ${QUI.kind === k ? 'on' : ''}" data-act="qz-kind" data-v="${k}">${l}</button>`).join('')}</div>
+    <div><h2 class="label" style="margin-bottom:12px">Quiz débloqués (${open.length})</h2>
+      ${open.length ? `<div class="grid">${open.slice(0, QUI.limit).map(qcard).join('')}</div>${open.length > QUI.limit ? '<div class="row" style="justify-content:center;margin-top:16px"><button type="button" class="btn" data-act="qz-more">Afficher plus</button></div>' : ''}`
+        : `<div class="empty"><h2>Aucun quiz débloqué pour ${h(playerName(pid))}</h2><p>Ouvre la fiche d'un dessin animé, d'une BD ou d'un livre et clique sur « ${W({type: 'Film'}).vu} » ou « Lu » : son quiz apparaît ici.</p></div>`}</div>
+    ${locked.length ? `<div><h2 class="label" style="margin-bottom:12px">Quiz sur l'histoire à débloquer (${locked.length})</h2><div class="locks">${locked.slice(0, 80).map(f => `<a class="lockcard" href="#/film/${h(f.id)}">${LOCK_SVG}<span>${h(f.title)}</span></a>`).join('')}</div></div>` : ''}
+  </div>`;
+}
+
+/* ---------- Clics et saisies du module ---------- */
+document.addEventListener('click', async (ev) => {
+  const el = ev.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act, f = currentFilm();
+  switch (act) {
+    case 'qz-trailer': if (f) playTrailer(f, el); break;
+    case 'qz-ost': if (f) { const z = $('#ost-zone'); if (z) z.innerHTML = '<p style="margin:0"><span class="spin"></span> Recherche des extraits…</p>'; try { if (OST[f.id]) delete OST[f.id]; await findOst(f); } catch (e) { toast(e.message); } render(); } break;
+    case 'qz-play': {
+      const u = el.dataset.u;
+      if (PLAYING === u && !AUDIO.paused) { stopAudio(); el.setAttribute('aria-pressed', 'false'); break; }
+      stopAudio(); PLAYING = u; AUDIO.src = u;
+      AUDIO.play().then(() => { el.classList.add('on'); el.setAttribute('aria-pressed', 'true'); }).catch(() => toast('Impossible de lire cet extrait.'));
+      break;
+    }
+    case 'qz-gen': if (f) {
+      const msg = $('#qz-gen-msg'); el.disabled = true; if (msg) msg.innerHTML = '<span class="spin"></span> Claude prépare 10 questions sur l\'histoire…';
+      try { f.qgen = await askClaudeQuiz(f); f.qgenAt = today(); save(); toast('Quiz créé : 10 questions sur l\'histoire'); QZ = null; render(); }
+      catch (e) { if (msg) msg.textContent = e.message; el.disabled = false; }
+    } break;
+    case 'qz-ans': answer(+el.dataset.i); break;
+    case 'qz-next': nextQ(); break;
+    case 'qz-again': {
+      if (!QZ) break;
+      const players = QZ.players ? QZ.players.map(p => ({id: p.id, name: p.name, score: 0})) : null;
+      if (QZ.kind === 'film') { const film = byId(QZ.fid); if (film) { startFilmQuiz(film, players); QZ.keep = true; render(); } }
+      else if (QZ.kind === 'songs') { startSongsQuiz(players, QZ.label === 'Toutes les chansons'); render(); }
+      else { QZ = null; location.hash = '#/quiz-musique'; if (players) { DEFI.game = 'musique'; startMusicQuiz(players); } }
+      break;
+    }
+    case 'qz-kind': QUI.kind = el.dataset.v; QUI.limit = 60; render(); break;
+    case 'qz-more': QUI.limit += 60; render(); break;
+    case 'mq-start': DEFI.on = false; startMusicQuiz(null); break;
+    case 'mq-replay': if (QZ && QZ.kind === 'music' && QZ.ans === null) { try { AUDIO.currentTime = 0; AUDIO.play(); } catch (e) { /* rien */ } } break;
+    case 'sq-start': DEFI.on = false; if (!startSongsQuiz(null, !!el.dataset.all)) { toast('Marque au moins 2 dessins animés du quiz comme vus'); break; } location.hash = '#/quiz-chansons/jeu'; render(); break;
+    case 'defi-go': defiGo(); break;
+    case 'del-claude': CLAUDE_KEY = ''; try { localStorage.removeItem(CLAUDE_KEY_STORE); } catch (e) { /* rien */ } render(); toast('Clé Claude retirée'); break;
+  }
+});
+document.addEventListener('change', (ev) => {
+  const t = ev.target, ch = t.dataset.ch;
+  if (ch === 'mqpool') { MQ.pool = t.value; MQ.msg = ''; paintMusicSetup(); }
+  else if (ch === 'defi-p') {
+    const p = allPlayers().find(x => x.id === t.value); if (!p) return;
+    if (t.checked) DEFI.players.push({id: p.id, name: p.id === 'fam' ? 'Les parents' : p.name, score: 0}); else DEFI.players = DEFI.players.filter(x => x.id !== p.id);
+    render();
+  }
+  else if (ch === 'defi-g') { DEFI.game = t.value; render(); }
+  else if (ch === 'defi-f') DEFI.fid = t.value;
+});
+document.addEventListener('submit', async (ev) => {
+  const t = ev.target; if (t.id !== 'claudeform') return;
+  ev.preventDefault();
+  const key = $('#claudekey').value.trim(), msg = $('#claudemsg');
+  if (!key) { msg.textContent = 'Colle d\'abord ta clé dans le champ.'; return; }
+  msg.innerHTML = '<span class="spin"></span> Test de la clé…';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {method: 'POST', headers: {'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true'},
+      body: JSON.stringify({model: 'claude-haiku-5-5', max_tokens: 5, messages: [{role: 'user', content: 'Réponds OK'}]})});
+    if (r.status === 401 || r.status === 403) throw new Error('Claude refuse cette clé. Vérifie-la.');
+    if (!r.ok && r.status !== 429 && r.status !== 529) throw new Error('Claude a répondu avec une erreur (' + r.status + ').');
+    CLAUDE_KEY = key; try { localStorage.setItem(CLAUDE_KEY_STORE, key); } catch (e) { /* rien */ }
+    toast('Clé Claude enregistrée : les quiz sur l\'histoire sont disponibles pour tous les titres'); render();
+  } catch (e) { msg.textContent = e.message && !/fetch/i.test(e.message) ? e.message : 'Impossible de joindre Claude. Vérifie ta connexion Internet.'; }
+});
+window.addEventListener('hashchange', () => { const r = route(); if (!/^quiz-musique/.test(r.name) || r.id !== 'jeu') { stopMq(); } if (r.name !== 'film') stopAudio(); });
+function claudeBox() {
+  if (IS_WEB) return `<div class="box"><h2>Quiz créés par Claude</h2><p style="margin:0" class="muted">Sur cette page, Claude peut créer un quiz de 10 questions sur l'histoire de n'importe quel titre vu (bouton sur la fiche). La première fois, la page te demande l'autorisation d'utiliser Claude ; cela compte dans ton utilisation de Claude.</p></div>`;
+  return `<div class="box"><h2>Clé Claude (facultative)</h2>
+    <p style="margin:0" class="muted">Sans clé, chaque titre vu a déjà un quiz : sur l'histoire pour ${Object.keys(QBANK).length} grands classiques, et à partir de la fiche pour les autres. Avec une clé Claude, l'application crée en plus un quiz sur l'histoire pour n'importe quel titre (environ 2 à 3 centimes par quiz, facturés par Anthropic). La clé reste sur cet ordinateur.</p>
+    <div class="note-box"><b>Obtenir une clé</b><ol><li>Crée un compte sur <a href="https://console.anthropic.com/" target="_blank" rel="noopener">console.anthropic.com</a> et ajoute un petit crédit (5 € suffisent pour des centaines de quiz).</li><li>Va dans « API Keys » et crée une clé.</li><li>Colle-la ci-dessous.</li></ol></div>
+    <form id="claudeform" class="row" style="align-items:flex-end"><label class="field" style="flex:1 1 320px"><span>Clé Claude</span><input class="inp" id="claudekey" type="password" autocomplete="off" value="${h(CLAUDE_KEY)}" placeholder="sk-ant-…"></label>
+      <button type="submit" class="btn primary">Enregistrer et tester</button>${CLAUDE_KEY ? '<button type="button" class="btn" data-act="del-claude">Retirer la clé</button>' : ''}</form>
+    <p id="claudemsg" class="muted" role="status" style="margin:0">${CLAUDE_KEY ? 'Une clé est enregistrée.' : 'Aucune clé : les quiz de la fiche sont utilisés pour les titres sans quiz écrit.'}</p></div>`;
+}
 
 /* =========================================================
    Actions (clics)
@@ -2076,7 +2720,7 @@ document.addEventListener('click', async (ev) => {
     case 'del-key': S.tmdbKey = ''; EX.loaded = false; save(); render(); toast('Clé TMDB retirée'); break;
     case 'backup': {
       const {over, deleted} = computeOver();
-      const data = {app: 'Toons & Bulles', v: 2, date: today(), over, deleted, lists: S.lists, kids: S.kids, images: IMAGES};
+      const data = {app: 'Toons & Bulles', v: 2, date: today(), over, deleted, lists: S.lists, kids: S.kids, games: S.games || {}, images: IMAGES};
       if (!IS_WEB) { data.posters = POSTERS; data.free = FREE; }
       if (!IS_WEB && S.tmdbKey) data.tmdbKey = S.tmdbKey;
       if (await download('toons-et-bulles-sauvegarde-' + today() + '.json', JSON.stringify(data, null, 1), 'application/json')) toast('Sauvegarde téléchargée');
