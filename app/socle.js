@@ -29,6 +29,8 @@
 
   // Page Claude = cadre protégé : téléchargements, impression et confirm() y sont refusés.
   var MODE_PAGE = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+  var dlPage = null; // service de téléchargement des pages Claude, s'il est accordé
+  if (MODE_PAGE) safe(function () { if (window.claude && typeof window.claude.use === 'function') window.claude.use('downloads').then(function (n) { dlPage = n; }, function () {}); });
   var NS = 'socle:';
   var K = {
     prefs: NS + 'prefs', erreurs: NS + 'erreurs', version: NS + 'version',
@@ -262,6 +264,10 @@
     var s = instantane(), txt = JSON.stringify(s, null, 1);
     lsSet(K.derniere, s.date);
     if (!MODE_PAGE) { telecharger(nomFichier('sauvegarde'), txt); toast('Sauvegarde téléchargée (' + Object.keys(s.donnees).length + ' éléments)'); return; }
+    if (dlPage) { // page Claude avec la capacité « downloads » : vrai fichier
+      dlPage.save({ filename: nomFichier('sauvegarde'), data: txt }).then(function () { toast('Sauvegarde enregistrée'); }, function () { dlPage = null; exporter(); });
+      return;
+    }
     // Page Claude : le téléchargement est bloqué, on propose de copier le texte.
     ouvrir('sauvegardes');
     setTimeout(function () {
