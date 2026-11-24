@@ -27,6 +27,8 @@
     aide: []          // { titre, texte } pour la page d'aide
   }, window.SOCLE_CONFIG || {});
 
+  // Page Claude = cadre protégé : téléchargements, impression et confirm() y sont refusés.
+  var MODE_PAGE = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
   var NS = 'socle:';
   var K = {
     prefs: NS + 'prefs', erreurs: NS + 'erreurs', version: NS + 'version',
@@ -219,6 +221,20 @@
   }
   if (mqSombre && mqSombre.addEventListener) mqSombre.addEventListener('change', function () { if (prefs.theme === 'auto') appliquer(); });
 
+  function demander(question, oui) {
+    monter();
+    return new Promise(function (ok) {
+      var v, fin = function (r) { v.remove(); ok(r); };
+      v = el('div', { class: 'voile', style: 'z-index:2147483004' }, [el('div', { class: 'panneau', role: 'alertdialog', 'aria-modal': 'true', style: 'max-width:460px;margin-top:14vh' }, [
+        el('div', { class: 'corps' }, [el('p', { texte: question, style: 'font-size:15px;white-space:pre-line' }),
+          el('div', { class: 'ligne', style: 'justify-content:flex-end' }, [
+            el('button', { class: 'choix', onclick: function () { fin(false); } }, ['Annuler']),
+            el('button', { class: 'choix principal', onclick: function () { fin(true); } }, [oui || 'Confirmer'])])])])]);
+      ombre.appendChild(v);
+      setTimeout(function () { var b = v.querySelector('.principal'); if (b) b.focus(); }, 30);
+    });
+  }
+
   /* ------------------------------------------------------------------ */
   /* Sauvegardes : export / import / copies automatiques                 */
   /* ------------------------------------------------------------------ */
@@ -243,29 +259,47 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
   }
   function exporter() {
-    var s = instantane();
-    telecharger(nomFichier('sauvegarde'), JSON.stringify(s, null, 1));
+    var s = instantane(), txt = JSON.stringify(s, null, 1);
     lsSet(K.derniere, s.date);
-    toast('Sauvegarde téléchargée (' + Object.keys(s.donnees).length + ' éléments)');
+    if (!MODE_PAGE) { telecharger(nomFichier('sauvegarde'), txt); toast('Sauvegarde téléchargée (' + Object.keys(s.donnees).length + ' éléments)'); return; }
+    // Page Claude : le téléchargement est bloqué, on propose de copier le texte.
+    ouvrir('sauvegardes');
+    setTimeout(function () {
+      var c = voile && voile.querySelector('.corps'); if (!c) return;
+      c.innerHTML = '';
+      c.appendChild(el('h3', { texte: 'Sauvegarde à copier' }));
+      c.appendChild(el('p', { class: 'note', texte: 'Dans une page Claude, le téléchargement est bloqué. Copiez ce texte et collez-le dans un fichier nommé ' + nomFichier('sauvegarde') + ' (Bloc-notes ou TextEdit).' }));
+      var ta = el('textarea', { readonly: '', style: 'width:100%;height:200px;font-size:12px;border-radius:8px;border:1px solid var(--socle-trait);background:var(--socle-carte);color:var(--socle-encre);padding:8px' });
+      ta.value = txt; c.appendChild(ta);
+      c.appendChild(el('div', { class: 'ligne' }, [el('button', { class: 'choix principal', onclick: function () {
+        navigator.clipboard.writeText(txt).then(function () { toast('Sauvegarde copiée'); }, function () { ta.select(); toast('Sélectionnez le texte puis Ctrl+C', 'err'); });
+      } }, ['📋 Copier la sauvegarde'])]));
+    }, 60);
   }
-  function importerTexte(txt) {
-    var s = JSON.parse(txt);
-    if (!s || s.format !== 'socle-sauvegarde' || typeof s.donnees !== 'object') throw new Error('Ce fichier n\'est pas une sauvegarde du socle.');
-    if (s.logiciel && s.logiciel !== CONF.app && !confirm('Cette sauvegarde vient de « ' + s.logiciel + ' ». L\'importer quand même dans « ' + CONF.app + ' » ?')) return false;
-    if (!confirm('Remplacer les données actuelles par la sauvegarde du ' + new Date(s.date).toLocaleString('fr-FR') + ' ?\nUne copie de secours des données actuelles est faite avant.')) return false;
-    copieAuto('avant-import');
-    clesLogiciel().forEach(function (k) { safe(function () { localStorage.removeItem(k); }); });
-    Object.keys(s.donnees).forEach(function (k) { if (s.donnees[k] != null) brutSet.call(localStorage, k, s.donnees[k]); });
-    return true;
+  function importerTexte(txt) { // renvoie une promesse : true si les données ont été remplacées
+    var s;
+    try { s = JSON.parse(txt); } catch (e) { return Promise.reject(new Error('Ce fichier est illisible.')); }
+    if (!s || s.format !== 'socle-sauvegarde' || typeof s.donnees !== 'object') return Promise.reject(new Error('Ce fichier n\'est pas une sauvegarde du socle. Utilisez l\'import du logiciel lui-même.'));
+    var autre = s.logiciel && s.logiciel !== CONF.app;
+    return (autre ? demander('Cette sauvegarde vient de « ' + s.logiciel + ' ».\nL\'importer quand même dans « ' + CONF.app + ' » ?', 'Importer') : Promise.resolve(true))
+      .then(function (ok) { return ok && demander('Remplacer les données actuelles par la sauvegarde du ' + new Date(s.date).toLocaleString('fr-FR') + ' ?\nUne copie de secours des données actuelles est faite avant.', 'Remplacer'); })
+      .then(function (ok) {
+        if (!ok) return false;
+        return copieAuto('avant-import').then(function () {
+          clesLogiciel().forEach(function (k) { safe(function () { localStorage.removeItem(k); }); });
+          Object.keys(s.donnees).forEach(function (k) { if (s.donnees[k] != null) brutSet.call(localStorage, k, s.donnees[k]); });
+          return true;
+        });
+      });
+  }
+  function apresImport(p, msg) {
+    p.then(function (ok) { if (ok) { toast(msg); setTimeout(function () { location.reload(); }, 900); } }, function (e) { toast(e.message, 'err'); });
   }
   function importer() {
     var f = el('input', { type: 'file', accept: '.json,application/json' });
     f.addEventListener('change', function () {
       var file = f.files && f.files[0]; if (!file) return;
-      file.text().then(function (t) {
-        try { if (importerTexte(t)) { toast('Sauvegarde rétablie — rechargement…'); setTimeout(function () { location.reload(); }, 900); } }
-        catch (e) { toast(e.message, 'err'); }
-      });
+      file.text().then(function (t) { apresImport(importerTexte(t), 'Sauvegarde rétablie — rechargement…'); });
     });
     f.click();
   }
@@ -306,8 +340,7 @@
   function restaurerCopie(id) {
     tx('readonly', function (s) { return s.get(id); }).then(function (c) {
       if (!c) return;
-      try { if (importerTexte(JSON.stringify(c.sauvegarde))) { toast('Copie rétablie — rechargement…'); setTimeout(function () { location.reload(); }, 900); } }
-      catch (e) { toast(e.message, 'err'); }
+      apresImport(importerTexte(JSON.stringify(c.sauvegarde)), 'Copie rétablie — rechargement…');
     });
   }
 
@@ -552,6 +585,7 @@
     var r = el('input', { type: 'range', min: '80', max: '160', step: '5', value: String(prefs.texte), 'aria-label': 'Taille du texte' });
     r.addEventListener('input', function () { prefs.texte = +r.value; val.textContent = r.value + ' %'; savePrefs(); appliquer(); });
     c.appendChild(el('div', { class: 'ligne' }, [r, val, el('button', { class: 'choix', onclick: function () { prefs.texte = 100; r.value = 100; val.textContent = '100 %'; savePrefs(); appliquer(); } }, ['Normale'])]));
+    if (MODE_PAGE) return; // impression refusée dans une page Claude
     c.appendChild(el('h3', { texte: 'Impression' }));
     c.appendChild(el('div', { class: 'ligne' }, [el('button', { class: 'choix', onclick: function () { fermer(); setTimeout(function () { window.print(); }, 150); } }, ['🖨 Imprimer ou enregistrer en PDF'])]));
     c.appendChild(el('p', { class: 'note', texte: 'Dans la fenêtre d\'impression, choisissez « Enregistrer au format PDF » pour obtenir un fichier.' }));
@@ -561,7 +595,7 @@
     var der = lsGet(K.derniere, null);
     c.appendChild(el('h3', { texte: 'Sauvegarde manuelle' }));
     c.appendChild(el('div', { class: 'ligne' }, [
-      el('button', { class: 'choix principal', onclick: exporter }, ['⬇ Télécharger une sauvegarde']),
+      el('button', { class: 'choix principal', onclick: exporter }, [MODE_PAGE ? '📋 Copier une sauvegarde' : '⬇ Télécharger une sauvegarde']),
       el('button', { class: 'choix', onclick: importer }, ['⬆ Rétablir depuis un fichier'])
     ]));
     c.appendChild(el('p', { class: 'note', texte: (der ? 'Dernière sauvegarde téléchargée : ' + new Date(der).toLocaleString('fr-FR') + '. ' : 'Aucune sauvegarde téléchargée pour l\'instant. ') + 'Rangez le fichier dans Google Drive ou sur le NAS. Raccourci : Ctrl+Maj+S.' }));
@@ -598,7 +632,7 @@
         if (c1.value !== c2.value) return toast('Les deux codes sont différents', 'err');
         hacher(c1.value).then(function (h) { lsSet(K.pin, h); toast('Code enregistré'); choisirOnglet('securite'); });
       } }, [a ? 'Changer le code' : 'Mettre un code']),
-      a ? el('button', { class: 'choix danger', onclick: function () { if (confirm('Retirer le code ?')) { safe(function () { localStorage.removeItem(K.pin); }); toast('Code retiré'); choisirOnglet('securite'); } } }, ['Retirer le code']) : null
+      a ? el('button', { class: 'choix danger', onclick: function () { demander('Retirer le code au démarrage ?', 'Retirer').then(function (ok) { if (!ok) return; safe(function () { localStorage.removeItem(K.pin); }); toast('Code retiré'); choisirOnglet('securite'); }); } }, ['Retirer le code']) : null
     ]));
     c.appendChild(el('p', { class: 'note', texte: 'Le code n\'est jamais enregistré en clair. Il protège contre un regard indiscret, pas contre un spécialiste qui aurait l\'ordinateur entre les mains.' }));
   };
@@ -635,7 +669,7 @@
       el('button', { class: 'choix principal', onclick: function () {
         (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { toast('Rapport copié'); }, function () { telecharger(nomFichier('rapport-erreurs').replace('.json', '.txt'), txt, 'text/plain'); toast('Rapport téléchargé'); });
       } }, ['📋 Copier le rapport']),
-      el('button', { class: 'choix', onclick: function () { telecharger(nomFichier('rapport-erreurs').replace('.json', '.txt'), txt, 'text/plain'); } }, ['Télécharger']),
+      MODE_PAGE ? null : el('button', { class: 'choix', onclick: function () { telecharger(nomFichier('rapport-erreurs').replace('.json', '.txt'), txt, 'text/plain'); } }, ['Télécharger']),
       j.length ? el('button', { class: 'choix danger', onclick: function () { lsSet(K.erreurs, []); majPastille(); choisirOnglet('journal'); } }, ['Vider le journal']) : null
     ]));
   };
@@ -700,6 +734,7 @@
     setTimeout(function () { copieAuto('quotidienne'); }, 60000);
     setInterval(function () { copieAuto('quotidienne'); }, 3 * 3600 * 1000);
     window.addEventListener('beforeunload', function () { if (enregCompte) copieAuto('quotidienne'); });
+    if (MODE_PAGE) document.documentElement.classList.add('socle-page-claude');
   }
 
   window.SOCLE = {
